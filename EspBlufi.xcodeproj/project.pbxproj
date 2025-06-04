@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		000AD42E2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD42D2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m */; };
+		000AD4312DF05C3100AD8B05 /* ESPDetailViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */; };
 		2662E48724A3079C0074383A /* BlufiConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E41F24A3079C0074383A /* BlufiConstants.m */; };
 		2662E48824A3079C0074383A /* BlufiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42024A3079C0074383A /* BlufiClient.m */; };
 		2662E48924A3079C0074383A /* BlufiVersionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42124A3079C0074383A /* BlufiVersionResponse.m */; };
@@ -84,6 +85,8 @@
 /* Begin PBXFileReference section */
 		000AD42C2DF0443C00AD8B05 /* BleDeviceListViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BleDeviceListViewController+UI.h"; sourceTree = "<group>"; };
 		000AD42D2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BleDeviceListViewController+UI.m"; sourceTree = "<group>"; };
+		000AD42F2DF05C3100AD8B05 /* ESPDetailViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ESPDetailViewController+UI.h"; sourceTree = "<group>"; };
+		000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ESPDetailViewController+UI.m"; sourceTree = "<group>"; };
 		2662E41F24A3079C0074383A /* BlufiConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiConstants.m; sourceTree = "<group>"; };
 		2662E42024A3079C0074383A /* BlufiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiClient.m; sourceTree = "<group>"; };
 		2662E42124A3079C0074383A /* BlufiVersionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiVersionResponse.m; sourceTree = "<group>"; };
@@ -527,6 +530,8 @@
 				26835AC72491CFF8003B1BC6 /* ESPSettingViewController.m */,
 				26835AC42491CFF8003B1BC6 /* ESPDetailViewController.h */,
 				26835AC82491CFF8003B1BC6 /* ESPDetailViewController.m */,
+				000AD42F2DF05C3100AD8B05 /* ESPDetailViewController+UI.h */,
+				000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */,
 				26835B4624920311003B1BC6 /* ESPProvisionViewController.h */,
 				26835B4724920311003B1BC6 /* ESPProvisionViewController.m */,
 			);
@@ -874,6 +879,7 @@
 				26835B4824920311003B1BC6 /* ESPProvisionViewController.m in Sources */,
 				26835B232491CFFD003B1BC6 /* MJRefreshAutoStateFooter.m in Sources */,
 				26835B6B249212A0003B1BC6 /* NSArray+MASAdditions.m in Sources */,
+				000AD4312DF05C3100AD8B05 /* ESPDetailViewController+UI.m in Sources */,
 				2662E48B24A3079C0074383A /* BlufiScanResponse.m in Sources */,
 				26835B142491CFFD003B1BC6 /* FFDropDownMenuView.m in Sources */,
 				26835B1A2491CFFD003B1BC6 /* MJRefreshConst.m in Sources */,
