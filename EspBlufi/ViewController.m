@@ -13,14 +13,13 @@
 #import "MJRefresh.h"
 #import "ESPSettingViewController.h"
 #import "ESPDetailViewController.h"
-#import "ESPFBYBLEHelper.h"
-#import "ESPDataConversion.h"
+#import "ESPBLEHelper.h"
+#import "ESPUserDefaults.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic, strong) FFDropDownMenuView *dropDownMenu;
 @property(nonatomic, strong) UITableView *peripheralView;
 @property(nonatomic, copy)   NSMutableArray<ESPPeripheral *> *peripheralArray;
-@property(nonatomic, strong) ESPFBYBLEHelper *espFBYBleHelper;
 @property(nonatomic, strong) NSString *filterContent;
 
 @end
@@ -31,7 +30,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.espFBYBleHelper = [ESPFBYBLEHelper share];
     self.navigationItem.title = INTER_STR(@"EspBlufi-nav-title");
 //    UIButton *menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
 //    [menuBtn addTarget:self action:@selector(showDropDownMenu) forControlEvents:UIControlEventTouchUpInside];
@@ -45,14 +43,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.filterContent = [ESPDataConversion loadBlufiScanFilter];
+    self.filterContent = [ESPUserDefaults loadBlufiScanFilter];
     [self scanDeviceInfo];
 }
 
 - (void)scanDeviceInfo {
     NSLog(@"vc 扫描设备");
     [self.dataSource removeAllObjects];
-    [self.espFBYBleHelper startScan:^(ESPPeripheral * _Nonnull device) {
+    [[ESPBLEHelper share] startScan:^(ESPPeripheral * _Nonnull device) {
         if ([self shouldAddToSource:device]) {
             [self.dataSource addObject:device];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -171,6 +169,6 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    [self.espFBYBleHelper stopScan];
+    [[ESPBLEHelper share] stopScan];
 }
 @end

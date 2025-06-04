@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "ESPDataConversion.h"
+#import "ESPUserDefaults.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [ESPDataConversion fby_saveNSUserDefaults:@"" withKey:@"filterContent"];
+    
+    [ESPUserDefaults saveBlufiScanFilter:@""];
     [[UINavigationBar appearance] setBarTintColor:navColor];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
     [UIColor whiteColor], NSForegroundColorAttributeName,

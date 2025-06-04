@@ -1,18 +1,18 @@
 //
-//  ESPDataConversion.m
+//  ESPUserDefaults.m
 //  EspBlufi
 //
 //  Created by fanbaoying on 2020/6/12.
 //  Copyright © 2020 espressif. All rights reserved.
 //
 
-#import "ESPDataConversion.h"
+#import "ESPUserDefaults.h"
 
 #define SettingsFilter @"filterContent"
 #define UseCustomFilter @"useCustomFilter"
 #define DefaultFilter @"BLUFI"
 
-@implementation ESPDataConversion
+@implementation ESPUserDefaults
 
 /**
  *  Defaults保存
@@ -21,7 +21,7 @@
  *  @param key   关键字
  *  @return 保存结果
  */
-+ (BOOL)fby_saveNSUserDefaults:(id)value withKey:(NSString *)key
++ (BOOL)saveNSUserDefaults:(id)value withKey:(NSString *)key
 {
     if((!value)||(!key)||key.length==0){
         NSLog(@"参数不能为空");
@@ -43,33 +43,32 @@
  *  @param key     关键字
  *  return  返回已保存的数据
  */
-+ (id)fby_getNSUserDefaults:(NSString *)key{
++ (id)getNSUserDefaults:(NSString *)key{
     if(key==nil||key.length==0){
         NSLog(@"参数不能为空");
         return nil;
     }
-    NSUserDefaults *version = [NSUserDefaults standardUserDefaults];
-    id fbyVersion = [version objectForKey:key];
-    [version synchronize];
     
-    return fbyVersion;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults objectForKey:key];
 }
 
 + (BOOL)saveBlufiScanFilter:(NSString *)filter {
-    if (![self fby_saveNSUserDefaults:filter withKey:SettingsFilter]) {
+    if (![self saveNSUserDefaults:filter withKey:SettingsFilter]) {
         return NO;
     }
-    [self fby_saveNSUserDefaults:@YES withKey:UseCustomFilter];
+    [self saveNSUserDefaults:@YES withKey:UseCustomFilter];
     return YES;
 }
 
 + (NSString *)loadBlufiScanFilter {
-    id custom = [self fby_getNSUserDefaults:UseCustomFilter];
+    id custom = [self getNSUserDefaults:UseCustomFilter];
     NSLog(@"loadBlufiScanFilter %@", custom);
+    
     if (!custom || ![custom boolValue]) {
         return DefaultFilter;
     }
-    return [self fby_getNSUserDefaults:SettingsFilter];
+    return [self getNSUserDefaults:SettingsFilter];
 }
 
 @end

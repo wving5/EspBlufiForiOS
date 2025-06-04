@@ -1,5 +1,5 @@
 //
-//  ESPFBYBLEHelper.h
+//  ESPBLEHelper.h
 //  EspBlufi
 //
 //  Created by fanbaoying on 2020/6/11.
@@ -11,10 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESPFBYBLEHelper : NSObject
+@interface ESPBLEHelper : NSObject
 typedef void(^FBYBleDeviceBackBlock)(ESPPeripheral *device);
 
-@property (nonatomic, copy) FBYBleDeviceBackBlock bleScanSuccessBlock;
+@property (nonatomic, copy) FBYBleDeviceBackBlock onBleScanSuccess;
 /**
  * 单例构造方法
  * @return ESPFBYLocalAPI共享实例

@@ -1,15 +1,15 @@
 //
-//  ESPFBYBLEHelper.m
+//  ESPBLEHelper.m
 //  EspBlufi
 //
 //  Created by fanbaoying on 2020/6/11.
 //  Copyright © 2020 espressif. All rights reserved.
 //
 
-#import "ESPFBYBLEHelper.h"
+#import "ESPBLEHelper.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface ESPFBYBLEHelper ()<CBCentralManagerDelegate,CBPeripheralDelegate>
+@interface ESPBLEHelper ()<CBCentralManagerDelegate,CBPeripheralDelegate>
 // 中心管理者(管理设备的扫描和连接)
 @property (nonatomic, strong) CBCentralManager *centralManager;
 // 存储的设备
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation ESPFBYBLEHelper
+@implementation ESPBLEHelper
 
 - (void)ESPFBYBLEHelperInit {
     self.centralManager = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
@@ -28,10 +28,10 @@
 
 //单例模式
 + (instancetype)share {
-    static ESPFBYBLEHelper *share = nil;
+    static ESPBLEHelper *share = nil;
     static dispatch_once_t oneToken;
     dispatch_once(&oneToken, ^{
-        share = [[ESPFBYBLEHelper alloc]init];
+        share = [[ESPBLEHelper alloc]init];
         [share ESPFBYBLEHelperInit];
     });
     return share;
@@ -44,7 +44,7 @@
 - (void)startScan:(FBYBleDeviceBackBlock)device {
     
     NSLog(@"扫描设备");
-    _bleScanSuccessBlock = device;
+    _onBleScanSuccess = device;
     if (self.peripheralState ==  CBManagerStatePoweredOn)
     {
         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
@@ -63,8 +63,8 @@
     ESPPeripheral *espPeripheral = [[ESPPeripheral alloc] initWithPeripheral:peripheral];
     espPeripheral.name = [advertisementData objectForKey:@"kCBAdvDataLocalName"];
     espPeripheral.rssi = RSSI.intValue;
-    if (self.bleScanSuccessBlock) {
-        self.bleScanSuccessBlock(espPeripheral);
+    if (self.onBleScanSuccess) {
+        self.onBleScanSuccess(espPeripheral);
     }
 }
 

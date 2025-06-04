@@ -75,8 +75,8 @@
 		26835B6F249212A0003B1BC6 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B652492129F003B1BC6 /* MASViewAttribute.m */; };
 		26835B7624921A08003B1BC6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B7524921A08003B1BC6 /* MBProgressHUD.m */; };
 		26835B7924921ABB003B1BC6 /* HUDTips.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B7824921ABB003B1BC6 /* HUDTips.m */; };
-		26835B7E249235E5003B1BC6 /* ESPFBYBLEHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B7D249235E5003B1BC6 /* ESPFBYBLEHelper.m */; };
-		26835B81249324A1003B1BC6 /* ESPDataConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B80249324A0003B1BC6 /* ESPDataConversion.m */; };
+		26835B7E249235E5003B1BC6 /* ESPBLEHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B7D249235E5003B1BC6 /* ESPBLEHelper.m */; };
+		26835B81249324A1003B1BC6 /* ESPUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B80249324A0003B1BC6 /* ESPUserDefaults.m */; };
 		80071DCD24973EBB00A74E55 /* ESPPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 80071DCC24973EBB00A74E55 /* ESPPeripheral.m */; };
 /* End PBXBuildFile section */
 
@@ -298,10 +298,10 @@
 		26835B7724921ABB003B1BC6 /* HUDTips.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HUDTips.h; sourceTree = "<group>"; };
 		26835B7824921ABB003B1BC6 /* HUDTips.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HUDTips.m; sourceTree = "<group>"; };
 		26835B7A24922875003B1BC6 /* EspBlufi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EspBlufi.entitlements; sourceTree = "<group>"; };
-		26835B7C249235E5003B1BC6 /* ESPFBYBLEHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPFBYBLEHelper.h; sourceTree = "<group>"; };
-		26835B7D249235E5003B1BC6 /* ESPFBYBLEHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPFBYBLEHelper.m; sourceTree = "<group>"; };
-		26835B7F249324A0003B1BC6 /* ESPDataConversion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPDataConversion.h; sourceTree = "<group>"; };
-		26835B80249324A0003B1BC6 /* ESPDataConversion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPDataConversion.m; sourceTree = "<group>"; };
+		26835B7C249235E5003B1BC6 /* ESPBLEHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPBLEHelper.h; sourceTree = "<group>"; };
+		26835B7D249235E5003B1BC6 /* ESPBLEHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPBLEHelper.m; sourceTree = "<group>"; };
+		26835B7F249324A0003B1BC6 /* ESPUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPUserDefaults.h; sourceTree = "<group>"; };
+		26835B80249324A0003B1BC6 /* ESPUserDefaults.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPUserDefaults.m; sourceTree = "<group>"; };
 		80071DCB24973EBB00A74E55 /* ESPPeripheral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPPeripheral.h; sourceTree = "<group>"; };
 		80071DCC24973EBB00A74E55 /* ESPPeripheral.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPPeripheral.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -726,10 +726,10 @@
 		26835B7B249235C1003B1BC6 /* ESPAPPResources */ = {
 			isa = PBXGroup;
 			children = (
-				26835B7C249235E5003B1BC6 /* ESPFBYBLEHelper.h */,
-				26835B7D249235E5003B1BC6 /* ESPFBYBLEHelper.m */,
-				26835B7F249324A0003B1BC6 /* ESPDataConversion.h */,
-				26835B80249324A0003B1BC6 /* ESPDataConversion.m */,
+				26835B7C249235E5003B1BC6 /* ESPBLEHelper.h */,
+				26835B7D249235E5003B1BC6 /* ESPBLEHelper.m */,
+				26835B7F249324A0003B1BC6 /* ESPUserDefaults.h */,
+				26835B80249324A0003B1BC6 /* ESPUserDefaults.m */,
 				80071DCB24973EBB00A74E55 /* ESPPeripheral.h */,
 				80071DCC24973EBB00A74E55 /* ESPPeripheral.m */,
 			);
@@ -826,11 +826,11 @@
 				26835B222491CFFD003B1BC6 /* MJRefreshBackNormalFooter.m in Sources */,
 				26835B68249212A0003B1BC6 /* MASCompositeConstraint.m in Sources */,
 				2662E48D24A3079C0074383A /* BlufiSecurity.m in Sources */,
-				26835B7E249235E5003B1BC6 /* ESPFBYBLEHelper.m in Sources */,
+				26835B7E249235E5003B1BC6 /* ESPBLEHelper.m in Sources */,
 				2662E48C24A3079C0074383A /* BlufiConfigureParams.m in Sources */,
 				2662E49324A3079C0074383A /* BlufiFrameCtrlData.m in Sources */,
 				26835B2E2491CFFD003B1BC6 /* MJRefreshAutoFooter.m in Sources */,
-				26835B81249324A1003B1BC6 /* ESPDataConversion.m in Sources */,
+				26835B81249324A1003B1BC6 /* ESPUserDefaults.m in Sources */,
 				26835B302491CFFD003B1BC6 /* MJRefreshTrailer.m in Sources */,
 				26835B262491CFFD003B1BC6 /* MJRefreshStateTrailer.m in Sources */,
 				2662E48824A3079C0074383A /* BlufiClient.m in Sources */,

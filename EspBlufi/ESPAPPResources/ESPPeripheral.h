@@ -14,8 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ESPPeripheral : NSObject
 
 @property(strong, nonatomic)CBPeripheral *peripheral;
-@property(strong, nonatomic)NSString *name;
 @property(strong, nonatomic)NSUUID *uuid;
+
+// 增加
+@property(strong, nonatomic)NSString *name;
 @property(assign, nonatomic)int rssi;
 
 - (instancetype)initWithPeripheral:(CBPeripheral *)peripheral;
