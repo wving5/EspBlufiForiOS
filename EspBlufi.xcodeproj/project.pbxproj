@@ -1054,7 +1054,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EspBlufi/ESPPch/PrefixHeader.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/BlufiLibrary/Security/openssl/include/";
 				INFOPLIST_FILE = EspBlufi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1082,7 +1082,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EspBlufi/ESPPch/PrefixHeader.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/BlufiLibrary/Security/openssl/include/";
 				INFOPLIST_FILE = EspBlufi/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
