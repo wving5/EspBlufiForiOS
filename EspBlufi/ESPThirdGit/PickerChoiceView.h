@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 - (void)PickerSelectorIndixString:(NSString *)str;
--(void)PickerSelectorCancel;
+- (void)PickerSelectorCancel;
 
 @end
 
@@ -38,7 +38,6 @@ typedef NS_ENUM(NSInteger, ARRAYTYPE) {
     Security,
     channel,
     max_connection,
-    
 };
 
 @interface PickerChoiceView : UIView
@@ -47,13 +46,12 @@ typedef NS_ENUM(NSInteger, ARRAYTYPE) {
 
 @property (nonatomic, strong) NSArray *customArr;
 
-@property (nonatomic,strong)UILabel *selectLb;
+@property (nonatomic, strong) UILabel *selectLb;
 
-@property(nonatomic,strong)NSMutableArray *dateArray;
+@property (nonatomic, strong) NSMutableArray *dateArray;
 
-@property (nonatomic,assign)id<TFPickerDelegate>delegate;
+@property (nonatomic, assign) id<TFPickerDelegate> delegate;
 
 @end
-
 
 NS_ASSUME_NONNULL_END

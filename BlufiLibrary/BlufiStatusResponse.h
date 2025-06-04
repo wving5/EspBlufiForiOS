@@ -13,19 +13,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BlufiStatusResponse : NSObject
 
-@property(assign, nonatomic)OpMode opMode;
+@property (assign, nonatomic) OpMode opMode;
 
-@property(assign, nonatomic)SoftAPSecurity softApSecurity;
-@property(assign, nonatomic)int softApConnectionCount;
-@property(assign, nonatomic)int softApMaxConnection;
-@property(assign, nonatomic)int softApChannel;
-@property(strong, nonatomic)NSString *softApPassword;
-@property(strong, nonatomic)NSString *softApSsid;
+@property (assign, nonatomic) SoftAPSecurity softApSecurity;
+@property (assign, nonatomic) int softApConnectionCount;
+@property (assign, nonatomic) int softApMaxConnection;
+@property (assign, nonatomic) int softApChannel;
+@property (strong, nonatomic) NSString *softApPassword;
+@property (strong, nonatomic) NSString *softApSsid;
 
-@property(assign, nonatomic)int staConnectionStatus;
-@property(strong, nonatomic)NSString *staBssid;
-@property(strong, nonatomic)NSString *staSsid;
-@property(strong, nonatomic)NSString *staPassword;
+@property (assign, nonatomic) int staConnectionStatus;
+@property (strong, nonatomic) NSString *staBssid;
+@property (strong, nonatomic) NSString *staSsid;
+@property (strong, nonatomic) NSString *staPassword;
 
 - (BOOL)isStaConnectWiFi;
 

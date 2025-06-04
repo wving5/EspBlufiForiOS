@@ -8,9 +8,9 @@
 
 #import "BlufiFrameCtrlData.h"
 
-@interface BlufiFrameCtrlData()
+@interface BlufiFrameCtrlData ()
 
-@property(assign, nonatomic,)Byte value;
+@property (assign, nonatomic, ) Byte value;
 
 @end
 
@@ -52,7 +52,11 @@ enum {
     return [self check:PositionFrag];
 }
 
-+ (Byte)getFrameCtrlValueWithEncrypted:(BOOL)encrypted checksum:(BOOL)checksum direction:(DataDirection)direction requireAck:(BOOL)ack hasFrag:(BOOL)frag {
++ (Byte)getFrameCtrlValueWithEncrypted:(BOOL)encrypted
+                              checksum:(BOOL)checksum
+                             direction:(DataDirection)direction
+                            requireAck:(BOOL)ack
+                               hasFrag:(BOOL)frag {
     Byte frame = 0;
     if (encrypted) {
         frame |= (1 << PositionEncrypted);

@@ -10,22 +10,21 @@
 
 @class FFDropDownMenuView;
 
-//model
+// model
 #import "FFDropDownMenuBasedModel.h"
 #import "FFDropDownMenuModel.h"
 
-//cell
+// cell
 #import "FFDropDownMenuBasedCell.h"
 #import "FFDropDownMenuCell.h"
 
-
-//default value
-#define FFDefaultFloat -10.0
-#define FFDefaultCell @"FFDropDownMenuCell"
+// default value
+#define FFDefaultFloat         -10.0
+#define FFDefaultCell          @"FFDropDownMenuCell"
 #define FFDefaultMenuScaleType FFDropDownMenuViewAnimateType_ScaleBasedTopRight
 
-//rgb color  r-red 、  g-green  、  b-blue  、 a-alpha
-#define FFColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+// rgb color  r-red 、  g-green  、  b-blue  、 a-alpha
+#define FFColor(r, g, b, a) [UIColor colorWithRed:(r) / 255.0 green:(g) / 255.0 blue:(b) / 255.0 alpha:(a)]
 
 /**
  *  dropdownMenu animationType.
@@ -36,7 +35,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
      *  scale based the point of upper right corner.
      *  以右上角为基点进行伸缩
      */
-    FFDropDownMenuViewAnimateType_ScaleBasedTopRight = 0, //default
+    FFDropDownMenuViewAnimateType_ScaleBasedTopRight = 0,  // default
     /**
      *  scale based the point of upper left corner.
      *  以左上角为基点进行伸缩
@@ -64,9 +63,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
     FFDropDownMenuViewAnimateType_FallFromTop,
 };
 
-
 @protocol FFDropDownMenuViewDelegate <NSObject>
-
 
 @optional
 
@@ -82,18 +79,13 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 
 - (void)ffDropDownMenuViewWDidDisappear;
 
-
 @end
-
 
 /**
  *  drop-down menu
  *  下拉菜单
  */
 @interface FFDropDownMenuView : UIView
-
-
-
 
 ///=========================
 ///    创建下拉菜单方式1
@@ -114,17 +106,16 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  *  @return 实例化的一个下拉菜单对象
  */
 
-
-
-///English description:
+/// English description:
 ///============================================================
-///         create a drop-down menu method one
-///  Applicable to the use of the default drop-down menu style
+///          create a drop-down menu method one
+///   Applicable to the use of the default drop-down menu style
 ///============================================================
 
 /**
  *  fast instance a default style drop-down menu
- *  >>>>Note:If you need to assign the other attributes, you can assign the other attributes separately. But at the end of the setup method must be called.
+ *  >>>>Note:If you need to assign the other attributes, you can assign the other attributes separately. But at the end of the setup method must be
+ * called.
  *
  *  @param menuModelsArray     drop-down menu models array. Array storage FFDropDownMenuModel instances
  *  @param menuWidth           drop-down menu's width                --- if want to use default width , pass FFDefaultFloat
@@ -134,10 +125,11 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  *
  *  @return An initialized drop-down menu
  */
-+ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray menuWidth:(CGFloat)menuWidth eachItemHeight:(CGFloat)eachItemHeight menuRightMargin:(CGFloat)menuRightMargin triangleRightMargin:(CGFloat)triangleRightMargin;
-
-
-
++ (instancetype)ff_DefaultStyleDropDownMenuWithMenuModelsArray:(NSArray *)menuModelsArray
+                                                     menuWidth:(CGFloat)menuWidth
+                                                eachItemHeight:(CGFloat)eachItemHeight
+                                               menuRightMargin:(CGFloat)menuRightMargin
+                                           triangleRightMargin:(CGFloat)triangleRightMargin;
 
 ///==================================================================
 ///                    创建下拉菜单方式2
@@ -150,31 +142,24 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
 ///   3、 调用 setup方法
 ///==================================================================
 
-///English description:
+/// English description:
 ///==================================================================
-///               create a drop-down menu method two
-///   Applicable to the use of the custom drop-down menu style
-///   >>step:
-///   1、 [FFDropDownMenuView alloc] init]
-///   2、 Assign to the properties that need to be assigned.
-///       >>>>>if want to use the default value，not assign or assign FFDefault....
+///                create a drop-down menu method two
+///    Applicable to the use of the custom drop-down menu style
+///    >>step:
+///    1、 [FFDropDownMenuView alloc] init]
+///    2、 Assign to the properties that need to be assigned.
+///        >>>>>if want to use the default value，not assign or assign FFDefault....
 ///
-///   3、 call setup method
+///    3、 call setup method
 ///==================================================================
-
-
-
-
-
 
 //===================================================================
 //    default menu style properties（only effect on default menu style）
 //    默认菜单样式的属性(只对默认菜单样式起作用，若使用自定义样式，则不起作用)
 //===================================================================
 
-
-
-/** 1、默认菜单样式 的字体颜色(默认为黑色) 
+/** 1、默认菜单样式 的字体颜色(默认为黑色)
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
@@ -214,23 +199,12 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGFloat iconRightMargin;
 
-
-
-
-
-
-
-
-
-
 //==========================================================================
 //    public properties (effect on default menu style and custom menu style)
 //    公共属性的注释(不论是自定义样式，还是使用默认的下拉菜单样式都适用的属性)
 //==========================================================================
 
-
-
-/** 1、下拉菜单模型数组(数组里面存放 FFDropDownMenuBasedModel的子类的对象) 
+/** 1、下拉菜单模型数组(数组里面存放 FFDropDownMenuBasedModel的子类的对象)
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
@@ -291,24 +265,24 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGFloat menuRightMargin;
 
-/** 7、菜单选项的背景颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色) 
+/** 7、菜单选项的背景颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色)
  *     若是自定义cell,如果在自定义cell中设置了cell中子控件的颜色，这个属性将不起作用,您可以在自定义cell中自己设置颜色
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
  *     drop-down menu item background color (if not assign, default color is white color.)
  *            you can use FFColor(r, g, b, a) to set a color with alpha.
- *     if you use custom cell and you set cell's background color or 
+ *     if you use custom cell and you set cell's background color or
  *            set cell's subview background color, this attribute will be affected
  */
 
 @property (nonatomic, strong) UIColor *menuItemBackgroundColor;
 
-/** 8、三角形颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色) 
+/** 8、三角形颜色(若不设置，默认为白色、可以用FFColor(r, g, b, a) 设置带透明度的颜色)
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
- *     triangle color (if not assign, default color is white color) 
+ *     triangle color (if not assign, default color is white color)
  *                    you can use FFColor(r, g, b, a) to set a color with alpha)
  */
 @property (nonatomic, strong) UIColor *triangleColor;
@@ -349,7 +323,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGSize triangleSize;
 
-/** 12、背景颜色开始时的透明度(还没展示menu的透明度)(若不设置，默认为0.02) 
+/** 12、背景颜色开始时的透明度(还没展示menu的透明度)(若不设置，默认为0.02)
  *      背景颜色的透明度就是除去菜单外的灰色蒙板的透明度
  *     -----------------------------------------------------------
  *     English description:
@@ -359,7 +333,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGFloat bgColorbeginAlpha;
 
-/** 13、背景颜色结束的的透明度(menu完全展示的透明度)(若不设置，默认为0.2) 
+/** 13、背景颜色结束的的透明度(menu完全展示的透明度)(若不设置，默认为0.2)
  *      背景颜色的透明度就是除去菜单外的灰色蒙板的透明度
  *     -----------------------------------------------------------
  *     English description:
@@ -369,7 +343,7 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGFloat bgColorEndAlpha;
 
-/** 14、动画效果时间(若不设置，默认为0.2) 
+/** 14、动画效果时间(若不设置，默认为0.2)
  *     -----------------------------------------------------------
  *     English description:
  *     -----------------------------------------------------------
@@ -384,7 +358,6 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  *     show drop-down menu animate type. (if not assign, default value is FFDropDownMenuViewAnimateType_ScaleBasedTopRight)
  */
 @property (nonatomic, assign) FFDropDownMenuViewAnimateType menuAnimateType;
-
 
 /** 16、菜单是否需要滚动（若不设置，默认为不可滚动）
  *     -----------------------------------------------------------
@@ -404,23 +377,10 @@ typedef NS_ENUM(NSInteger, FFDropDownMenuViewAnimateType) {
  */
 @property (nonatomic, assign) CGFloat menuBarHeight;
 
-
 /** 18、delegate
  *
  */
 @property (nonatomic, weak) id<FFDropDownMenuViewDelegate> delegate;
-
-
-
-
-
-
-
-
-
-
-
-
 
 /** 初始化(当所有属性调用完毕，一定要调用这个方法)
  *  assign all properies complete must call this method

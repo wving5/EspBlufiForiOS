@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-//定义一个菜单的block
-typedef void(^FFMenuBlock)(void);
+// 定义一个菜单的block
+typedef void (^FFMenuBlock)(void);
 
 /**
  *  下拉菜单的基本模型，所有自定义模型必须继承这个模型

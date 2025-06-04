@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ESPDetailViewController : UIViewController
 
-@property(strong, nonatomic)ESPPeripheral *device;
+@property (strong, nonatomic) ESPPeripheral *device;
 
 @end
 

@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BlufiScanResponse : NSObject
 
-@property(assign, nonatomic)int type;
-@property(strong, nonatomic)NSString *ssid;
-@property(assign, nonatomic)int8_t rssi;
+@property (assign, nonatomic) int type;
+@property (strong, nonatomic) NSString *ssid;
+@property (assign, nonatomic) int8_t rssi;
 
 @end
 

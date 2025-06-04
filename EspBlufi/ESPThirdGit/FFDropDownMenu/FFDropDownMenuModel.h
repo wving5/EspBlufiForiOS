@@ -13,13 +13,11 @@
  */
 @interface FFDropDownMenuModel : FFDropDownMenuBasedModel
 
-
 /** 菜单选项标题 */
 @property (nonatomic, copy) NSString *menuItemTitle;
 
 /** 菜单选项图标名称 */
 @property (nonatomic, copy) NSString *menuItemIconName;
-
 
 /**
  *  快速实例化一个下拉菜单模型
@@ -30,6 +28,8 @@
  *
  *  @return 实例化的菜单模型
  */
-+ (instancetype)ff_DropDownMenuModelWithMenuItemTitle:(NSString *)menuItemTitle menuItemIconName:(NSString *)menuItemIconName menuBlock:(FFMenuBlock)menuBlock;
++ (instancetype)ff_DropDownMenuModelWithMenuItemTitle:(NSString *)menuItemTitle
+                                     menuItemIconName:(NSString *)menuItemIconName
+                                            menuBlock:(FFMenuBlock)menuBlock;
 
 @end

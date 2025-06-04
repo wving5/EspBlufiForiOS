@@ -34,7 +34,7 @@
         ret = DH_compute_key(shareKey, pubKey, _dh);
     }
     BN_free(pubKey);
-    
+
     int offset = 0;
     for (int i = 0; i < 128; i++) {
         if (shareKey[i] == 0) {
@@ -43,7 +43,7 @@
             break;
         }
     }
-    
+
     if (offset == 0) {
         return [NSData dataWithBytes:shareKey length:128];
     } else {

@@ -14,14 +14,14 @@
     self = [super init];
     if (self) {
         _opMode = OpModeNull;
-        
+
         _softApSecurity = SoftAPSecurityUnknown;
         _softApConnectionCount = -1;
         _softApMaxConnection = -1;
         _softApChannel = -1;
         _softApSsid = nil;
         _softApPassword = nil;
-        
+
         _staConnectionStatus = -1;
         _staBssid = nil;
         _staSsid = nil;
@@ -54,7 +54,7 @@
             break;
     }
     [info appendString:@"\n"];
-    
+
     if (_opMode == OpModeSta || _opMode == OpModeStaSoftAP) {
         if ([self isStaConnectWiFi]) {
             [info appendString:@"Station connect Wi-Fi now"];
@@ -98,7 +98,7 @@
             case SoftAPSecurityUnknown:
                 break;
         }
-        
+
         if (_softApSsid) {
             [info appendString:@"SoftAP ssid: "];
             [info appendString:_softApSsid];
@@ -119,7 +119,7 @@
             [info appendFormat:@"SoftAP current connection: %d\n", _softApConnectionCount];
         }
     }
-   
+
     return info;
 }
 

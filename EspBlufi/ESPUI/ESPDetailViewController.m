@@ -22,22 +22,27 @@ typedef enum {
     TagCustom,
 } TagButton;
 
-@interface ESPDetailViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, BlufiDelegate, UITableViewDelegate, UITableViewDataSource, ConfigureParamsDelegate>
+@interface ESPDetailViewController () <CBCentralManagerDelegate,
+                                       CBPeripheralDelegate,
+                                       BlufiDelegate,
+                                       UITableViewDelegate,
+                                       UITableViewDataSource,
+                                       ConfigureParamsDelegate>
 
-@property(strong, nonatomic)UIButton *connectBtn;
-@property(strong, nonatomic)UIButton *disConnectBtn;
-@property(strong, nonatomic)UIButton *encryptionBtn;
-@property(strong, nonatomic)UIButton *versionBtn;
-@property(strong, nonatomic)UIButton *configureBtn;
-@property(strong, nonatomic)UIButton *stateBtn;
-@property(strong, nonatomic)UIButton *scanBtn;
-@property(strong, nonatomic)UIButton *customBtn;
+@property (strong, nonatomic) UIButton *connectBtn;
+@property (strong, nonatomic) UIButton *disConnectBtn;
+@property (strong, nonatomic) UIButton *encryptionBtn;
+@property (strong, nonatomic) UIButton *versionBtn;
+@property (strong, nonatomic) UIButton *configureBtn;
+@property (strong, nonatomic) UIButton *stateBtn;
+@property (strong, nonatomic) UIButton *scanBtn;
+@property (strong, nonatomic) UIButton *customBtn;
 
-@property(strong, nonatomic)UITableView *messageView;
-@property(strong, nonatomic)NSMutableArray *messageArray;
+@property (strong, nonatomic) UITableView *messageView;
+@property (strong, nonatomic) NSMutableArray *messageArray;
 
-@property(strong, nonatomic)BlufiClient *blufiClient;
-@property(assign, atomic)BOOL connected;
+@property (strong, nonatomic) BlufiClient *blufiClient;
+@property (assign, atomic) BOOL connected;
 
 @end
 
@@ -54,14 +59,18 @@ typedef enum {
 
 - (void)setupBasedView {
     UIView *reminderView = [[UIView alloc] initWithFrame:CGRectMake(0, statusHeight + 44, SCREEN_WIDTH, SCREEN_HEIGHT - statusHeight - 164)];
-//    reminderView.backgroundColor = UICOLOR_RGBA(221, 221, 221, 1);
+    //    reminderView.backgroundColor = UICOLOR_RGBA(221, 221, 221, 1);
     [self.view addSubview:reminderView];
-    
+
     UIView *operationView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 120, SCREEN_HEIGHT, 100)];
     [self.view addSubview:operationView];
-    
-    NSArray *operationArr = @[INTER_STR(@"EspBlufi-operation-connect"), INTER_STR(@"EspBlufi-operation-disConnect"), INTER_STR(@"EspBlufi-operation-encryption"), INTER_STR(@"EspBlufi-operation-version"), INTER_STR(@"EspBlufi-operation-provision"), INTER_STR(@"EspBlufi-operation-state"), INTER_STR(@"EspBlufi-operation-scan"), INTER_STR(@"EspBlufi-operation-custom")];
-    for (int i = 0; i < operationArr.count; i ++ ) {
+
+    NSArray *operationArr = @[
+        INTER_STR(@"EspBlufi-operation-connect"), INTER_STR(@"EspBlufi-operation-disConnect"), INTER_STR(@"EspBlufi-operation-encryption"),
+        INTER_STR(@"EspBlufi-operation-version"), INTER_STR(@"EspBlufi-operation-provision"), INTER_STR(@"EspBlufi-operation-state"),
+        INTER_STR(@"EspBlufi-operation-scan"), INTER_STR(@"EspBlufi-operation-custom")
+    ];
+    for (int i = 0; i < operationArr.count; i++) {
         int firstCount = 0;
         int twoCount = 0;
         if (i < 4) {
@@ -114,7 +123,7 @@ typedef enum {
         }
         [operationView addSubview:myButton];
     }
-    
+
     _messageView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 130)];
     _messageView.backgroundColor = [UIColor colorWithRed:80 green:80 blue:80 alpha:1];
     _messageArray = [[NSMutableArray alloc] init];
@@ -216,7 +225,7 @@ typedef enum {
     if (!ValidArray(_messageArray)) {
         return cell;
     }
-    
+
     NSString *message = _messageArray[indexPath.row];
     cell.textLabel.text = message;
     cell.textLabel.numberOfLines = 0;
@@ -226,11 +235,13 @@ typedef enum {
 - (void)updateMessage:(NSString *)message {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self.messageArray addObject:message];
-        NSArray *insertIndexPaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.messageArray.count-1 inSection:0]];
+        NSArray *insertIndexPaths = [NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.messageArray.count - 1 inSection:0]];
         [self.messageView beginUpdates];
         [self.messageView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationNone];
         [self.messageView endUpdates];
-        [self.messageView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self->_messageArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        [self.messageView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self->_messageArray.count - 1 inSection:0]
+                                atScrollPosition:UITableViewScrollPositionTop
+                                        animated:YES];
     }];
 }
 
@@ -240,7 +251,7 @@ typedef enum {
         [_blufiClient close];
         _blufiClient = nil;
     }
-    
+
     _blufiClient = [[BlufiClient alloc] init];
     _blufiClient.centralManagerDelete = self;
     _blufiClient.peripheralDelegate = self;
@@ -261,20 +272,26 @@ typedef enum {
 }
 
 - (void)showCustomDataAlert {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:INTER_STR(@"EspBlufi-custom-data") preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:INTER_STR(@"cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self setButton:self.customBtn enable:self.connected];
-    }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:INTER_STR(@"ok") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setButton:self.customBtn enable:self.connected];
-        UITextField *filterTextField = alertController.textFields.firstObject;
-        NSString *text = filterTextField.text;
-        if (text && text.length > 0 && self.blufiClient) {
-            NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
-            [self.blufiClient postCustomData:data];
-        }
-    }]];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:INTER_STR(@"EspBlufi-custom-data")
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:INTER_STR(@"cancel")
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:^(UIAlertAction *_Nonnull action) {
+                                                          [self setButton:self.customBtn enable:self.connected];
+                                                      }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:INTER_STR(@"ok")
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction *_Nonnull action) {
+                                                          [self setButton:self.customBtn enable:self.connected];
+                                                          UITextField *filterTextField = alertController.textFields.firstObject;
+                                                          NSString *text = filterTextField.text;
+                                                          if (text && text.length > 0 && self.blufiClient) {
+                                                              NSData *data = [text dataUsingEncoding:NSUTF8StringEncoding];
+                                                              [self.blufiClient postCustomData:data];
+                                                          }
+                                                      }]];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *_Nonnull textField) {
         textField.placeholder = INTER_STR(@"EspBlufi-custom-data-hint");
     }];
     [self presentViewController:alertController animated:YES completion:nil];
@@ -286,7 +303,7 @@ typedef enum {
     }
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self setButton:self.connectBtn enable:YES];
-        
+
         [self setButton:self.disConnectBtn enable:NO];
         [self setButton:self.encryptionBtn enable:NO];
         [self setButton:self.versionBtn enable:NO];
@@ -300,7 +317,7 @@ typedef enum {
 - (void)onBlufiPrepared {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self setButton:self.connectBtn enable:NO];
-        
+
         [self setButton:self.disConnectBtn enable:YES];
         [self setButton:self.encryptionBtn enable:YES];
         [self setButton:self.versionBtn enable:YES];
@@ -329,7 +346,11 @@ typedef enum {
     self.connected = NO;
 }
 
-- (void)blufi:(BlufiClient *)client gattPrepared:(BlufiStatusCode)status service:(CBService *)service writeChar:(CBCharacteristic *)writeChar notifyChar:(CBCharacteristic *)notifyChar {
+- (void)blufi:(BlufiClient *)client
+    gattPrepared:(BlufiStatusCode)status
+         service:(CBService *)service
+       writeChar:(CBCharacteristic *)writeChar
+      notifyChar:(CBCharacteristic *)notifyChar {
     NSLog(@"Blufi gattPrepared status:%d", status);
     if (status == StatusSuccess) {
         self.connected = YES;
@@ -417,7 +438,6 @@ typedef enum {
     NSString *customString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     [self updateMessage:[NSString stringWithFormat:@"Receive device custom data: %@", customString]];
 }
-
 
 /*
 #pragma mark - Navigation

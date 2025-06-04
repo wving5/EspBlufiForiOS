@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BlufiVersionResponse : NSObject
 
-@property(assign, nonatomic)Byte bigVer;
-@property(assign, nonatomic)Byte smallVer;
+@property (assign, nonatomic) Byte bigVer;
+@property (assign, nonatomic) Byte smallVer;
 
 - (NSString *)getVersionString;
 

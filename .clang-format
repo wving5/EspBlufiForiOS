@@ -1,0 +1,34 @@
+BasedOnStyle: Google
+Language: ObjC
+
+IndentWidth: 4
+ColumnLimit: 150
+
+# Objective-C method parameter alignment
+ObjCBreakBeforeNestedBlockParam: true
+ObjCSpaceAfterProperty: true
+ObjCSpaceBeforeProtocolList: true
+ObjCBlockIndentWidth: 4
+
+# General alignment settings
+AlignAfterOpenBracket: Align
+AlignOperands: Align
+AlignConsecutiveDeclarations: false
+AlignConsecutiveMacros: true
+AlignConsecutiveBitFields: true
+AlignConsecutiveAssignments: false
+
+# Method signature wrapping
+AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnASingleLine: Never
+
+# Disable all include/import sorting
+SortIncludes: Never
+IncludeBlocks: Preserve  # Keep existing groupings
+
+# Prevent short constructs on single lines
+AllowShortEnumsOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: true
+

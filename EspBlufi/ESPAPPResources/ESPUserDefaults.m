@@ -8,9 +8,9 @@
 
 #import "ESPUserDefaults.h"
 
-#define SettingsFilter @"filterContent"
+#define SettingsFilter  @"filterContent"
 #define UseCustomFilter @"useCustomFilter"
-#define DefaultFilter @"BLUFI"
+#define DefaultFilter   @"BLUFI"
 
 @implementation ESPUserDefaults
 
@@ -21,13 +21,13 @@
  *  @param key   关键字
  *  @return 保存结果
  */
-+ (BOOL)saveNSUserDefaults:(id)value withKey:(NSString *)key
-{
-    if((!value)||(!key)||key.length==0){
++ (BOOL)saveNSUserDefaults:(id)value withKey:(NSString *)key {
+    if ((!value) || (!key) || key.length == 0) {
         NSLog(@"参数不能为空");
         return NO;
     }
-    if(!([value isKindOfClass:[NSString class]]||[value isKindOfClass:[NSNumber class]]||[value isKindOfClass:[NSArray class]]||[value isKindOfClass:[NSDictionary class]])){
+    if (!([value isKindOfClass:[NSString class]] || [value isKindOfClass:[NSNumber class]] || [value isKindOfClass:[NSArray class]] ||
+          [value isKindOfClass:[NSDictionary class]])) {
         NSLog(@"参数格式不对");
         return NO;
     }
@@ -43,12 +43,12 @@
  *  @param key     关键字
  *  return  返回已保存的数据
  */
-+ (id)getNSUserDefaults:(NSString *)key{
-    if(key==nil||key.length==0){
++ (id)getNSUserDefaults:(NSString *)key {
+    if (key == nil || key.length == 0) {
         NSLog(@"参数不能为空");
         return nil;
     }
-    
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     return [defaults objectForKey:key];
 }
@@ -64,7 +64,7 @@
 + (NSString *)loadBlufiScanFilter {
     id custom = [self getNSUserDefaults:UseCustomFilter];
     NSLog(@"loadBlufiScanFilter %@", custom);
-    
+
     if (!custom || ![custom boolValue]) {
         return DefaultFilter;
     }

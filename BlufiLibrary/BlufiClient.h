@@ -27,28 +27,28 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion The delegate object that will receive Blufi events.
  */
-@property(weak, nonatomic, nullable)id<BlufiDelegate> blufiDelegate;
+@property (weak, nonatomic, nullable) id<BlufiDelegate> blufiDelegate;
 
 /*!
  *  @property delegate
  *
  *  @discussion The delegate object that will receive central events.
-*/
-@property(weak, nonatomic, nullable)id<CBCentralManagerDelegate> centralManagerDelete;
+ */
+@property (weak, nonatomic, nullable) id<CBCentralManagerDelegate> centralManagerDelete;
 
 /*!
  *  @property peripheralDelegate
  *
  *  @discussion The delegate object that will receive peripheral events.
  */
-@property(weak, nonatomic, nullable)id<CBPeripheralDelegate> peripheralDelegate;
+@property (weak, nonatomic, nullable) id<CBPeripheralDelegate> peripheralDelegate;
 
 /*!
  *  @property peripheralDelegate
  *
  *  @discussion The maximum length of each Blufi packet, the excess part will be subcontracted.
  */
-@property(assign, nonatomic)NSInteger postPackageLengthLimit;
+@property (assign, nonatomic) NSInteger postPackageLengthLimit;
 
 /*!
  * @method connect:
@@ -149,7 +149,11 @@ typedef enum {
  *
  * @discussion Invoked after client set notifyChar notification enable. User can post BluFi packet now.
  */
-- (void)blufi:(BlufiClient *)client gattPrepared:(BlufiStatusCode)status service:(nullable CBService *)service writeChar:(nullable CBCharacteristic *)writeChar notifyChar:(nullable CBCharacteristic *)notifyChar;
+- (void)blufi:(BlufiClient *)client
+    gattPrepared:(BlufiStatusCode)status
+         service:(nullable CBService *)service
+       writeChar:(nullable CBCharacteristic *)writeChar
+      notifyChar:(nullable CBCharacteristic *)notifyChar;
 
 /*!
  * @method blufi:gattNotification:packageType:subType:
@@ -227,7 +231,6 @@ typedef enum {
  * @discussion Invoked when received device scan results
  */
 - (void)blufi:(BlufiClient *)client didReceiveDeviceScanResponse:(nullable NSArray<BlufiScanResponse *> *)scanResults status:(BlufiStatusCode)status;
-
 
 /*!
  * @method blufi:didPostCustomData:status:

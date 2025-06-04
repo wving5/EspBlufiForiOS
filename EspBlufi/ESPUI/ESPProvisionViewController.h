@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ESPProvisionViewController : UIViewController
 
-@property(nonatomic, weak)id<ConfigureParamsDelegate> paramsDelegate;
+@property (nonatomic, weak) id<ConfigureParamsDelegate> paramsDelegate;
 
 @end
 

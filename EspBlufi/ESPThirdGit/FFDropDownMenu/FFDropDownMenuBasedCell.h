@@ -14,7 +14,7 @@
 @interface FFDropDownMenuBasedCell : UITableViewCell
 
 {
-    @public
+   @public
     id _menuModel;
 }
 

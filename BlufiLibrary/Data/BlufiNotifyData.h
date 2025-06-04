@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BlufiNotifyData : NSObject
 
-@property(assign, nonatomic)Byte typeValue;
-@property(assign, nonatomic)PackageType packageType;
-@property(assign, nonatomic)SubType subType;
+@property (assign, nonatomic) Byte typeValue;
+@property (assign, nonatomic) PackageType packageType;
+@property (assign, nonatomic) SubType subType;
 
-@property(assign, nonatomic)NSInteger frameCtrl;
+@property (assign, nonatomic) NSInteger frameCtrl;
 
 - (void)appendData:(NSData *)data;
 

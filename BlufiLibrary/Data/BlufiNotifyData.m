@@ -8,9 +8,9 @@
 
 #import "BlufiNotifyData.h"
 
-@interface BlufiNotifyData()
+@interface BlufiNotifyData ()
 
-@property(strong, nonatomic)NSMutableData *data;
+@property (strong, nonatomic) NSMutableData *data;
 
 @end
 

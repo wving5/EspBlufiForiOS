@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BlufiConstants : NSObject
 
-#define UUID_SERVICE      @"FFFF"
-#define UUID_WRITE_CHAR   @"FF01"
-#define UUID_NOTIFY_CHAR  @"FF02"
+#define UUID_SERVICE     @"FFFF"
+#define UUID_WRITE_CHAR  @"FF01"
+#define UUID_NOTIFY_CHAR @"FF02"
 
 typedef enum {
     OpModeNull = 0,

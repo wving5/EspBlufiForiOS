@@ -23,7 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)hasFrag;
 
-+ (Byte)getFrameCtrlValueWithEncrypted:(BOOL)encrypted checksum:(BOOL)checksum direction:(DataDirection)direction requireAck:(BOOL)ack hasFrag:(BOOL)frag;
++ (Byte)getFrameCtrlValueWithEncrypted:(BOOL)encrypted
+                              checksum:(BOOL)checksum
+                             direction:(DataDirection)direction
+                            requireAck:(BOOL)ack
+                               hasFrag:(BOOL)frag;
 
 @end
 

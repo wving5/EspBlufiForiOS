@@ -22,7 +22,6 @@
 /** 标题 */
 @property (weak, nonatomic) UILabel *customTitleLabel;
 
-
 /** 默认菜单样式 的字体颜色 */
 @property (nonatomic, assign) UIColor *titleColor;
 
@@ -37,6 +36,5 @@
 
 /** 默认菜单样式 图片的右边距(也就是和标题之间的边距) */
 @property (nonatomic, assign) CGFloat iconRightMargin;
-
 
 @end

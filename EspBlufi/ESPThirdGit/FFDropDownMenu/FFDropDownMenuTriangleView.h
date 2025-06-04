@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 /**
- *  下拉菜单的三角形 
+ *  下拉菜单的三角形
  */
 @interface FFDropDownMenuTriangleView : UIView
 

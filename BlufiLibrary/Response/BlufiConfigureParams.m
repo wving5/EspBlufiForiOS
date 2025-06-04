@@ -10,9 +10,11 @@
 
 @implementation BlufiConfigureParams
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"opMode=%u, staBssid=%@, staSsid=%@, staPassword=%@, softapSecurity=%u, softapSsid=%@, softapPassword=%@, softapChannel=%ld, softapMaxConnection=%ld", _opMode, _staBssid, _staSsid, _staPassword, _softApSecurity, _softApSsid, _softApPassword, (long)_softApChannel, (long)_softApMaxConnection];
+- (NSString *)description {
+    return [NSString stringWithFormat:@"opMode=%u, staBssid=%@, staSsid=%@, staPassword=%@, softapSecurity=%u, softapSsid=%@, softapPassword=%@, "
+                                      @"softapChannel=%ld, softapMaxConnection=%ld",
+                                      _opMode, _staBssid, _staSsid, _staPassword, _softApSecurity, _softApSsid, _softApPassword, (long)_softApChannel,
+                                      (long)_softApMaxConnection];
 }
 
 @end

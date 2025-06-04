@@ -12,9 +12,9 @@
 #import "BlufiSecurity.h"
 #import "BlufiConfigureParams.h"
 
-#define PACKAGE_LENGTH_DEFAULT   128
-#define PACKAGE_LENGTH_MIN       20
-#define PACKAGE_HEADER_LENGTH    4
+#define PACKAGE_LENGTH_DEFAULT 128
+#define PACKAGE_LENGTH_MIN     20
+#define PACKAGE_HEADER_LENGTH  4
 
 #define DBUG false
 
@@ -48,43 +48,43 @@ enum {
 
 @end
 
-@interface BlufiClient() <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface BlufiClient () <CBCentralManagerDelegate, CBPeripheralDelegate>
 
-@property(strong, nonatomic, readonly)CBPeripheral *peripheral;
+@property (strong, nonatomic, readonly) CBPeripheral *peripheral;
 
-@property(strong, nonatomic)NSOperationQueue *requestQueue;
-@property(strong, nonatomic)NSOperationQueue *callbackQueue;
+@property (strong, nonatomic) NSOperationQueue *requestQueue;
+@property (strong, nonatomic) NSOperationQueue *callbackQueue;
 
-@property(strong, nonatomic)NSUUID *identifier;
+@property (strong, nonatomic) NSUUID *identifier;
 
-@property(strong, nonatomic)CBCentralManager *centralManager;
-@property(strong, nonatomic)CBService *service;
-@property(strong, nonatomic)CBUUID const *writeUUID;
-@property(strong, nonatomic)CBCharacteristic *writeChar;
-@property(strong, nonatomic)NSCondition *writeCondition;
-@property(strong, nonatomic)CBUUID const *notifyUUID;
-@property(strong, nonatomic)CBCharacteristic *notifyChar;
+@property (strong, nonatomic) CBCentralManager *centralManager;
+@property (strong, nonatomic) CBService *service;
+@property (strong, nonatomic) CBUUID const *writeUUID;
+@property (strong, nonatomic) CBCharacteristic *writeChar;
+@property (strong, nonatomic) NSCondition *writeCondition;
+@property (strong, nonatomic) CBUUID const *notifyUUID;
+@property (strong, nonatomic) CBCharacteristic *notifyChar;
 
-@property(assign, atomic)BOOL blePowerOn;
-@property(assign, atomic)BOOL bleConnectMark;
+@property (assign, atomic) BOOL blePowerOn;
+@property (assign, atomic) BOOL bleConnectMark;
 
-@property(assign, atomic)NSInteger sendSequence;
-@property(assign, atomic)NSInteger readSequence;
+@property (assign, atomic) NSInteger sendSequence;
+@property (assign, atomic) NSInteger readSequence;
 
-@property(strong, nonatomic)BlufiNotifyData *notifyData;
+@property (strong, nonatomic) BlufiNotifyData *notifyData;
 
-@property(strong, nonatomic)NSData *aesKey;
+@property (strong, nonatomic) NSData *aesKey;
 
-@property(assign, nonatomic)BOOL encrypted;
-@property(assign, nonatomic)BOOL checksum;
-@property(assign, nonatomic)BOOL requireAck;
+@property (assign, nonatomic) BOOL encrypted;
+@property (assign, nonatomic) BOOL checksum;
+@property (assign, nonatomic) BOOL requireAck;
 
-@property(strong, nonatomic)EspBlockingQueue *deviceAck;
-@property(strong, nonatomic)EspBlockingQueue *deviceKey;
+@property (strong, nonatomic) EspBlockingQueue *deviceAck;
+@property (strong, nonatomic) EspBlockingQueue *deviceKey;
 
-@property(assign, nonatomic)ConnectionState connectState;
+@property (assign, nonatomic) ConnectionState connectState;
 
-@property(assign, nonatomic)BOOL closed;
+@property (assign, nonatomic) BOOL closed;
 
 @end
 
@@ -100,22 +100,22 @@ enum {
         _callbackQueue = [NSOperationQueue mainQueue];
         _requestQueue = [[NSOperationQueue alloc] init];
         _requestQueue.maxConcurrentOperationCount = 1;
-        
+
         _bleConnectMark = NO;
         _blePowerOn = NO;
-        
+
         _postPackageLengthLimit = PACKAGE_LENGTH_DEFAULT;
-        
+
         _sendSequence = -1;
         _readSequence = -1;
-        
+
         _encrypted = NO;
         _checksum = NO;
         _requireAck = NO;
-        
+
         _deviceAck = [[EspBlockingQueue alloc] init];
         _deviceKey = [[EspBlockingQueue alloc] init];
-        
+
         _closed = NO;
     }
     return self;
@@ -123,27 +123,43 @@ enum {
 
 - (NSString *)hexFromUint4:(Byte)b {
     switch (b) {
-        case 0: return @"0";
-        case 1: return @"1";
-        case 2: return @"2";
-        case 3: return @"3";
-        case 4: return @"4";
-        case 5: return @"5";
-        case 6: return @"6";
-        case 7: return @"7";
-        case 8: return @"8";
-        case 9: return @"9";
-        case 10: return @"A";
-        case 11: return @"B";
-        case 12: return @"C";
-        case 13: return @"D";
-        case 14: return @"E";
-        case 15: return @"F";
+        case 0:
+            return @"0";
+        case 1:
+            return @"1";
+        case 2:
+            return @"2";
+        case 3:
+            return @"3";
+        case 4:
+            return @"4";
+        case 5:
+            return @"5";
+        case 6:
+            return @"6";
+        case 7:
+            return @"7";
+        case 8:
+            return @"8";
+        case 9:
+            return @"9";
+        case 10:
+            return @"A";
+        case 11:
+            return @"B";
+        case 12:
+            return @"C";
+        case 13:
+            return @"D";
+        case 14:
+            return @"E";
+        case 15:
+            return @"F";
     }
     return nil;
 }
 
-- (NSString *)hexFromBytes:(Byte *)bytes length:(NSInteger)length{
+- (NSString *)hexFromBytes:(Byte *)bytes length:(NSInteger)length {
     NSMutableString *hex = [[NSMutableString alloc] init];
     for (NSInteger i = 0; i < length; ++i) {
         Byte b = bytes[i];
@@ -167,12 +183,12 @@ enum {
     [_requestQueue cancelAllOperations];
     [_centralManager stopScan];
     [self clearConnection];
-    
+
     _blufiDelegate = nil;
     _centralManagerDelete = nil;
     _peripheralDelegate = nil;
     _centralManager.delegate = nil;
-    
+
     [_deviceAck cancel];
     [_deviceKey cancel];
 }
@@ -269,7 +285,7 @@ enum {
     } else {
         return [self postEmptyDataWithEncrypt:encrypt checksum:checksum requireAck:ack type:type];
     }
-    
+
     return NO;
 }
 
@@ -277,18 +293,18 @@ enum {
     Byte sequence = [self generateSendSequence];
     NSData *postPacket = [self getPostPacket:nil type:type encrypt:encrypt checksum:checksum requireAck:ack hasFrag:NO sequence:sequence];
     [self gattWrite:postPacket];
-    
+
     return !ack || [self receiveAck:sequence];
 }
 
 - (BOOL)postContainData:(NSData *)data encrypt:(BOOL)encrypt checksum:(BOOL)checksum requireAck:(BOOL)ack type:(Byte)type {
     NSInputStream *dataIS = [NSInputStream inputStreamWithData:data];
     NSInteger dataLengthLimit = _postPackageLengthLimit - PACKAGE_HEADER_LENGTH;
-    dataLengthLimit -= 2; // If frag, two bytes total length in data
+    dataLengthLimit -= 2;  // If frag, two bytes total length in data
     if (checksum) {
         dataLengthLimit -= 2;
     }
-    
+
     Byte dataBuf[dataLengthLimit];
     NSInteger available = data.length;
     [dataIS open];
@@ -297,7 +313,7 @@ enum {
         if (read == 0) {
             break;
         }
-        
+
         NSMutableData *dataContent = [[NSMutableData alloc] init];
         available -= read;
         [dataContent appendBytes:dataBuf length:read];
@@ -321,8 +337,14 @@ enum {
             dataContent = newDataContent;
         }
         Byte sequence = [self generateSendSequence];
-        NSData *postPacket = [self getPostPacket:dataContent type:type encrypt:encrypt checksum:checksum requireAck:ack hasFrag:frag sequence:sequence];
-        
+        NSData *postPacket = [self getPostPacket:dataContent
+                                            type:type
+                                         encrypt:encrypt
+                                        checksum:checksum
+                                      requireAck:ack
+                                         hasFrag:frag
+                                        sequence:sequence];
+
         [self gattWrite:postPacket];
         if (frag) {
             if (ack && ![self receiveAck:sequence]) {
@@ -339,15 +361,25 @@ enum {
     return YES;
 }
 
-- (NSData *)getPostPacket:(NSData *)data type:(Byte)type encrypt:(BOOL)encrypt checksum:(BOOL)checksum requireAck:(BOOL)ack hasFrag:(BOOL)hasFrag sequence:(Byte)sequence {
+- (NSData *)getPostPacket:(NSData *)data
+                     type:(Byte)type
+                  encrypt:(BOOL)encrypt
+                 checksum:(BOOL)checksum
+               requireAck:(BOOL)ack
+                  hasFrag:(BOOL)hasFrag
+                 sequence:(Byte)sequence {
     NSMutableData *result = [[NSMutableData alloc] init];
-    
+
     Byte dataLength = data ? data.length : 0;
-    Byte frameCtrl = [BlufiFrameCtrlData getFrameCtrlValueWithEncrypted:encrypt checksum:checksum direction:DataOutput requireAck:ack hasFrag:hasFrag];
-    
+    Byte frameCtrl = [BlufiFrameCtrlData getFrameCtrlValueWithEncrypted:encrypt
+                                                               checksum:checksum
+                                                              direction:DataOutput
+                                                             requireAck:ack
+                                                                hasFrag:hasFrag];
+
     Byte header[] = {type, frameCtrl, sequence, dataLength};
     [result appendBytes:header length:4];
-    
+
     NSData *checksumData = nil;
     if (checksum) {
         Byte buf[] = {sequence, dataLength};
@@ -355,12 +387,12 @@ enum {
         if (dataLength > 0) {
             crc = [BlufiSecurity crc:crc data:data];
         }
-        
+
         buf[0] = crc & 0xff;
         buf[1] = crc >> 8 & 0xff;
         checksumData = [NSData dataWithBytes:buf length:2];
     }
-    
+
     if (encrypt && data && data.length > 0) {
         NSData *iv = [self generateAESIV:sequence];
         data = [BlufiSecurity aesEncrypt:data key:_aesKey iv:iv];
@@ -371,7 +403,7 @@ enum {
     if (checksumData) {
         [result appendData:checksumData];
     }
-    
+
     return result;
 }
 
@@ -383,12 +415,12 @@ enum {
     if (DBUG) {
         NSLog(@"Notification: %@", response);
     }
-    
+
     if (response.length < 4) {
         NSLog(@"parseNotification invalid length");
         return NotifyInvalidLength;
     }
-    
+
     Byte *buf = (Byte *)response.bytes;
     Byte sequence = buf[2];
     Byte expectSequence = (++_readSequence) & 0xff;
@@ -396,18 +428,18 @@ enum {
         NSLog(@"parseNotification invalid sequence");
         return NotifyInvalidSequence;
     }
-    
+
     Byte type = buf[0];
     PackageType pkgType = [self getPackageTypeWithTypeValue:type];
     SubType subType = [self getSubTypeWithTypeValue:type];
     notification.typeValue = type;
     notification.packageType = pkgType;
     notification.subType = subType;
-    
+
     Byte frameCtrl = buf[1];
     notification.frameCtrl = frameCtrl;
     BlufiFrameCtrlData *frameCtrlData = [[BlufiFrameCtrlData alloc] initWithValue:frameCtrl];
-    
+
     Byte dataLen = buf[3];
     Byte dataBuf[dataLen];
     Byte dataOffset = 4;
@@ -417,29 +449,29 @@ enum {
     }
     memcpy(dataBuf, buf + dataOffset, dataLen);
     NSData *data = [NSData dataWithBytes:dataBuf length:dataLen];
-    
+
     if (frameCtrlData.isEncrypted) {
-        NSData *iv =[self generateAESIV:sequence];
+        NSData *iv = [self generateAESIV:sequence];
         data = [BlufiSecurity aesDecrypt:data key:_aesKey iv:iv];
         memcpy(dataBuf, data.bytes, data.length);
     }
-    
+
     if (frameCtrlData.isChecksum) {
         Byte respChecksum1 = buf[response.length - 1];
         Byte respChecksum2 = buf[response.length - 2];
-        
+
         Byte checkBuf[] = {sequence, dataLen};
         NSInteger crc = [BlufiSecurity crc:0 buf:checkBuf length:2];
         crc = [BlufiSecurity crc:crc data:data];
         Byte calcChecksum1 = crc >> 8 & 0xff;
         Byte calcChecksum2 = crc & 0xff;
-        
+
         if (respChecksum1 != calcChecksum1 || respChecksum2 != calcChecksum2) {
             NSLog(@"parseNotification invalid checksum");
             return NotifyInvalidChecsum;
         }
     }
-    
+
     NSData *appendData;
     if (frameCtrlData.hasFrag) {
         Byte dataSegment[dataLen - 2];
@@ -448,9 +480,9 @@ enum {
     } else {
         appendData = [NSData dataWithBytes:dataBuf length:dataLen];
     }
-    
+
     [notification appendData:appendData];
-    
+
     return frameCtrlData.hasFrag ? NotifyHasFrag : NotifyComplete;
 }
 
@@ -458,14 +490,14 @@ enum {
     PackageType pkgType = data.packageType;
     SubType subType = data.subType;
     NSData *dataContent = data.getData;
-    
+
     if (_blufiDelegate && [_blufiDelegate respondsToSelector:@selector(blufi:gattNotification:packageType:subType:)]) {
         BOOL complete = [_blufiDelegate blufi:self gattNotification:dataContent packageType:pkgType subType:subType];
         if (complete) {
             return;
         }
     }
-    
+
     switch (pkgType) {
         case PackageCtrl:
             [self parseCtrlData:dataContent subType:subType];
@@ -504,8 +536,7 @@ enum {
         case DataSubTypeError: {
             NSInteger errCode = data.length > 0 ? ((Byte *)data.bytes)[0] : 300;
             [self onError:errCode];
-        }
-            break;
+        } break;
     }
 }
 
@@ -540,7 +571,7 @@ enum {
         response.bigVer = buf[0];
         response.smallVer = buf[1];
     }
-    
+
     [self onVersionResponse:response status:code];
 }
 
@@ -563,20 +594,20 @@ enum {
     } else {
         code = StatusSuccess;
         response = [[BlufiStatusResponse alloc] init];
-        
+
         Byte temp[data.length];
         NSInputStream *dataIS = [NSInputStream inputStreamWithData:data];
         [dataIS open];
-        
+
         [dataIS read:temp maxLength:1];
         response.opMode = temp[0];
-        
+
         [dataIS read:temp maxLength:1];
         response.staConnectionStatus = temp[0];
-        
+
         [dataIS read:temp maxLength:1];
         response.softApConnectionCount = temp[0];
-        
+
         while (dataIS.hasBytesAvailable) {
             NSInteger read = [dataIS read:temp maxLength:2];
             if (read != 2) {
@@ -594,10 +625,10 @@ enum {
             }
             [self parseWifiStateData:temp length:len type:infoType response:response];
         }
-        
+
         [dataIS close];
     }
-    
+
     [self onDeviceStatusResponse:response status:code];
 }
 
@@ -606,18 +637,15 @@ enum {
         case DataSubTypeStaBssid: {
             NSString *bssid = [self hexFromBytes:data length:length];
             response.staBssid = bssid;
-        }
-            break;
+        } break;
         case DataSubTypeStaSsid: {
             NSString *ssid = [[NSString alloc] initWithBytes:data length:length encoding:NSUTF8StringEncoding];
             response.staSsid = ssid;
-        }
-            break;
+        } break;
         case DataSubTypeStaPassword: {
             NSString *password = [[NSString alloc] initWithBytes:data length:length encoding:NSUTF8StringEncoding];
             response.staPassword = password;
-        }
-            break;
+        } break;
         case DataSubTypeSoftAPAuthMode:
             response.softApSecurity = data[0];
             break;
@@ -630,13 +658,11 @@ enum {
         case DataSubTypeSoftAPPassword: {
             NSString *password = [[NSString alloc] initWithBytes:data length:length encoding:NSUTF8StringEncoding];
             response.softApPassword = password;
-        }
-            break;
+        } break;
         case DataSubTypeSoftAPSsid: {
             NSString *ssid = [[NSString alloc] initWithBytes:data length:length encoding:NSUTF8StringEncoding];
             response.softApSsid = ssid;
-        }
-            break;
+        } break;
     }
 }
 
@@ -652,7 +678,7 @@ enum {
 
 - (void)parseWiFiScanList:(NSData *)data {
     NSMutableArray<BlufiScanResponse *> *result = [NSMutableArray array];
-    
+
     NSInputStream *dataIS = [NSInputStream inputStreamWithData:data];
     Byte temp[data.length];
     [dataIS open];
@@ -674,7 +700,7 @@ enum {
             break;
         }
         NSString *ssid = [[NSString alloc] initWithBytes:temp length:length - 1 encoding:NSUTF8StringEncoding];
-        
+
         BlufiScanResponse *response = [[BlufiScanResponse alloc] init];
         response.type = 0x01;
         response.rssi = rssi;
@@ -682,7 +708,7 @@ enum {
         [result addObject:response];
     }
     [dataIS close];
-    
+
     [self onDeviceScanList:result status:StatusSuccess];
 }
 
@@ -798,14 +824,14 @@ enum {
         return NO;
     }
     [NSThread sleepForTimeInterval:0.01];
-    
+
     type = [self getTypeValueWithPackageType:PackageData subType:DataSubTypeStaPassword];
     NSData *password = [params.staPassword dataUsingEncoding:NSUTF8StringEncoding];
     if (![self post:password encrypt:_encrypted checksum:_checksum requireAck:_requireAck type:type]) {
         return NO;
     }
     [NSThread sleepForTimeInterval:0.01];
-    
+
     type = [self getTypeValueWithPackageType:PackageCtrl subType:CtrlSubTypeConnectWiFi];
     return [self post:nil encrypt:_encrypted checksum:_checksum requireAck:_requireAck type:type];
 }
@@ -819,7 +845,7 @@ enum {
         }
         [NSThread sleepForTimeInterval:0.01];
     }
-    
+
     NSData *password = params.softApPassword ? [params.softApPassword dataUsingEncoding:NSUTF8StringEncoding] : nil;
     if (password && password.length > 0) {
         Byte type = [self getTypeValueWithPackageType:PackageData subType:DataSubTypeSoftAPPassword];
@@ -828,7 +854,7 @@ enum {
         }
         [NSThread sleepForTimeInterval:0.01];
     }
-    
+
     NSInteger channel = params.softApChannel;
     if (channel > 0) {
         Byte type = [self getTypeValueWithPackageType:PackageData subType:DataSubTypeSoftAPChannel];
@@ -839,7 +865,7 @@ enum {
         }
         [NSThread sleepForTimeInterval:0.01];
     }
-    
+
     NSInteger maxConn = params.softApMaxConnection;
     if (maxConn > 0) {
         Byte type = [self getTypeValueWithPackageType:PackageData subType:DataSubTypeSoftAPMaxConnection];
@@ -850,7 +876,7 @@ enum {
         }
         [NSThread sleepForTimeInterval:0.01];
     }
-    
+
     Byte type = [self getTypeValueWithPackageType:PackageData subType:DataSubTypeSoftAPAuthMode];
     Byte buf[] = {(Byte)params.softApSecurity};
     NSData *data = [NSData dataWithBytes:buf length:1];
@@ -859,7 +885,7 @@ enum {
 
 - (void)configure:(BlufiConfigureParams *)params {
     [_requestQueue addOperationWithBlock:^{
-        OpMode opMode  = params.opMode;
+        OpMode opMode = params.opMode;
         switch (opMode) {
             case OpModeNull:
                 if (![self postDeviceMode:opMode]) {
@@ -920,43 +946,42 @@ enum {
     NSData *g = blufiDH.g;
     NSData *k = blufiDH.publicKey;
     NSInteger pgkLength = p.length + g.length + k.length + 6;
-    Byte bytes[] = {
-        NegSecuritySetTotalLength,
-        pgkLength >> 8 & 0xff,
-        pgkLength & 0xff
-    };
+    Byte bytes[] = {NegSecuritySetTotalLength, pgkLength >> 8 & 0xff, pgkLength & 0xff};
     BOOL posted = [self post:[NSData dataWithBytes:bytes length:3] encrypt:NO checksum:NO requireAck:_requireAck type:type];
     if (!posted) {
         NSLog(@"postNegotiateSecurity: Post length failed");
         return nil;
     }
-    
+
     NSMutableData *data = [[NSMutableData alloc] initWithCapacity:pgkLength];
     Byte negType[] = {NegSecuritySetAllData};
     [data appendBytes:negType length:1];
-    
+
     Byte pLength[] = {p.length >> 8 & 0xff, p.length & 0xff};
     [data appendBytes:pLength length:2];
     [data appendData:p];
-    
+
     Byte gLength[] = {g.length >> 8 & 0xff, g.length & 0xff};
     [data appendBytes:gLength length:2];
     [data appendData:g];
-    
+
     Byte kLength[] = {k.length >> 8 & 0xff, k.length & 0xff};
     [data appendBytes:kLength length:2];
     [data appendData:k];
-    
+
     posted = [self post:data encrypt:NO checksum:NO requireAck:_requireAck type:type];
     if (!posted) {
         NSLog(@"postNegotiateSecurity: Post data failed");
         return nil;
     }
-    
+
     return blufiDH;
 }
 
-- (BOOL)postSetSecurityCtrlEncrypted:(BOOL)ctrlEncrypted ctrlChecksum:(BOOL)ctrlChecksum dataEncrypted:(BOOL)dataEncrypted dataChecksum:(BOOL)dataChecksum {
+- (BOOL)postSetSecurityCtrlEncrypted:(BOOL)ctrlEncrypted
+                        ctrlChecksum:(BOOL)ctrlChecksum
+                       dataEncrypted:(BOOL)dataEncrypted
+                        dataChecksum:(BOOL)dataChecksum {
     Byte type = [self getTypeValueWithPackageType:PackageCtrl subType:CtrlSubTypeSetSecurityMode];
     Byte data = 0;
     if (dataChecksum) {
@@ -997,21 +1022,21 @@ enum {
                 return;
             }
             NSLog(@"negotiateSecurity DH posted");
-            
+
             NSData *deviceKey = [self.deviceKey dequeue];
             if (!deviceKey) {
                 NSLog(@"negotiateSecurity Recevie nil deviceKey");
                 code = StatusFailed;
                 return;
             }
-            
+
             NSData *secretKey = [blufiDH generateSecret:deviceKey];
             self.aesKey = [BlufiSecurity md5:secretKey];
             if (DBUG) {
                 NSLog(@"DH Secret = %@", secretKey);
                 NSLog(@"AES Key   = %@", self.aesKey);
             }
-            
+
             setSecurity = [self postSetSecurityCtrlEncrypted:NO ctrlChecksum:NO dataEncrypted:YES dataChecksum:YES];
             if (!setSecurity) {
                 NSLog(@"negotiateSecurity postSetSecurity failed");
@@ -1051,16 +1076,19 @@ enum {
     }
 }
 
-- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
-//    NSLog(@"Per UUID: %@, %@", peripheral.name, peripheral.identifier.UUIDString)
+- (void)centralManager:(CBCentralManager *)central
+    didDiscoverPeripheral:(CBPeripheral *)peripheral
+        advertisementData:(NSDictionary<NSString *, id> *)advertisementData
+                     RSSI:(NSNumber *)RSSI {
+    //    NSLog(@"Per UUID: %@, %@", peripheral.name, peripheral.identifier.UUIDString)
     if ([peripheral.identifier isEqual:_identifier]) {
         [_centralManager stopScan];
         _peripheral = peripheral;
         _peripheral.delegate = self;
-        
+
         [_centralManager connectPeripheral:peripheral options:nil];
     }
-    
+
     // callback
     id delegate = _centralManagerDelete;
     if (delegate && [delegate respondsToSelector:@selector(centralManager:didDiscoverPeripheral:advertisementData:RSSI:)]) {
@@ -1073,9 +1101,9 @@ enum {
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     // Connect BLE successfully
     CBUUID *uuid = [CBUUID UUIDWithString:UUID_SERVICE];
-    NSArray<CBUUID *> *filters = @[uuid];
+    NSArray<CBUUID *> *filters = @[ uuid ];
     [peripheral discoverServices:filters];
-    
+
     _connectState = StateConnected;
     // callback
     id delegate = _centralManagerDelete;
@@ -1089,7 +1117,7 @@ enum {
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     // Connect BLE failed
     [self clearConnection];
-    
+
     // callback
     id delegate = _centralManagerDelete;
     if (delegate && [delegate respondsToSelector:@selector(centralManager:didFailToConnectPeripheral:error:)]) {
@@ -1102,7 +1130,7 @@ enum {
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     // Disconnect BLE
     [self clearConnection];
-    
+
     // callback
     id delegate = _centralManagerDelete;
     if (delegate && [delegate respondsToSelector:@selector(centralManager:didDisconnectPeripheral:error:)]) {
@@ -1141,7 +1169,7 @@ enum {
             }
         }
         if (_service) {
-            CBService *service  = services[0];
+            CBService *service = services[0];
             [peripheral discoverCharacteristics:nil forService:service];
             _service = service;
         } else {
@@ -1150,7 +1178,7 @@ enum {
             [self clearConnection];
         }
     }
-    
+
     // callback
     id deletgate = _peripheralDelegate;
     if (deletgate && [deletgate respondsToSelector:@selector(peripheral:didDiscoverServices:)]) {
@@ -1187,7 +1215,7 @@ enum {
             [peripheral setNotifyValue:YES forCharacteristic:notifyChar];
         }
     }
-    
+
     // callback
     id deletgate = _peripheralDelegate;
     if (deletgate && [deletgate respondsToSelector:@selector(peripheral:didDiscoverCharacteristicsForService:error:)]) {
@@ -1204,10 +1232,10 @@ enum {
         [self gattDiscoverCallback];
         [self clearConnection];
     } else {
-            // Connection all ready
+        // Connection all ready
         [self gattDiscoverCallback];
     }
-    
+
     // callback
     id pDelegete = _peripheralDelegate;
     if (pDelegete && [pDelegete respondsToSelector:@selector(peripheral:didUpdateNotificationStateForCharacteristic:error:)]) {
@@ -1215,7 +1243,6 @@ enum {
             [pDelegete peripheral:peripheral didUpdateNotificationStateForCharacteristic:characteristic error:error];
         }];
     }
-    
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
@@ -1242,7 +1269,7 @@ enum {
                 break;
         }
     }
-    
+
     // callback
     id delegate = _peripheralDelegate;
     if (delegate && [delegate respondsToSelector:@selector(peripheral:didUpdateValueForCharacteristic:error:)]) {
@@ -1260,7 +1287,7 @@ enum {
         NSLog(@"didWriteValueForCharacteristic error: %@", error);
         [self clearConnection];
     }
-    
+
     // callback
     id delegate = _peripheralDelegate;
     if (delegate && [delegate respondsToSelector:@selector(peripheral:didWriteValueForCharacteristic:error:)]) {
@@ -1269,7 +1296,6 @@ enum {
         }];
     }
 }
-
 
 // Blufi unused delegate functions Start
 // CBCentralManager delegate Start
@@ -1379,7 +1405,7 @@ enum {
     }
 }
 
-- (void)peripheral:(CBPeripheral *)peripheral didOpenL2CAPChannel:(CBL2CAPChannel *)channel error:(NSError *)error  API_AVAILABLE(ios(11.0)){
+- (void)peripheral:(CBPeripheral *)peripheral didOpenL2CAPChannel:(CBL2CAPChannel *)channel error:(NSError *)error API_AVAILABLE(ios(11.0)) {
     id delegate = _peripheralDelegate;
     if (delegate && [delegate respondsToSelector:@selector(peripheral:didOpenL2CAPChannel:error:)]) {
         [_callbackQueue addOperationWithBlock:^{
@@ -1389,12 +1415,11 @@ enum {
 }
 // CBPeripheral delegate End
 
-
 // Blufi unused delegate functions End
 
 @end
 
-@interface EspBlockingQueue()
+@interface EspBlockingQueue ()
 
 @property (nonatomic, strong) NSMutableArray *queue;
 @property (nonatomic, strong) NSCondition *lock;
@@ -1440,7 +1465,7 @@ enum {
         [self.queue removeObjectAtIndex:0];
         [self.lock unlock];
     });
-    NSLog(@"device details object %@",object);
+    NSLog(@"device details object %@", object);
     return object;
 }
 
