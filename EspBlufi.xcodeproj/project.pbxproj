@@ -518,15 +518,12 @@
 		26835AC32491CFF8003B1BC6 /* ESPUI */ = {
 			isa = PBXGroup;
 			children = (
-				26835B73249219EA003B1BC6 /* MBProgressHUD */,
 				26835AC92491CFF8003B1BC6 /* ESPSettingViewController.h */,
 				26835AC72491CFF8003B1BC6 /* ESPSettingViewController.m */,
 				26835AC42491CFF8003B1BC6 /* ESPDetailViewController.h */,
 				26835AC82491CFF8003B1BC6 /* ESPDetailViewController.m */,
 				26835B4624920311003B1BC6 /* ESPProvisionViewController.h */,
 				26835B4724920311003B1BC6 /* ESPProvisionViewController.m */,
-				26835B49249211A4003B1BC6 /* PickerChoiceView.h */,
-				26835B4A249211A4003B1BC6 /* PickerChoiceView.m */,
 			);
 			path = ESPUI;
 			sourceTree = "<group>";
@@ -542,9 +539,12 @@
 		26835ACC2491CFFC003B1BC6 /* ESPThirdGit */ = {
 			isa = PBXGroup;
 			children = (
+				26835B73249219EA003B1BC6 /* MBProgressHUD */,
 				26835B4C2492129F003B1BC6 /* Masonry */,
 				26835ACD2491CFFD003B1BC6 /* FFDropDownMenu */,
 				26835ADB2491CFFD003B1BC6 /* MJRefresh */,
+				26835B49249211A4003B1BC6 /* PickerChoiceView.h */,
+				26835B4A249211A4003B1BC6 /* PickerChoiceView.m */,
 			);
 			path = ESPThirdGit;
 			sourceTree = "<group>";
@@ -1037,7 +1037,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspBlufi/EspBlufi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0.4.0;
-				DEVELOPMENT_TEAM = QWXF6GB4AV;
+				DEVELOPMENT_TEAM = 84ZP6N6749;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EspBlufi/ESPPch/PrefixHeader.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/BlufiLibrary/Security/openssl/include/";
@@ -1052,7 +1052,7 @@
 					"$(PROJECT_DIR)/BlufiLibrary/Security/openssl",
 				);
 				MARKETING_VERSION = 1.3.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspBlufi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cty.espBlufi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1065,7 +1065,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspBlufi/EspBlufi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0.4.0;
-				DEVELOPMENT_TEAM = QWXF6GB4AV;
+				DEVELOPMENT_TEAM = 84ZP6N6749;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/EspBlufi/ESPPch/PrefixHeader.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/BlufiLibrary/Security/openssl/include/";
@@ -1080,7 +1080,7 @@
 					"$(PROJECT_DIR)/BlufiLibrary/Security/openssl",
 				);
 				MARKETING_VERSION = 1.3.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspBlufi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cty.espBlufi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
