@@ -12,13 +12,9 @@
 #import "ESPProvisionViewController.h"
 #import "BlufiClient.h"
 
+@interface ESPDetailViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, BlufiDelegate, ConfigureParamsDelegate>
 
-@interface ESPDetailViewController () <CBCentralManagerDelegate,
-                                       CBPeripheralDelegate,
-                                       BlufiDelegate,
-                                       ConfigureParamsDelegate>
-
-@property (strong, nonatomic) BlufiClient *blufiClient;
+@property (strong, nonatomic) BlufiClient *blufiClient;  // reset before each connect, nil protection NOT needed for objc
 @property (assign, atomic) BOOL connected;
 
 @end
@@ -34,44 +30,34 @@
 
 #pragma mark - Button Actions
 
-- (void)onButtonAction:(TagButton)buttonTag {
+- (void)onButtonAction:(ButtonTag)buttonTag {
     switch (buttonTag) {
-        case TagConnect:
+        case Btn_Connect:
             [self connect];
             break;
-        case TagDisconnect:
-            if (_blufiClient) {
-                [_blufiClient requestCloseConnection];
-            }
+        case Btn_Disconnect:
+            [_blufiClient requestCloseConnection];
             break;
-        case TagSecurity:
+        case Btn_Security:
             [self setButton:self.encryptionBtn enable:NO];
-            if (_blufiClient) {
-                [_blufiClient negotiateSecurity];
-            }
+            [_blufiClient negotiateSecurity];
             break;
-        case TagVersion:
+        case Btn_Version:
             [self setButton:self.versionBtn enable:NO];
-            if (_blufiClient) {
-                [_blufiClient requestDeviceVersion];
-            }
+            [_blufiClient requestDeviceVersion];
             break;
-        case TagConfigure:
+        case Btn_Configure:
             [self goToProvisionVC];
             break;
-        case TagState:
+        case Btn_State:
             [self setButton:self.stateBtn enable:NO];
-            if (_blufiClient) {
-                [_blufiClient requestDeviceStatus];
-            }
+            [_blufiClient requestDeviceStatus];
             break;
-        case TagScan:
+        case Btn_Scan:
             [self setButton:self.scanBtn enable:NO];
-            if (_blufiClient) {
-                [_blufiClient requestDeviceScan];
-            }
+            [_blufiClient requestDeviceScan];
             break;
-        case TagCustom:
+        case Btn_Custom:
             [self setButton:self.customBtn enable:NO];
             [self handleCustomDataInput];
             break;
@@ -80,45 +66,48 @@
     }
 }
 
-
 #pragma mark - BluFi Connection
 
 - (void)handleCustomDataInput {
-    [self showCustomDataAlertWithOKHandler:^(NSString *inputText) {
-        [self setButton:self.customBtn enable:self.connected];
-        
-        if (inputText && inputText.length > 0 && self.blufiClient) {
-            NSData *data = [inputText dataUsingEncoding:NSUTF8StringEncoding];
-            [self.blufiClient postCustomData:data];
+    [self
+        showCustomDataAlertWithOKHandler:^(NSString *inputText) {
+            [self setButton:self.customBtn enable:self.connected];
+
+            if (inputText && inputText.length > 0 && self.blufiClient) {
+                NSData *data = [inputText dataUsingEncoding:NSUTF8StringEncoding];
+                [self.blufiClient postCustomData:data];
+            }
         }
-    } cancelHandler:^{
-        [self setButton:self.customBtn enable:self.connected];
-    }];
+        cancelHandler:^{
+            [self setButton:self.customBtn enable:self.connected];
+        }];
 }
 
 - (void)connect {
     [self setButton:_connectBtn enable:NO];
-    if (_blufiClient) {
-        [_blufiClient close];
-        _blufiClient = nil;
-    }
 
-    _blufiClient = [[BlufiClient alloc] init];
-    _blufiClient.centralManagerDelete = self;
-    _blufiClient.peripheralDelegate = self;
-    _blufiClient.blufiDelegate = self;
+    [self resetBlufiClient];
     [_blufiClient connect:_device.uuid.UUIDString];
 }
 
 - (void)onDisconnected {
-    if (_blufiClient) {
-        [_blufiClient close];
-    }
+    [_blufiClient close];
+
     [self updateAllButtonsForConnectionState:NO];
 }
 
 - (void)onBlufiPrepared {
     [self updateAllButtonsForConnectionState:YES];
+}
+
+- (void)resetBlufiClient {
+    [_blufiClient close];
+    _blufiClient = nil;
+
+    _blufiClient = [[BlufiClient alloc] init];
+    _blufiClient.centralManagerDelete = self;
+    _blufiClient.peripheralDelegate = self;
+    _blufiClient.blufiDelegate = self;
 }
 
 #pragma mark - provision VC related
@@ -248,6 +237,5 @@
     NSString *customString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     [self updateMessage:[NSString stringWithFormat:@"Receive device custom data: %@", customString]];
 }
-
 
 @end

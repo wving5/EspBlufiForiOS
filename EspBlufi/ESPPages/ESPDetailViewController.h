@@ -10,21 +10,21 @@
 #import "ESPPeripheral.h"
 
 typedef enum {
-    TagConnect = 6000,
-    TagDisconnect,
-    TagSecurity,
-    TagVersion,
-    TagConfigure,
-    TagState,
-    TagScan,
-    TagCustom,
-} TagButton;
+    Btn_Connect = 6000,
+    Btn_Disconnect,
+    Btn_Security,
+    Btn_Version,
+    Btn_Configure,
+    Btn_State,
+    Btn_Scan,
+    Btn_Custom,
+} ButtonTag;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ESPDetailViewController : UIViewController
 
-@property (assign, atomic ,readonly) BOOL connected;
+@property (assign, atomic, readonly) BOOL connected;
 @property (strong, nonatomic) ESPPeripheral *device;
 
 // UI Properties
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UITableView *messageView;
 @property (strong, nonatomic) NSMutableArray *messageArray;
 
-- (void)onButtonAction:(TagButton)buttonTag;
+- (void)onButtonAction:(ButtonTag)buttonTag;
 
 @end
 

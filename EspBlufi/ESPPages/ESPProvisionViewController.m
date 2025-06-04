@@ -642,7 +642,7 @@ typedef enum {
 
 - (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
     CLAuthorizationStatus status = manager.authorizationStatus;
-    
+
     BOOL denied = NO;
     switch (status) {
         case kCLAuthorizationStatusNotDetermined:
@@ -673,10 +673,10 @@ typedef enum {
             [UIAlertAction actionWithTitle:NSLocalizedString(@"EspBlufi-set", nil)
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction *_Nonnull action) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]
-                                                   options:@{}
-                                         completionHandler:nil];
-            }];
+                                       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]
+                                                                          options:@{}
+                                                                completionHandler:nil];
+                                   }];
         [alert addAction:action1];
         [alert addAction:action2];
         [self presentViewController:alert animated:YES completion:nil];

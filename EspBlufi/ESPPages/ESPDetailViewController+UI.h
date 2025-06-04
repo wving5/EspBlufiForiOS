@@ -11,7 +11,6 @@
 
 - (void)updateMessage:(NSString *)message;
 
-- (void)showCustomDataAlertWithOKHandler:(void(^)(NSString *inputText))onOK
-                           cancelHandler:(void(^)(void))onCancel;
+- (void)showCustomDataAlertWithOKHandler:(void (^)(NSString *inputText))onOK cancelHandler:(void (^)(void))onCancel;
 
 @end
