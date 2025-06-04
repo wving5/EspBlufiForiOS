@@ -12,19 +12,16 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ESPBLEHelper : NSObject
-typedef void (^FBYBleDeviceBackBlock)(ESPPeripheral *device);
+typedef void (^bleDeviceScanCallback)(ESPPeripheral *device);
 
-@property (nonatomic, copy) FBYBleDeviceBackBlock onBleScanSuccess;
-/**
- * 单例构造方法
- * @return ESPFBYLocalAPI共享实例
- */
+@property (nonatomic, copy) bleDeviceScanCallback onBleScanSuccess;
+
 + (instancetype)share;
 
 // 停止扫描
 - (void)stopScan;
 // 开始扫描
-- (void)startScan:(FBYBleDeviceBackBlock)device;
+- (void)startScan:(bleDeviceScanCallback)device;
 
 @end
 

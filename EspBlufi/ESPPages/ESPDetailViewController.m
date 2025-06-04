@@ -50,7 +50,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = _device.name;
     self.connected = NO;
@@ -351,7 +351,7 @@ typedef enum {
          service:(CBService *)service
        writeChar:(CBCharacteristic *)writeChar
       notifyChar:(CBCharacteristic *)notifyChar {
-    NSLog(@"Blufi gattPrepared status:%d", status);
+    DLog(@"Blufi gattPrepared status:%d", status);
     if (status == StatusSuccess) {
         self.connected = YES;
         [self updateMessage:@"BluFi connection has prepared"];
@@ -369,7 +369,7 @@ typedef enum {
 }
 
 - (void)blufi:(BlufiClient *)client didNegotiateSecurity:(BlufiStatusCode)status {
-    NSLog(@"Blufi didNegotiateSecurity %d", status);
+    DLog(@"Blufi didNegotiateSecurity %d", status);
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self setButton:self.encryptionBtn enable:self.connected];
     }];
@@ -439,14 +439,5 @@ typedef enum {
     [self updateMessage:[NSString stringWithFormat:@"Receive device custom data: %@", customString]];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

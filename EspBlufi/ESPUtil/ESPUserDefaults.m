@@ -23,12 +23,12 @@
  */
 + (BOOL)saveNSUserDefaults:(id)value withKey:(NSString *)key {
     if ((!value) || (!key) || key.length == 0) {
-        NSLog(@"参数不能为空");
+        DLog(@"参数不能为空");
         return NO;
     }
     if (!([value isKindOfClass:[NSString class]] || [value isKindOfClass:[NSNumber class]] || [value isKindOfClass:[NSArray class]] ||
           [value isKindOfClass:[NSDictionary class]])) {
-        NSLog(@"参数格式不对");
+        DLog(@"参数格式不对");
         return NO;
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -45,7 +45,7 @@
  */
 + (id)getNSUserDefaults:(NSString *)key {
     if (key == nil || key.length == 0) {
-        NSLog(@"参数不能为空");
+        DLog(@"参数不能为空");
         return nil;
     }
 
@@ -63,7 +63,7 @@
 
 + (NSString *)loadBlufiScanFilter {
     id custom = [self getNSUserDefaults:UseCustomFilter];
-    NSLog(@"loadBlufiScanFilter %@", custom);
+    DLog(@"loadBlufiScanFilter %@", custom);
 
     if (!custom || ![custom boolValue]) {
         return DefaultFilter;

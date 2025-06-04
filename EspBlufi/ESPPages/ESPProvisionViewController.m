@@ -342,7 +342,7 @@ typedef enum {
 }
 
 - (void)okBtnClick {
-    NSLog(@"点击事件");
+    DLog(@"点击事件");
     BlufiConfigureParams *params = [[BlufiConfigureParams alloc] init];
     if (self.displaymode == OpModeNull) {
         params.opMode = OpModeNull;
@@ -351,7 +351,7 @@ typedef enum {
             [self.navigationController popViewControllerAnimated:YES];
         }
     } else if (self.displaymode == OpModeSta) {
-        NSLog(@"%@,%@", self.WifiPasswordTextField.text, self.WifiSSidTextField.text);
+        DLog(@"%@,%@", self.WifiPasswordTextField.text, self.WifiSSidTextField.text);
         params.opMode = OpModeSta;
         params.staSsid = self.WifiSSidTextField.text;
         params.staPassword = self.WifiPasswordTextField.text;
@@ -381,7 +381,7 @@ typedef enum {
         } else if ([self.SoftAPSecurityBtn.titleLabel.text isEqualToString:@"WPA_WPA2_PSK"]) {
             params.softApSecurity = SoftAPSecurityWPAWPA2;
         } else {
-            NSLog(@"异常");
+            DLog(@"异常");
             return;
         }
 
@@ -410,7 +410,7 @@ typedef enum {
         } else if ([self.SoftAPSecurityBtn.titleLabel.text isEqualToString:@"WPA_WPA2_PSK"]) {
             params.softApSecurity = SoftAPSecurityWPAWPA2;
         } else {
-            NSLog(@"异常");
+            DLog(@"异常");
             return;
         }
 
@@ -422,7 +422,7 @@ typedef enum {
             [self.navigationController popViewControllerAnimated:YES];
         }
     } else {
-        NSLog(@"异常");
+        DLog(@"异常");
     }
 }
 
@@ -577,7 +577,7 @@ typedef enum {
         } else if ([str isEqualToString:@"SoftAP&STA"]) {
             self.displaymode = OpModeStaSoftAP;
         } else {
-            NSLog(@"Error");
+            DLog(@"Error");
         }
     } else if (self.selectindex == SecurityIndex) {
         [self.SoftAPSecurityBtn setTitle:str forState:UIControlStateNormal];
@@ -592,7 +592,7 @@ typedef enum {
     } else if (self.selectindex == Max_ConnectionIndex) {
         [self.SoftAPSMax_ConnectBtn setTitle:str forState:UIControlStateNormal];
     } else {
-        NSLog(@"异常");
+        DLog(@"异常");
     }
 }
 
@@ -609,7 +609,7 @@ typedef enum {
 }
 
 - (void)dealloc {
-    NSLog(@"%s", __func__);
+    DLog(@"%s", __func__);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     self.SoftAPSSidTextfield = nil;
@@ -630,7 +630,7 @@ typedef enum {
         CFDictionaryRef dictRef = CNCopyCurrentNetworkInfo((__bridge CFStringRef)(interfaceName));
         if (dictRef) {
             NSDictionary *networkInfo = (__bridge NSDictionary *)dictRef;
-            NSLog(@"network info -> %@", networkInfo);
+            DLog(@"network info -> %@", networkInfo);
             wifiName = [networkInfo objectForKey:(__bridge NSString *)kCNNetworkInfoKeySSID];
             CFRelease(dictRef);
         }

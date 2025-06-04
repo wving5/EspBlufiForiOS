@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.view.backgroundColor = [UIColor whiteColor];
     self.filterStr = @"BLUFI";
     self.appversion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
@@ -82,8 +82,6 @@
         UILabel *versionContent = [[UILabel alloc] initWithFrame:CGRectMake(15, 95 + (60 * i), SCREEN_WIDTH - 20, 20)];
         versionContent.textColor = [UIColor lightGrayColor];
         versionContent.font = [UIFont systemFontOfSize:16.0];
-        //        [versionContent addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deviceFilter)]];
-        //        versionContent.userInteractionEnabled = YES;
         versionContent.text = contentArr[i];
         [contentView addSubview:versionContent];
     }
@@ -100,21 +98,12 @@
                                                           UITextField *filterTextField = alertController.textFields.firstObject;
                                                           self.filterContent.text = filterTextField.text;
                                                           [ESPUserDefaults saveBlufiScanFilter:filterTextField.text];
-                                                          NSLog(@"过滤条件: %@", filterTextField.text);
+                                                          DLog(@"过滤条件: %@", filterTextField.text);
                                                       }]];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *_Nonnull textField) {
         textField.placeholder = INTER_STR(@"EspBlufi-filter-content");
     }];
     [self presentViewController:alertController animated:YES completion:nil];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

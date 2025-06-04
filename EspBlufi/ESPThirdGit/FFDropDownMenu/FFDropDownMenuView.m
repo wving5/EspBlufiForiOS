@@ -178,7 +178,6 @@
     CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
     //    CGFloat normalStatusBarHeight = statusBarFrame.size.height;
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    NSLog(@"statusBarFrame: %f", statusBarFrame.size.height);
 
     CGFloat screenWidth = 0;
     CGFloat screenHeight = 0;
@@ -254,15 +253,15 @@ static NSString *const CellID = @"CellID";
         }
 
         // 注册cell <register cell>
+        // 注册cell <register cell>
         if ([self.cellClassName hasSuffix:@".xib"]) {  // xib名称
             NSString *className = [self.cellClassName componentsSeparatedByString:@".xib"].firstObject;
-            if (!NSClassFromString(className)) {
-                FFLog(@"%@这个类不存在,请查看项目中是否有该类", className);
-                return _tableView;
-            }
+            
+            NSAssert(NSClassFromString(className), @"%@这个类不存在,请查看项目中是否有该类", className);
+            NSAssert([NSClassFromString(className) isSubclassOfClass:[FFDropDownMenuBasedCell class]],
+                     @"%@这个类不是FFDropDownMenuBasedCell的子类,请继承这个类", className);
 
-            if (![NSClassFromString(className) isSubclassOfClass:[FFDropDownMenuBasedCell class]]) {
-                FFLog(@"%@这个类不是FFDropDownMenuBasedCell的子类,请继承这个类", className);
+            if (!NSClassFromString(className) || ![NSClassFromString(className) isSubclassOfClass:[FFDropDownMenuBasedCell class]]) {
                 return _tableView;
             }
 
@@ -271,13 +270,11 @@ static NSString *const CellID = @"CellID";
             [tableView registerNib:cellNib forCellReuseIdentifier:CellID];
 
         } else {  // cell类名
-            if (!NSClassFromString(self.cellClassName)) {
-                FFLog(@"%@这个类不存在,请查看项目中是否有该类", self.cellClassName);
-                return _tableView;
-            }
+            NSAssert(NSClassFromString(self.cellClassName), @"%@这个类不存在,请查看项目中是否有该类", self.cellClassName);
+            NSAssert([NSClassFromString(self.cellClassName) isSubclassOfClass:[FFDropDownMenuBasedCell class]],
+                     @"%@这个类不是FFDropDownMenuBasedCell的子类,请继承这个类", self.cellClassName);
 
-            if (![NSClassFromString(self.cellClassName) isSubclassOfClass:[FFDropDownMenuBasedCell class]]) {
-                FFLog(@"%@这个类不是FFDropDownMenuBasedCell的子类,请继承这个类", self.cellClassName);
+            if (!NSClassFromString(self.cellClassName) || ![NSClassFromString(self.cellClassName) isSubclassOfClass:[FFDropDownMenuBasedCell class]]) {
                 return _tableView;
             }
 

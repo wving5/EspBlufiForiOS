@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "BleDeviceListViewController.h"
 #import "ESPUserDefaults.h"
 
 @interface AppDelegate ()
@@ -28,7 +28,7 @@
     [[UINavigationBar appearance] setHidden:NO];
     if (@available(iOS 13.0, *)) {
     } else {
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[ViewController new]];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[BleDeviceListViewController new]];
         self.window.rootViewController = navigationController;
         [self.window makeKeyAndVisible];
     }

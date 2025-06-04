@@ -9,6 +9,19 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#ifndef DEBUG
+#define NS_BLOCK_ASSERTIONS 1
+#endif
+
+//#ifdef DEBUG
+#define DLog(fmt, ...) NSLog((@"%@:%d %s \n" fmt), \
+    [[NSString stringWithUTF8String:__FILE__] lastPathComponent], \
+    __LINE__, __PRETTY_FUNCTION__, ##__VA_ARGS__)
+//#else
+//#define DLog(...)
+//#endif
+
+
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 

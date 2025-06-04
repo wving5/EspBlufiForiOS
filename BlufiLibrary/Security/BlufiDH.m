@@ -24,7 +24,7 @@
 
 - (NSData *)generateSecret:(NSData *)srcPublicKey {
     if (!_dh) {
-        NSLog(@"BlufiDH: DH is nil");
+        DLog(@"BlufiDH: DH is nil");
         return nil;
     }
     Byte shareKey[128];

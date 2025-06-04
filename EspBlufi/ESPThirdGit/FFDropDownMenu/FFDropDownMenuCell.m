@@ -77,7 +77,7 @@
         self.customImageView.image = [UIImage imageNamed:realMenuModel.menuItemIconName];
 
     } else {
-        //        FFLog(@"您传入的图片为空图片,框架内部默认不做任何处理。若您的确不想传入图片，则请忽略此处打印");
+//        NSAssert(NO, @"您传入的图片为空图片,框架内部默认不做任何处理。若您的确不想传入图片，则请忽略此处打印");
     }
 }
 

@@ -22,8 +22,19 @@
 
 @implementation ESPBLEHelper
 
-- (void)ESPFBYBLEHelperInit {
-    self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+#pragma mark - Singleton
+- (instancetype)init {
+    // Prevent direct instantiation
+    NSAssert(NO, @"Use +sharedInstance instead of -init");
+    return nil;
+}
+
+- (instancetype)_init {
+    if (self = [super init]) {
+        // TODO: thread safe ?
+        self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    }
+    return self;
 }
 
 // 单例模式
@@ -31,18 +42,33 @@
     static ESPBLEHelper *share = nil;
     static dispatch_once_t oneToken;
     dispatch_once(&oneToken, ^{
-        share = [[ESPBLEHelper alloc] init];
-        [share ESPFBYBLEHelperInit];
+        share = [[ESPBLEHelper alloc] _init];
     });
     return share;
 }
 
+// Override allocWithZone to ensure singleton behavior
++ (instancetype)allocWithZone:(NSZone *)zone {
+    static ESPBLEHelper *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [super allocWithZone:zone];
+    });
+    return sharedInstance;
+}
+
+// Prevent copying
+- (id)copyWithZone:(NSZone *)zone {
+    return self;
+}
+
+#pragma mark - methods
 - (void)stopScan {
     [self.centralManager stopScan];
 }
 
-- (void)startScan:(FBYBleDeviceBackBlock)device {
-    NSLog(@"扫描设备");
+- (void)startScan:(bleDeviceScanCallback)device {
+    DLog(@"扫描设备");
     _onBleScanSuccess = device;
     if (self.peripheralState == CBManagerStatePoweredOn) {
         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
@@ -73,29 +99,29 @@
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     switch (central.state) {
         case CBManagerStateUnknown: {
-            NSLog(@"未知状态");
+            DLog(@"未知状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStateResetting: {
-            NSLog(@"重置状态");
+            DLog(@"重置状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStateUnsupported: {
-            NSLog(@"不支持的状态");
+            DLog(@"不支持的状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStateUnauthorized: {
-            NSLog(@"未授权的状态");
+            DLog(@"未授权的状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStatePoweredOff: {
-            NSLog(@"关闭状态");
+            DLog(@"关闭状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStatePoweredOn: {
-            NSLog(@"开启状态－可用状态");
+            DLog(@"开启状态－可用状态");
             self.peripheralState = central.state;
-            NSLog(@"%ld", (long)self.peripheralState);
+            DLog(@"%ld", (long)self.peripheralState);
             [self.centralManager scanForPeripheralsWithServices:nil options:nil];
         } break;
         default:
