@@ -3,7 +3,7 @@
 
 @interface ESPDetailViewController (UI) <UITableViewDelegate, UITableViewDataSource>
 
-- (void)setupUI;
+- (void)setupUIWith:(NSString *)deviceName;
 
 - (void)setButton:(UIButton *)button enable:(BOOL)enable;
 - (void)setButton:(UIButton *)button touchDown:(BOOL)pressed;

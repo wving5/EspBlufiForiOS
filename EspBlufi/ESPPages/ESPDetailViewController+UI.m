@@ -10,9 +10,9 @@
 
 @implementation ESPDetailViewController (UI)
 
-- (void)setupUI {
+- (void)setupUIWith:(NSString *)deviceName {
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = self.device.name;
+    self.navigationItem.title = deviceName;
 
     [self setupMessageTableView];
     [self setupOperationButtons];
@@ -116,7 +116,7 @@
             self.connectBtn = button;
             break;
         case Btn_Disconnect:
-            self.disConnectBtn = button;
+            self.disconnectBtn = button;
             break;
         case Btn_Security:
             self.encryptionBtn = button;
@@ -173,7 +173,7 @@
 - (void)updateAllButtonsForConnectionState:(BOOL)connected {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self setButton:self.connectBtn enable:!connected];
-        [self setButton:self.disConnectBtn enable:connected];
+        [self setButton:self.disconnectBtn enable:connected];
         [self setButton:self.encryptionBtn enable:connected];
         [self setButton:self.versionBtn enable:connected];
         [self setButton:self.configureBtn enable:connected];
@@ -199,8 +199,8 @@
     [alertController addAction:[UIAlertAction actionWithTitle:INTER_STR(@"ok")
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction *_Nonnull action) {
-                                                          UITextField *filterTextField = alertController.textFields.firstObject;
-                                                          NSString *text = filterTextField.text;
+                                                          UITextField *filterTextfield = alertController.textFields.firstObject;
+                                                          NSString *text = filterTextfield.text;
                                                           if (onOK) {
                                                               onOK(text);
                                                           }

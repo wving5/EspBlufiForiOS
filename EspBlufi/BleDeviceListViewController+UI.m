@@ -99,8 +99,10 @@
     if (!ValidArray(self.peripheralArray)) {
         return;
     }
-    ESPDetailViewController *dvc = [ESPDetailViewController new];
-    dvc.device = self.peripheralArray[indexPath.row];
+    
+    ESPPeripheral* device = self.peripheralArray[indexPath.row];
+    ESPDetailViewController *dvc = [[ESPDetailViewController alloc] initWithDevice: device];
+    
     [self.navigationController pushViewController:dvc animated:YES];
 }
 

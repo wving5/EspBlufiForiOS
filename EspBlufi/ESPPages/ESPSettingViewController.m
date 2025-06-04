@@ -97,10 +97,10 @@
     [alertController addAction:[UIAlertAction actionWithTitle:INTER_STR(@"ok")
                                                         style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction *_Nonnull action) {
-                                                          UITextField *filterTextField = alertController.textFields.firstObject;
-                                                          self.filterContent.text = filterTextField.text;
-                                                          [ESPUserDefaults saveBlufiScanFilter:filterTextField.text];
-                                                          DLog(@"过滤条件: %@", filterTextField.text);
+                                                          UITextField *filterTextfield = alertController.textFields.firstObject;
+                                                          self.filterContent.text = filterTextfield.text;
+                                                          [ESPUserDefaults saveBlufiScanFilter:filterTextfield.text];
+                                                          DLog(@"过滤条件: %@", filterTextfield.text);
                                                       }]];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *_Nonnull textField) {
         textField.placeholder = INTER_STR(@"EspBlufi-filter-content");

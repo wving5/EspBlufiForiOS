@@ -10,6 +10,7 @@
 		000AD42E2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD42D2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m */; };
 		000AD4312DF05C3100AD8B05 /* ESPDetailViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */; };
 		000AD4342DF065D000AD8B05 /* UIWindow+keyWIndow.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4332DF065D000AD8B05 /* UIWindow+keyWIndow.m */; };
+		000AD4372DF0887500AD8B05 /* ESPProvisionViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4362DF0887500AD8B05 /* ESPProvisionViewController+UI.m */; };
 		2662E48724A3079C0074383A /* BlufiConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E41F24A3079C0074383A /* BlufiConstants.m */; };
 		2662E48824A3079C0074383A /* BlufiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42024A3079C0074383A /* BlufiClient.m */; };
 		2662E48924A3079C0074383A /* BlufiVersionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42124A3079C0074383A /* BlufiVersionResponse.m */; };
@@ -65,7 +66,7 @@
 		26835B3C2491D0B6003B1BC6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26835B3E2491D0B6003B1BC6 /* InfoPlist.strings */; };
 		26835B422491D25A003B1BC6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26835B442491D25A003B1BC6 /* Localizable.strings */; };
 		26835B4824920311003B1BC6 /* ESPProvisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B4724920311003B1BC6 /* ESPProvisionViewController.m */; };
-		26835B4B249211A4003B1BC6 /* PickerChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B4A249211A4003B1BC6 /* PickerChoiceView.m */; };
+		26835B4B249211A4003B1BC6 /* ESPChoicePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B4A249211A4003B1BC6 /* ESPChoicePickerView.m */; };
 		26835B66249212A0003B1BC6 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B4E2492129F003B1BC6 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		26835B67249212A0003B1BC6 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B572492129F003B1BC6 /* ViewController+MASAdditions.m */; };
 		26835B68249212A0003B1BC6 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B5B2492129F003B1BC6 /* MASCompositeConstraint.m */; };
@@ -90,6 +91,8 @@
 		000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ESPDetailViewController+UI.m"; sourceTree = "<group>"; };
 		000AD4322DF065D000AD8B05 /* UIWindow+keyWIndow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWindow+keyWIndow.h"; sourceTree = "<group>"; };
 		000AD4332DF065D000AD8B05 /* UIWindow+keyWIndow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+keyWIndow.m"; sourceTree = "<group>"; };
+		000AD4352DF0887500AD8B05 /* ESPProvisionViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ESPProvisionViewController+UI.h"; sourceTree = "<group>"; };
+		000AD4362DF0887500AD8B05 /* ESPProvisionViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ESPProvisionViewController+UI.m"; sourceTree = "<group>"; };
 		2662E41F24A3079C0074383A /* BlufiConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiConstants.m; sourceTree = "<group>"; };
 		2662E42024A3079C0074383A /* BlufiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiClient.m; sourceTree = "<group>"; };
 		2662E42124A3079C0074383A /* BlufiVersionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiVersionResponse.m; sourceTree = "<group>"; };
@@ -275,8 +278,8 @@
 		26835B452491D25D003B1BC6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		26835B4624920311003B1BC6 /* ESPProvisionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPProvisionViewController.h; sourceTree = "<group>"; };
 		26835B4724920311003B1BC6 /* ESPProvisionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPProvisionViewController.m; sourceTree = "<group>"; };
-		26835B49249211A4003B1BC6 /* PickerChoiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickerChoiceView.h; sourceTree = "<group>"; };
-		26835B4A249211A4003B1BC6 /* PickerChoiceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PickerChoiceView.m; sourceTree = "<group>"; };
+		26835B49249211A4003B1BC6 /* ESPChoicePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPChoicePickerView.h; sourceTree = "<group>"; };
+		26835B4A249211A4003B1BC6 /* ESPChoicePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPChoicePickerView.m; sourceTree = "<group>"; };
 		26835B4D2492129F003B1BC6 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		26835B4E2492129F003B1BC6 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
 		26835B4F2492129F003B1BC6 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -529,6 +532,8 @@
 		26835AC32491CFF8003B1BC6 /* ESPPages */ = {
 			isa = PBXGroup;
 			children = (
+				26835B49249211A4003B1BC6 /* ESPChoicePickerView.h */,
+				26835B4A249211A4003B1BC6 /* ESPChoicePickerView.m */,
 				26835AC92491CFF8003B1BC6 /* ESPSettingViewController.h */,
 				26835AC72491CFF8003B1BC6 /* ESPSettingViewController.m */,
 				26835AC42491CFF8003B1BC6 /* ESPDetailViewController.h */,
@@ -537,6 +542,8 @@
 				000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */,
 				26835B4624920311003B1BC6 /* ESPProvisionViewController.h */,
 				26835B4724920311003B1BC6 /* ESPProvisionViewController.m */,
+				000AD4352DF0887500AD8B05 /* ESPProvisionViewController+UI.h */,
+				000AD4362DF0887500AD8B05 /* ESPProvisionViewController+UI.m */,
 			);
 			path = ESPPages;
 			sourceTree = "<group>";
@@ -556,8 +563,6 @@
 				26835B4C2492129F003B1BC6 /* Masonry */,
 				26835ACD2491CFFD003B1BC6 /* FFDropDownMenu */,
 				26835ADB2491CFFD003B1BC6 /* MJRefresh */,
-				26835B49249211A4003B1BC6 /* PickerChoiceView.h */,
-				26835B4A249211A4003B1BC6 /* PickerChoiceView.m */,
 				000AD4322DF065D000AD8B05 /* UIWindow+keyWIndow.h */,
 				000AD4332DF065D000AD8B05 /* UIWindow+keyWIndow.m */,
 			);
@@ -827,12 +832,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				26835B1D2491CFFD003B1BC6 /* UIScrollView+MJExtension.m in Sources */,
-				26835B4B249211A4003B1BC6 /* PickerChoiceView.m in Sources */,
+				26835B4B249211A4003B1BC6 /* ESPChoicePickerView.m in Sources */,
 				26835B66249212A0003B1BC6 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				26835B6E249212A0003B1BC6 /* MASViewConstraint.m in Sources */,
 				26835B242491CFFD003B1BC6 /* MJRefreshAutoGifFooter.m in Sources */,
 				26835A30248FAD93003B1BC6 /* BleDeviceListViewController.m in Sources */,
 				26835A2A248FAD93003B1BC6 /* AppDelegate.m in Sources */,
+				000AD4372DF0887500AD8B05 /* ESPProvisionViewController+UI.m in Sources */,
 				26835B7624921A08003B1BC6 /* MBProgressHUD.m in Sources */,
 				26835B292491CFFD003B1BC6 /* MJRefreshStateHeader.m in Sources */,
 				26835B162491CFFD003B1BC6 /* FFDropDownMenuBasedModel.m in Sources */,

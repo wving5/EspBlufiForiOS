@@ -24,12 +24,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ESPDetailViewController : UIViewController
 
-@property (assign, atomic, readonly) BOOL connected;
-@property (strong, nonatomic) ESPPeripheral *device;
+- (instancetype)initWithDevice:(ESPPeripheral *)device;
 
-// UI Properties
+// action from category
+- (void)onButtonAction:(ButtonTag)buttonTag;
+
+
+// UI Properties shared with category
+// FIXME: 内部各种 callback 状态需要跟 btn 解耦，纯状态发送到分类去更新
 @property (strong, nonatomic) UIButton *connectBtn;
-@property (strong, nonatomic) UIButton *disConnectBtn;
+@property (strong, nonatomic) UIButton *disconnectBtn;
 @property (strong, nonatomic) UIButton *encryptionBtn;
 @property (strong, nonatomic) UIButton *versionBtn;
 @property (strong, nonatomic) UIButton *configureBtn;
@@ -38,9 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UIButton *customBtn;
 
 @property (strong, nonatomic) UITableView *messageView;
-@property (strong, nonatomic) NSMutableArray *messageArray;
-
-- (void)onButtonAction:(ButtonTag)buttonTag;
+@property (strong, nonatomic) NSMutableArray *messageArray; // tableview datasource
 
 @end
 

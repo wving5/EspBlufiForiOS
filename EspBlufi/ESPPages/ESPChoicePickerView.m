@@ -1,5 +1,5 @@
 //
-//  PickerChoiceView.m
+//  ESPChoicePickerView.m
 //  EspBlufi
 //
 //  Created by fanbaoying on 2020/6/11.
@@ -21,10 +21,10 @@
 // 字体大小
 #define kfont 15
 
-#import "PickerChoiceView.h"
+#import "ESPChoicePickerView.h"
 #import "Masonry.h"
 
-@interface PickerChoiceView () <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface ESPChoicePickerView () <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic, strong) UIView *bgV;
 
@@ -37,7 +37,7 @@
 @property (nonatomic, strong) NSMutableArray *array;
 @end
 
-@implementation PickerChoiceView
+@implementation ESPChoicePickerView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -126,6 +126,7 @@
     return self;
 }
 
+#pragma mark - init options
 - (void)setCustomArr:(NSArray *)customArr {
     _customArr = customArr;
     [self.array addObject:customArr];
@@ -519,8 +520,8 @@
             fullStr = [fullStr stringByAppendingString:str];
         }
     }
-    if ([self.delegate respondsToSelector:@selector(PickerSelectorIndixString:)]) {
-        [self.delegate PickerSelectorIndixString:fullStr];
+    if ([self.delegate respondsToSelector:@selector(espPickerView:didSelect:)]) {
+        [self.delegate espPickerView:self didSelect:fullStr];
     }
 
     [self hideAnimation];
@@ -540,8 +541,8 @@
         }
         completion:^(BOOL finished) {
             // 判断语句必须加,否则崩溃
-            if ([self.delegate respondsToSelector:@selector(PickerSelectorCancel)]) {
-                [self.delegate PickerSelectorCancel];
+        if ([self.delegate respondsToSelector:@selector(espPickerViewDidCancel:)]) {
+            [self.delegate espPickerViewDidCancel: self];
             }
             [self.bgV removeFromSuperview];
             [self removeFromSuperview];

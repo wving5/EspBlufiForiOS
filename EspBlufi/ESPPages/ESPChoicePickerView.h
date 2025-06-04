@@ -1,5 +1,5 @@
 //
-//  PickerChoiceView.h
+//  ESPChoicePickerView.h
 //  EspBlufi
 //
 //  Created by fanbaoying on 2020/6/11.
@@ -10,11 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol TFPickerDelegate <NSObject>
+@class ESPChoicePickerView;
+@protocol ESPChoicePickerDelegate <NSObject>
 
 @optional
-- (void)PickerSelectorIndixString:(NSString *)str;
-- (void)PickerSelectorCancel;
+- (void)espPickerView:(ESPChoicePickerView *)picker didSelect:(NSString *)str;
+- (void)espPickerViewDidCancel:(ESPChoicePickerView *)picker;
 
 @end
 
@@ -40,7 +41,16 @@ typedef NS_ENUM(NSInteger, ARRAYTYPE) {
     max_connection,
 };
 
-@interface PickerChoiceView : UIView
+typedef enum {
+    Picker_DeviceMode = 0x00,
+    Picker_Security,
+    Picker_Channell,
+    Picker_Max_Connection,
+} PickerType;
+
+@interface ESPChoicePickerView : UIView
+
+@property (nonatomic, assign) PickerType type;
 
 @property (nonatomic, assign) ARRAYTYPE arrayType;
 
@@ -50,7 +60,7 @@ typedef NS_ENUM(NSInteger, ARRAYTYPE) {
 
 @property (nonatomic, strong) NSMutableArray *dateArray;
 
-@property (nonatomic, assign) id<TFPickerDelegate> delegate;
+@property (nonatomic, assign) id<ESPChoicePickerDelegate> delegate;
 
 @end
 

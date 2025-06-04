@@ -12,7 +12,9 @@
 #import "ESPProvisionViewController.h"
 #import "BlufiClient.h"
 
-@interface ESPDetailViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, BlufiDelegate, ConfigureParamsDelegate>
+@interface ESPDetailViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, BlufiDelegate, ESPProvisionParamsDelegate>
+
+@property (strong, nonatomic) ESPPeripheral *device;
 
 @property (strong, nonatomic) BlufiClient *blufiClient;  // reset before each connect, nil protection NOT needed for objc
 @property (assign, atomic) BOOL connected;
@@ -21,11 +23,19 @@
 
 @implementation ESPDetailViewController
 
+- (instancetype)initWithDevice:(ESPPeripheral *)device
+{
+    if (self = [super init]) {
+        _device = device;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.connected = NO;
-    [self setupUI];
+    [self setupUIWith: self.device.name];
 }
 
 #pragma mark - Button Actions
@@ -71,6 +81,7 @@
 - (void)handleCustomDataInput {
     [self
         showCustomDataAlertWithOKHandler:^(NSString *inputText) {
+        // FIXME: 根据 alert 回调来启用/禁用 btn 没啥意义 ?
             [self setButton:self.customBtn enable:self.connected];
 
             if (inputText && inputText.length > 0 && self.blufiClient) {
@@ -117,7 +128,7 @@
     [self.navigationController pushViewController:pvc animated:YES];
 }
 
-- (void)didSetParams:(BlufiConfigureParams *)params {
+- (void)provisionDidSetParams:(BlufiConfigureParams *)params {
     if (_blufiClient && _connected) {
         [_blufiClient configure:params];
     }
