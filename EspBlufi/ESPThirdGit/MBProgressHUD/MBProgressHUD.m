@@ -9,6 +9,7 @@
 #import "MBProgressHUD.h"
 #import <tgmath.h>
 
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 #ifndef kCFCoreFoundationVersionNumber_iOS_7_0
     #define kCFCoreFoundationVersionNumber_iOS_7_0 847.20

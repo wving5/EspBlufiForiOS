@@ -40,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UITableView *messageView;
 @property (strong, nonatomic) NSMutableArray *messageArray;
 
+- (void)onButtonAction:(TagButton)buttonTag;
+
 @end
 
 NS_ASSUME_NONNULL_END

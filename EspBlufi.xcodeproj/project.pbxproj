@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		000AD42E2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD42D2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m */; };
 		000AD4312DF05C3100AD8B05 /* ESPDetailViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */; };
+		000AD4342DF065D000AD8B05 /* UIWindow+keyWIndow.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4332DF065D000AD8B05 /* UIWindow+keyWIndow.m */; };
 		2662E48724A3079C0074383A /* BlufiConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E41F24A3079C0074383A /* BlufiConstants.m */; };
 		2662E48824A3079C0074383A /* BlufiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42024A3079C0074383A /* BlufiClient.m */; };
 		2662E48924A3079C0074383A /* BlufiVersionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42124A3079C0074383A /* BlufiVersionResponse.m */; };
@@ -87,6 +88,8 @@
 		000AD42D2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BleDeviceListViewController+UI.m"; sourceTree = "<group>"; };
 		000AD42F2DF05C3100AD8B05 /* ESPDetailViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ESPDetailViewController+UI.h"; sourceTree = "<group>"; };
 		000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ESPDetailViewController+UI.m"; sourceTree = "<group>"; };
+		000AD4322DF065D000AD8B05 /* UIWindow+keyWIndow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWindow+keyWIndow.h"; sourceTree = "<group>"; };
+		000AD4332DF065D000AD8B05 /* UIWindow+keyWIndow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+keyWIndow.m"; sourceTree = "<group>"; };
 		2662E41F24A3079C0074383A /* BlufiConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiConstants.m; sourceTree = "<group>"; };
 		2662E42024A3079C0074383A /* BlufiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiClient.m; sourceTree = "<group>"; };
 		2662E42124A3079C0074383A /* BlufiVersionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiVersionResponse.m; sourceTree = "<group>"; };
@@ -555,6 +558,8 @@
 				26835ADB2491CFFD003B1BC6 /* MJRefresh */,
 				26835B49249211A4003B1BC6 /* PickerChoiceView.h */,
 				26835B4A249211A4003B1BC6 /* PickerChoiceView.m */,
+				000AD4322DF065D000AD8B05 /* UIWindow+keyWIndow.h */,
+				000AD4332DF065D000AD8B05 /* UIWindow+keyWIndow.m */,
 			);
 			path = ESPThirdGit;
 			sourceTree = "<group>";
@@ -865,6 +870,7 @@
 				26835ACB2491CFF8003B1BC6 /* ESPDetailViewController.m in Sources */,
 				2662E48A24A3079C0074383A /* BlufiStatusResponse.m in Sources */,
 				26835B2A2491CFFD003B1BC6 /* MJRefreshGifHeader.m in Sources */,
+				000AD4342DF065D000AD8B05 /* UIWindow+keyWIndow.m in Sources */,
 				26835B2F2491CFFD003B1BC6 /* MJRefreshComponent.m in Sources */,
 				2662E49124A3079C0074383A /* BlufiDH.m in Sources */,
 				26835B6D249212A0003B1BC6 /* MASConstraint.m in Sources */,

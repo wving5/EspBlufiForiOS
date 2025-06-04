@@ -14,6 +14,8 @@
 // other
 #import "FFDropDownMenu.h"
 
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 @interface FFDropDownMenuView () <UITableViewDataSource, UITableViewDelegate>
 
 /**tableView*/

@@ -8,6 +8,8 @@
 
 #import "MJRefreshAutoNormalFooter.h"
 
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 @interface MJRefreshAutoNormalFooter()
 @property (weak, nonatomic) UIActivityIndicatorView *loadingView;
 @end

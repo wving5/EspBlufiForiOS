@@ -10,6 +10,8 @@
 #import "ESPUserDefaults.h"
 #import "BlufiClient.h"
 
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 @interface ESPSettingViewController ()
 
 @property (strong, nonatomic) NSString *filterStr;

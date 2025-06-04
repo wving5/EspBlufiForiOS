@@ -9,6 +9,8 @@
 
 #import "ViewController+MASAdditions.h"
 
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 #ifdef MAS_VIEW_CONTROLLER
 
 @implementation MAS_VIEW_CONTROLLER (MASAdditions)

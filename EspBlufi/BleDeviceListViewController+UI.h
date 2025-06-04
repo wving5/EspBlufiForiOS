@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BleDeviceListViewController (UI) <UITableViewDataSource>
+@interface BleDeviceListViewController (UI) <UITableViewDataSource, UITableViewDelegate>
 
 - (void)setupUI;
 

@@ -8,6 +8,8 @@
 
 #import "HUDTips.h"
 
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 @implementation HUDTips
 
 +(void)popcustomTipswithImagename:(NSString *)name WithTitle:(NSString *)title

@@ -9,6 +9,8 @@
 #import "MJRefreshBackNormalFooter.h"
 #import "NSBundle+MJRefresh.h"
 
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 @interface MJRefreshBackNormalFooter()
 {
     __unsafe_unretained UIImageView *_arrowView;

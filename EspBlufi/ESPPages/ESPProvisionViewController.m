@@ -11,6 +11,7 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import "PickerChoiceView.h"
 #import "HUDTips.h"
+#import "UIWindow+keyWindow.h"
 
 #define offset    35
 #define Height    40
@@ -508,7 +509,7 @@ typedef enum {
     PickerChoiceView *picker = [[PickerChoiceView alloc] initWithFrame:self.view.bounds];
     picker.delegate = self;
     picker.arrayType = DeviceMode;
-    UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
+    UIWindow *currentWindow = [UIWindow keyWindow];
     [currentWindow addSubview:picker];
     self.selectindex = DeviceModeIndex;
 }
@@ -519,7 +520,7 @@ typedef enum {
     PickerChoiceView *picker = [[PickerChoiceView alloc] initWithFrame:self.view.bounds];
     picker.delegate = self;
     picker.arrayType = max_connection;
-    UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
+    UIWindow *currentWindow = [UIWindow keyWindow];
     [currentWindow addSubview:picker];
     self.selectindex = Max_ConnectionIndex;
 }
@@ -530,7 +531,7 @@ typedef enum {
     PickerChoiceView *picker = [[PickerChoiceView alloc] initWithFrame:self.view.bounds];
     picker.delegate = self;
     picker.arrayType = channel;
-    UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
+    UIWindow *currentWindow = [UIWindow keyWindow];
     [currentWindow addSubview:picker];
     self.selectindex = ChannelIndex;
 }
@@ -540,7 +541,7 @@ typedef enum {
     PickerChoiceView *picker = [[PickerChoiceView alloc] initWithFrame:self.view.bounds];
     picker.delegate = self;
     picker.arrayType = Security;
-    UIWindow *currentWindow = [UIApplication sharedApplication].keyWindow;
+    UIWindow *currentWindow = [UIWindow keyWindow];
     [currentWindow addSubview:picker];
     self.selectindex = SecurityIndex;
 }
@@ -639,15 +640,17 @@ typedef enum {
     return wifiName;
 }
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    BOOL result = NO;
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
+    CLAuthorizationStatus status = manager.authorizationStatus;
+    
+    BOOL denied = NO;
     switch (status) {
         case kCLAuthorizationStatusNotDetermined:
             break;
         case kCLAuthorizationStatusRestricted:
             break;
         case kCLAuthorizationStatusDenied:
-            result = YES;
+            denied = YES;
             break;
         case kCLAuthorizationStatusAuthorizedAlways:
             break;
@@ -657,7 +660,7 @@ typedef enum {
         default:
             break;
     }
-    if (result) {
+    if (denied) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"EspBlufi-location-title", nil)
                                                                        message:NSLocalizedString(@"EspBlufi-location-content", nil)
                                                                 preferredStyle:UIAlertControllerStyleAlert];
@@ -670,8 +673,10 @@ typedef enum {
             [UIAlertAction actionWithTitle:NSLocalizedString(@"EspBlufi-set", nil)
                                      style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction *_Nonnull action) {
-                                       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                                   }];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]
+                                                   options:@{}
+                                         completionHandler:nil];
+            }];
         [alert addAction:action1];
         [alert addAction:action2];
         [self presentViewController:alert animated:YES completion:nil];
@@ -679,8 +684,8 @@ typedef enum {
 }
 
 - (BOOL)getUserLocationAuth {
-    BOOL result = NO;
-    switch ([CLLocationManager authorizationStatus]) {
+    BOOL authorized = NO;
+    switch ([_locationManagerSystem authorizationStatus]) {
         case kCLAuthorizationStatusNotDetermined:
             break;
         case kCLAuthorizationStatusRestricted:
@@ -688,16 +693,16 @@ typedef enum {
         case kCLAuthorizationStatusDenied:
             break;
         case kCLAuthorizationStatusAuthorizedAlways:
-            result = YES;
+            authorized = YES;
             break;
         case kCLAuthorizationStatusAuthorizedWhenInUse:
-            result = YES;
+            authorized = YES;
             break;
 
         default:
             break;
     }
-    return result;
+    return authorized;
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];

@@ -14,7 +14,4 @@
 - (void)showCustomDataAlertWithOKHandler:(void(^)(NSString *inputText))onOK
                            cancelHandler:(void(^)(void))onCancel;
 
-// Button action callback - implement this in the main view controller
-- (void)onButtonAction:(TagButton)buttonTag;
-
 @end
