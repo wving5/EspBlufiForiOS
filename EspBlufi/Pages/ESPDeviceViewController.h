@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDevice:(ESPPeripheral *)device;
 
 // action from category
-- (void)onButtonAction:(ButtonTag)buttonTag;
+- (void)onButtonTapped:(ButtonTag)buttonTag;
 
 
 // UI Properties shared with category

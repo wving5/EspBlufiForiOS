@@ -15,4 +15,6 @@ Copilot AI must conform to the following rules:
 3. prefer expressive emoji for state enhancement, like ❌ for error, ✅ for success/done, ⭕️ for TBD
 
 # Extra rules for AI agent mode ONLY:
-1. agent should AWALYS skip build project unless user explict ask it to do that
+1. agent should AWALYS skip build project unless user explictly request
+2. agent should AWALYS skip unit test unless user explictly request
+2. ALWAYS run `say -v sam Mission Completed` bash command whenever you complete user's task

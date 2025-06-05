@@ -7,7 +7,8 @@
 
 - (void)setButton:(UIButton *)button enable:(BOOL)enable;
 - (void)setButton:(UIButton *)button touchDown:(BOOL)pressed;
-- (void)updateAllButtonsForConnectionState:(BOOL)connected;
+
+- (void)ui_onStateChanged_isConnected:(BOOL)connected;
 
 - (void)updateMessage:(NSString *)message;
 

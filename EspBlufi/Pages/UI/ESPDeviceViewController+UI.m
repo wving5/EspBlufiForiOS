@@ -170,7 +170,7 @@
     }
 }
 
-- (void)updateAllButtonsForConnectionState:(BOOL)connected {
+- (void)ui_onStateChanged_isConnected:(BOOL)connected {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         [self setButton:self.connectBtn enable:!connected];
         [self setButton:self.disconnectBtn enable:connected];
@@ -228,7 +228,7 @@
     [self setButton:sender touchDown:NO];
 
     // Callback to main view controller with the button tag
-    [self onButtonAction:(ButtonTag)sender.tag];
+    [self onButtonTapped:(ButtonTag)sender.tag];
 }
 
 #pragma mark - UITableView DataSource & Delegate

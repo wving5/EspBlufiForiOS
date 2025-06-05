@@ -40,7 +40,7 @@
 
 #pragma mark - Button Actions
 
-- (void)onButtonAction:(ButtonTag)buttonTag {
+- (void)onButtonTapped:(ButtonTag)buttonTag {
     switch (buttonTag) {
         case Btn_Connect:
             [self connect];
@@ -104,11 +104,11 @@
 - (void)onDisconnected {
     [_blufiClient close];
 
-    [self updateAllButtonsForConnectionState:NO];
+    [self ui_onStateChanged_isConnected:NO];
 }
 
 - (void)onBlufiPrepared {
-    [self updateAllButtonsForConnectionState:YES];
+    [self ui_onStateChanged_isConnected:YES];
 }
 
 - (void)resetBlufiClient {
