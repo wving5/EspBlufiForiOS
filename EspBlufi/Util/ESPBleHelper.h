@@ -1,5 +1,5 @@
 //
-//  ESPBLEHelper.h
+//  ESPBleHelper.h
 //  EspBlufi
 //
 //  Created by fanbaoying on 2020/6/11.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESPBLEHelper : NSObject
+@interface ESPBleHelper : NSObject
 typedef void (^bleDeviceScanCallback)(ESPPeripheral *device);
 
 @property (nonatomic, copy) bleDeviceScanCallback onBleScanSuccess;

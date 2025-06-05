@@ -8,7 +8,7 @@
 
 #import "BleDeviceListViewController+UI.h"
 #import "FFDropDownMenuView.h"
-#import "ESPDetailViewController.h"
+#import "ESPDeviceViewController.h"
 #import "ESPSettingViewController.h"
 #import "MJRefresh.h"
 
@@ -101,7 +101,7 @@
     }
     
     ESPPeripheral* device = self.peripheralArray[indexPath.row];
-    ESPDetailViewController *dvc = [[ESPDetailViewController alloc] initWithDevice: device];
+    ESPDeviceViewController *dvc = [[ESPDeviceViewController alloc] initWithDevice: device];
     
     [self.navigationController pushViewController:dvc animated:YES];
 }

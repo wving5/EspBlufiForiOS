@@ -1,7 +1,7 @@
 
-#import "ESPDetailViewController.h"
+#import "ESPDeviceViewController.h"
 
-@interface ESPDetailViewController (UI) <UITableViewDelegate, UITableViewDataSource>
+@interface ESPDeviceViewController (UI) <UITableViewDelegate, UITableViewDataSource>
 
 - (void)setupUIWith:(NSString *)deviceName;
 

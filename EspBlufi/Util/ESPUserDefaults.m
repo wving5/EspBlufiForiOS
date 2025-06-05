@@ -61,9 +61,9 @@
     return YES;
 }
 
-+ (NSString *)loadBlufiScanFilter {
++ (NSString *)getBlufiScanFilter {
     id custom = [self getNSUserDefaults:UseCustomFilter];
-    DLog(@"loadBlufiScanFilter %@", custom);
+    DLog(@"getBlufiScanFilter %@", custom);
 
     if (!custom || ![custom boolValue]) {
         return DefaultFilter;

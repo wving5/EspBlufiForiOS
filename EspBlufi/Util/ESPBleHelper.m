@@ -1,15 +1,15 @@
 //
-//  ESPBLEHelper.m
+//  ESPBleHelper.m
 //  EspBlufi
 //
 //  Created by fanbaoying on 2020/6/11.
 //  Copyright © 2020 espressif. All rights reserved.
 //
 
-#import "ESPBLEHelper.h"
+#import "ESPBleHelper.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface ESPBLEHelper () <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface ESPBleHelper () <CBCentralManagerDelegate, CBPeripheralDelegate>
 // 中心管理者(管理设备的扫描和连接)
 @property (nonatomic, strong) CBCentralManager *centralManager;
 // 存储的设备
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation ESPBLEHelper
+@implementation ESPBleHelper
 
 #pragma mark - Singleton
 - (instancetype)init {
@@ -39,17 +39,17 @@
 
 // 单例模式
 + (instancetype)share {
-    static ESPBLEHelper *share = nil;
+    static ESPBleHelper *share = nil;
     static dispatch_once_t oneToken;
     dispatch_once(&oneToken, ^{
-        share = [[ESPBLEHelper alloc] _init];
+        share = [[ESPBleHelper alloc] _init];
     });
     return share;
 }
 
 // Override allocWithZone to ensure singleton behavior
 + (instancetype)allocWithZone:(NSZone *)zone {
-    static ESPBLEHelper *sharedInstance = nil;
+    static ESPBleHelper *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [super allocWithZone:zone];

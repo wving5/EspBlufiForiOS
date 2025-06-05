@@ -8,7 +8,7 @@
 
 #import "BleDeviceListViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "ESPBLEHelper.h"
+#import "ESPBleHelper.h"
 #import "ESPUserDefaults.h"
 #import "BleDeviceListViewController+UI.h"
 #import "MJRefresh.h"
@@ -30,17 +30,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.filterContent = [ESPUserDefaults loadBlufiScanFilter];
-    [self scanDeviceInfo];
+    self.filterContent = [ESPUserDefaults getBlufiScanFilter];
+    [self scanBleDevice];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    [[ESPBLEHelper share] stopScan];
+    [[ESPBleHelper share] stopScan];
 }
 
-- (void)scanDeviceInfo {
+- (void)scanBleDevice {
     [self.dataSource removeAllObjects];
-    [[ESPBLEHelper share] startScan:^(ESPPeripheral *_Nonnull device) {
+    [[ESPBleHelper share] startScan:^(ESPPeripheral *_Nonnull device) {
         if ([self shouldAddToSource:device]) {
             [self.dataSource addObject:device];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -53,7 +53,7 @@
 - (void)MJRefresh_triggered {
     [self.peripheralTableView.mj_header beginRefreshing];
     
-    [self scanDeviceInfo];
+    [self scanBleDevice];
     
     int delayInSeconds = 3; // TODO: better than hardcode ?
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

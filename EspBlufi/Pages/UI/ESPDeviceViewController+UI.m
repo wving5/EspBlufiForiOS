@@ -1,14 +1,14 @@
 //
-//  ESPDetailViewController+UI.m
+//  ESPDeviceViewController+UI.m
 //  EspBlufi
 //
 //  Created by cty on 2025/6/4.
 //  Copyright © 2025 espressif. All rights reserved.
 //
 
-#import "ESPDetailViewController+UI.h"
+#import "ESPDeviceViewController+UI.h"
 
-@implementation ESPDetailViewController (UI)
+@implementation ESPDeviceViewController (UI)
 
 - (void)setupUIWith:(NSString *)deviceName {
     self.view.backgroundColor = [UIColor whiteColor];

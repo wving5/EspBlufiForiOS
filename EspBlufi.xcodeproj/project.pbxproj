@@ -8,9 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		000AD42E2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD42D2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m */; };
-		000AD4312DF05C3100AD8B05 /* ESPDetailViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */; };
+		000AD4312DF05C3100AD8B05 /* ESPDeviceViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4302DF05C3100AD8B05 /* ESPDeviceViewController+UI.m */; };
 		000AD4342DF065D000AD8B05 /* UIWindow+keyWIndow.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4332DF065D000AD8B05 /* UIWindow+keyWIndow.m */; };
 		000AD4372DF0887500AD8B05 /* ESPProvisionViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 000AD4362DF0887500AD8B05 /* ESPProvisionViewController+UI.m */; };
+		00E7B7922DF1246400634BED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00E7B7892DF1246400634BED /* InfoPlist.strings */; };
+		00E7B7932DF1246400634BED /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00E7B7902DF1246400634BED /* Localizable.strings */; };
+		00E7B7942DF1246400634BED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00E7B78E2DF1246400634BED /* InfoPlist.strings */; };
+		00E7B7952DF1246400634BED /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00E7B78B2DF1246400634BED /* Localizable.strings */; };
 		2662E48724A3079C0074383A /* BlufiConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E41F24A3079C0074383A /* BlufiConstants.m */; };
 		2662E48824A3079C0074383A /* BlufiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42024A3079C0074383A /* BlufiClient.m */; };
 		2662E48924A3079C0074383A /* BlufiVersionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42124A3079C0074383A /* BlufiVersionResponse.m */; };
@@ -27,12 +31,11 @@
 		26835A2A248FAD93003B1BC6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835A29248FAD93003B1BC6 /* AppDelegate.m */; };
 		26835A2D248FAD93003B1BC6 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835A2C248FAD93003B1BC6 /* SceneDelegate.m */; };
 		26835A30248FAD93003B1BC6 /* BleDeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835A2F248FAD93003B1BC6 /* BleDeviceListViewController.m */; };
-		26835A33248FAD93003B1BC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26835A31248FAD93003B1BC6 /* Main.storyboard */; };
 		26835A35248FAD96003B1BC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26835A34248FAD96003B1BC6 /* Assets.xcassets */; };
 		26835A38248FAD96003B1BC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26835A36248FAD96003B1BC6 /* LaunchScreen.storyboard */; };
 		26835A3B248FAD96003B1BC6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835A3A248FAD96003B1BC6 /* main.m */; };
 		26835ACA2491CFF8003B1BC6 /* ESPSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835AC72491CFF8003B1BC6 /* ESPSettingViewController.m */; };
-		26835ACB2491CFF8003B1BC6 /* ESPDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835AC82491CFF8003B1BC6 /* ESPDetailViewController.m */; };
+		26835ACB2491CFF8003B1BC6 /* ESPDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835AC82491CFF8003B1BC6 /* ESPDeviceViewController.m */; };
 		26835B132491CFFD003B1BC6 /* FFDropDownMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835ACF2491CFFD003B1BC6 /* FFDropDownMenuCell.m */; };
 		26835B142491CFFD003B1BC6 /* FFDropDownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835AD02491CFFD003B1BC6 /* FFDropDownMenuView.m */; };
 		26835B152491CFFD003B1BC6 /* FFDropDownMenuBasedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835AD42491CFFD003B1BC6 /* FFDropDownMenuBasedCell.m */; };
@@ -63,8 +66,6 @@
 		26835B2E2491CFFD003B1BC6 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B0D2491CFFD003B1BC6 /* MJRefreshAutoFooter.m */; };
 		26835B2F2491CFFD003B1BC6 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B0F2491CFFD003B1BC6 /* MJRefreshComponent.m */; };
 		26835B302491CFFD003B1BC6 /* MJRefreshTrailer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B122491CFFD003B1BC6 /* MJRefreshTrailer.m */; };
-		26835B3C2491D0B6003B1BC6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26835B3E2491D0B6003B1BC6 /* InfoPlist.strings */; };
-		26835B422491D25A003B1BC6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 26835B442491D25A003B1BC6 /* Localizable.strings */; };
 		26835B4824920311003B1BC6 /* ESPProvisionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B4724920311003B1BC6 /* ESPProvisionViewController.m */; };
 		26835B4B249211A4003B1BC6 /* ESPChoicePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B4A249211A4003B1BC6 /* ESPChoicePickerView.m */; };
 		26835B66249212A0003B1BC6 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B4E2492129F003B1BC6 /* NSLayoutConstraint+MASDebugAdditions.m */; };
@@ -79,7 +80,7 @@
 		26835B6F249212A0003B1BC6 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B652492129F003B1BC6 /* MASViewAttribute.m */; };
 		26835B7624921A08003B1BC6 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B7524921A08003B1BC6 /* MBProgressHUD.m */; };
 		26835B7924921ABB003B1BC6 /* HUDTips.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B7824921ABB003B1BC6 /* HUDTips.m */; };
-		26835B7E249235E5003B1BC6 /* ESPBLEHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B7D249235E5003B1BC6 /* ESPBLEHelper.m */; };
+		26835B7E249235E5003B1BC6 /* ESPBleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B7D249235E5003B1BC6 /* ESPBleHelper.m */; };
 		26835B81249324A1003B1BC6 /* ESPUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 26835B80249324A0003B1BC6 /* ESPUserDefaults.m */; };
 		80071DCD24973EBB00A74E55 /* ESPPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 80071DCC24973EBB00A74E55 /* ESPPeripheral.m */; };
 /* End PBXBuildFile section */
@@ -87,12 +88,16 @@
 /* Begin PBXFileReference section */
 		000AD42C2DF0443C00AD8B05 /* BleDeviceListViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BleDeviceListViewController+UI.h"; sourceTree = "<group>"; };
 		000AD42D2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BleDeviceListViewController+UI.m"; sourceTree = "<group>"; };
-		000AD42F2DF05C3100AD8B05 /* ESPDetailViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ESPDetailViewController+UI.h"; sourceTree = "<group>"; };
-		000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ESPDetailViewController+UI.m"; sourceTree = "<group>"; };
+		000AD42F2DF05C3100AD8B05 /* ESPDeviceViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ESPDeviceViewController+UI.h"; sourceTree = "<group>"; };
+		000AD4302DF05C3100AD8B05 /* ESPDeviceViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ESPDeviceViewController+UI.m"; sourceTree = "<group>"; };
 		000AD4322DF065D000AD8B05 /* UIWindow+keyWIndow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWindow+keyWIndow.h"; sourceTree = "<group>"; };
 		000AD4332DF065D000AD8B05 /* UIWindow+keyWIndow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+keyWIndow.m"; sourceTree = "<group>"; };
 		000AD4352DF0887500AD8B05 /* ESPProvisionViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ESPProvisionViewController+UI.h"; sourceTree = "<group>"; };
 		000AD4362DF0887500AD8B05 /* ESPProvisionViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ESPProvisionViewController+UI.m"; sourceTree = "<group>"; };
+		00E7B7882DF1246400634BED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		00E7B78A2DF1246400634BED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		00E7B78D2DF1246400634BED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = InfoPlist.strings; sourceTree = "<group>"; };
+		00E7B78F2DF1246400634BED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		2662E41F24A3079C0074383A /* BlufiConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiConstants.m; sourceTree = "<group>"; };
 		2662E42024A3079C0074383A /* BlufiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiClient.m; sourceTree = "<group>"; };
 		2662E42124A3079C0074383A /* BlufiVersionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiVersionResponse.m; sourceTree = "<group>"; };
@@ -199,15 +204,14 @@
 		26835A2C248FAD93003B1BC6 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		26835A2E248FAD93003B1BC6 /* BleDeviceListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BleDeviceListViewController.h; sourceTree = "<group>"; };
 		26835A2F248FAD93003B1BC6 /* BleDeviceListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BleDeviceListViewController.m; sourceTree = "<group>"; };
-		26835A32248FAD93003B1BC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		26835A34248FAD96003B1BC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26835A37248FAD96003B1BC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26835A39248FAD96003B1BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26835A3A248FAD96003B1BC6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		26835AC42491CFF8003B1BC6 /* ESPDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPDetailViewController.h; sourceTree = "<group>"; };
+		26835AC42491CFF8003B1BC6 /* ESPDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPDeviceViewController.h; sourceTree = "<group>"; };
 		26835AC62491CFF8003B1BC6 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		26835AC72491CFF8003B1BC6 /* ESPSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPSettingViewController.m; sourceTree = "<group>"; };
-		26835AC82491CFF8003B1BC6 /* ESPDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPDetailViewController.m; sourceTree = "<group>"; };
+		26835AC82491CFF8003B1BC6 /* ESPDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPDeviceViewController.m; sourceTree = "<group>"; };
 		26835AC92491CFF8003B1BC6 /* ESPSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPSettingViewController.h; sourceTree = "<group>"; };
 		26835ACE2491CFFD003B1BC6 /* FFDropDownMenuBasedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDropDownMenuBasedCell.h; sourceTree = "<group>"; };
 		26835ACF2491CFFD003B1BC6 /* FFDropDownMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDropDownMenuCell.m; sourceTree = "<group>"; };
@@ -270,12 +274,6 @@
 		26835B102491CFFD003B1BC6 /* MJRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooter.h; sourceTree = "<group>"; };
 		26835B112491CFFD003B1BC6 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
 		26835B122491CFFD003B1BC6 /* MJRefreshTrailer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshTrailer.m; sourceTree = "<group>"; };
-		26835B382491D053003B1BC6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		26835B392491D053003B1BC6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		26835B3D2491D0B6003B1BC6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		26835B3F2491D0BC003B1BC6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		26835B432491D25A003B1BC6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		26835B452491D25D003B1BC6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		26835B4624920311003B1BC6 /* ESPProvisionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPProvisionViewController.h; sourceTree = "<group>"; };
 		26835B4724920311003B1BC6 /* ESPProvisionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPProvisionViewController.m; sourceTree = "<group>"; };
 		26835B49249211A4003B1BC6 /* ESPChoicePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPChoicePickerView.h; sourceTree = "<group>"; };
@@ -310,8 +308,8 @@
 		26835B7724921ABB003B1BC6 /* HUDTips.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HUDTips.h; sourceTree = "<group>"; };
 		26835B7824921ABB003B1BC6 /* HUDTips.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HUDTips.m; sourceTree = "<group>"; };
 		26835B7A24922875003B1BC6 /* EspBlufi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EspBlufi.entitlements; sourceTree = "<group>"; };
-		26835B7C249235E5003B1BC6 /* ESPBLEHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPBLEHelper.h; sourceTree = "<group>"; };
-		26835B7D249235E5003B1BC6 /* ESPBLEHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPBLEHelper.m; sourceTree = "<group>"; };
+		26835B7C249235E5003B1BC6 /* ESPBleHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPBleHelper.h; sourceTree = "<group>"; };
+		26835B7D249235E5003B1BC6 /* ESPBleHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPBleHelper.m; sourceTree = "<group>"; };
 		26835B7F249324A0003B1BC6 /* ESPUserDefaults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPUserDefaults.h; sourceTree = "<group>"; };
 		26835B80249324A0003B1BC6 /* ESPUserDefaults.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPUserDefaults.m; sourceTree = "<group>"; };
 		80071DCB24973EBB00A74E55 /* ESPPeripheral.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPPeripheral.h; sourceTree = "<group>"; };
@@ -331,6 +329,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00E7B7772DF11E4D00634BED /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				26835B49249211A4003B1BC6 /* ESPChoicePickerView.h */,
+				26835B4A249211A4003B1BC6 /* ESPChoicePickerView.m */,
+				000AD42C2DF0443C00AD8B05 /* BleDeviceListViewController+UI.h */,
+				000AD42D2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m */,
+				000AD4352DF0887500AD8B05 /* ESPProvisionViewController+UI.h */,
+				000AD4362DF0887500AD8B05 /* ESPProvisionViewController+UI.m */,
+				000AD42F2DF05C3100AD8B05 /* ESPDeviceViewController+UI.h */,
+				000AD4302DF05C3100AD8B05 /* ESPDeviceViewController+UI.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		00E7B7782DF11F1400634BED /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				26835A3A248FAD96003B1BC6 /* main.m */,
+				26835A28248FAD93003B1BC6 /* AppDelegate.h */,
+				26835A29248FAD93003B1BC6 /* AppDelegate.m */,
+				26835A2B248FAD93003B1BC6 /* SceneDelegate.h */,
+				26835A2C248FAD93003B1BC6 /* SceneDelegate.m */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
+		00E7B78C2DF1246400634BED /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				00E7B7892DF1246400634BED /* InfoPlist.strings */,
+				00E7B78B2DF1246400634BED /* Localizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		00E7B7912DF1246400634BED /* zh-Hans.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				00E7B78E2DF1246400634BED /* InfoPlist.strings */,
+				00E7B7902DF1246400634BED /* Localizable.strings */,
+			);
+			path = "zh-Hans.lproj";
+			sourceTree = "<group>";
+		};
 		2662E41D24A3079C0074383A /* BlufiLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,57 +549,37 @@
 			isa = PBXGroup;
 			children = (
 				26835B7A24922875003B1BC6 /* EspBlufi.entitlements */,
-				26835B7B249235C1003B1BC6 /* ESPUtil */,
-				26835AC52491CFF8003B1BC6 /* ESPPch */,
-				26835ACC2491CFFC003B1BC6 /* ESPThirdGit */,
-				26835AC32491CFF8003B1BC6 /* ESPPages */,
-				26835A2E248FAD93003B1BC6 /* BleDeviceListViewController.h */,
-				26835A2F248FAD93003B1BC6 /* BleDeviceListViewController.m */,
-				000AD42C2DF0443C00AD8B05 /* BleDeviceListViewController+UI.h */,
-				000AD42D2DF0443C00AD8B05 /* BleDeviceListViewController+UI.m */,
-				26835A28248FAD93003B1BC6 /* AppDelegate.h */,
-				26835A29248FAD93003B1BC6 /* AppDelegate.m */,
-				26835A2B248FAD93003B1BC6 /* SceneDelegate.h */,
-				26835A2C248FAD93003B1BC6 /* SceneDelegate.m */,
-				26835A31248FAD93003B1BC6 /* Main.storyboard */,
+				26835B7B249235C1003B1BC6 /* Util */,
+				26835ACC2491CFFC003B1BC6 /* Vendor */,
+				26835AC32491CFF8003B1BC6 /* Pages */,
+				00E7B7782DF11F1400634BED /* Misc */,
+				26835AC62491CFF8003B1BC6 /* PrefixHeader.pch */,
 				26835A34248FAD96003B1BC6 /* Assets.xcassets */,
 				26835A36248FAD96003B1BC6 /* LaunchScreen.storyboard */,
 				26835A39248FAD96003B1BC6 /* Info.plist */,
-				26835B442491D25A003B1BC6 /* Localizable.strings */,
-				26835B3E2491D0B6003B1BC6 /* InfoPlist.strings */,
-				26835A3A248FAD96003B1BC6 /* main.m */,
+				00E7B78C2DF1246400634BED /* en.lproj */,
+				00E7B7912DF1246400634BED /* zh-Hans.lproj */,
 			);
 			path = EspBlufi;
 			sourceTree = "<group>";
 		};
-		26835AC32491CFF8003B1BC6 /* ESPPages */ = {
+		26835AC32491CFF8003B1BC6 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				26835B49249211A4003B1BC6 /* ESPChoicePickerView.h */,
-				26835B4A249211A4003B1BC6 /* ESPChoicePickerView.m */,
+				00E7B7772DF11E4D00634BED /* UI */,
 				26835AC92491CFF8003B1BC6 /* ESPSettingViewController.h */,
 				26835AC72491CFF8003B1BC6 /* ESPSettingViewController.m */,
-				26835AC42491CFF8003B1BC6 /* ESPDetailViewController.h */,
-				26835AC82491CFF8003B1BC6 /* ESPDetailViewController.m */,
-				000AD42F2DF05C3100AD8B05 /* ESPDetailViewController+UI.h */,
-				000AD4302DF05C3100AD8B05 /* ESPDetailViewController+UI.m */,
+				26835AC42491CFF8003B1BC6 /* ESPDeviceViewController.h */,
+				26835AC82491CFF8003B1BC6 /* ESPDeviceViewController.m */,
 				26835B4624920311003B1BC6 /* ESPProvisionViewController.h */,
 				26835B4724920311003B1BC6 /* ESPProvisionViewController.m */,
-				000AD4352DF0887500AD8B05 /* ESPProvisionViewController+UI.h */,
-				000AD4362DF0887500AD8B05 /* ESPProvisionViewController+UI.m */,
+				26835A2E248FAD93003B1BC6 /* BleDeviceListViewController.h */,
+				26835A2F248FAD93003B1BC6 /* BleDeviceListViewController.m */,
 			);
-			path = ESPPages;
+			path = Pages;
 			sourceTree = "<group>";
 		};
-		26835AC52491CFF8003B1BC6 /* ESPPch */ = {
-			isa = PBXGroup;
-			children = (
-				26835AC62491CFF8003B1BC6 /* PrefixHeader.pch */,
-			);
-			path = ESPPch;
-			sourceTree = "<group>";
-		};
-		26835ACC2491CFFC003B1BC6 /* ESPThirdGit */ = {
+		26835ACC2491CFFC003B1BC6 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
 				26835B73249219EA003B1BC6 /* MBProgressHUD */,
@@ -566,7 +589,7 @@
 				000AD4322DF065D000AD8B05 /* UIWindow+keyWIndow.h */,
 				000AD4332DF065D000AD8B05 /* UIWindow+keyWIndow.m */,
 			);
-			path = ESPThirdGit;
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 		26835ACD2491CFFD003B1BC6 /* FFDropDownMenu */ = {
@@ -743,17 +766,17 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
-		26835B7B249235C1003B1BC6 /* ESPUtil */ = {
+		26835B7B249235C1003B1BC6 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				26835B7C249235E5003B1BC6 /* ESPBLEHelper.h */,
-				26835B7D249235E5003B1BC6 /* ESPBLEHelper.m */,
+				26835B7C249235E5003B1BC6 /* ESPBleHelper.h */,
+				26835B7D249235E5003B1BC6 /* ESPBleHelper.m */,
 				26835B7F249324A0003B1BC6 /* ESPUserDefaults.h */,
 				26835B80249324A0003B1BC6 /* ESPUserDefaults.m */,
 				80071DCB24973EBB00A74E55 /* ESPPeripheral.h */,
 				80071DCC24973EBB00A74E55 /* ESPPeripheral.m */,
 			);
-			path = ESPUtil;
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -815,12 +838,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				26835A38248FAD96003B1BC6 /* LaunchScreen.storyboard in Resources */,
-				26835B3C2491D0B6003B1BC6 /* InfoPlist.strings in Resources */,
+				00E7B7922DF1246400634BED /* InfoPlist.strings in Resources */,
+				00E7B7932DF1246400634BED /* Localizable.strings in Resources */,
+				00E7B7942DF1246400634BED /* InfoPlist.strings in Resources */,
+				00E7B7952DF1246400634BED /* Localizable.strings in Resources */,
 				26835A35248FAD96003B1BC6 /* Assets.xcassets in Resources */,
 				2662E48F24A3079C0074383A /* LICENSE in Resources */,
-				26835B422491D25A003B1BC6 /* Localizable.strings in Resources */,
 				26835B1C2491CFFD003B1BC6 /* MJRefresh.bundle in Resources */,
-				26835A33248FAD93003B1BC6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,7 +871,7 @@
 				26835B222491CFFD003B1BC6 /* MJRefreshBackNormalFooter.m in Sources */,
 				26835B68249212A0003B1BC6 /* MASCompositeConstraint.m in Sources */,
 				2662E48D24A3079C0074383A /* BlufiSecurity.m in Sources */,
-				26835B7E249235E5003B1BC6 /* ESPBLEHelper.m in Sources */,
+				26835B7E249235E5003B1BC6 /* ESPBleHelper.m in Sources */,
 				2662E48C24A3079C0074383A /* BlufiConfigureParams.m in Sources */,
 				2662E49324A3079C0074383A /* BlufiFrameCtrlData.m in Sources */,
 				26835B2E2491CFFD003B1BC6 /* MJRefreshAutoFooter.m in Sources */,
@@ -873,7 +897,7 @@
 				26835A2D248FAD93003B1BC6 /* SceneDelegate.m in Sources */,
 				26835B152491CFFD003B1BC6 /* FFDropDownMenuBasedCell.m in Sources */,
 				2662E49224A3079C0074383A /* BlufiNotifyData.m in Sources */,
-				26835ACB2491CFF8003B1BC6 /* ESPDetailViewController.m in Sources */,
+				26835ACB2491CFF8003B1BC6 /* ESPDeviceViewController.m in Sources */,
 				2662E48A24A3079C0074383A /* BlufiStatusResponse.m in Sources */,
 				26835B2A2491CFFD003B1BC6 /* MJRefreshGifHeader.m in Sources */,
 				000AD4342DF065D000AD8B05 /* UIWindow+keyWIndow.m in Sources */,
@@ -891,7 +915,7 @@
 				26835B4824920311003B1BC6 /* ESPProvisionViewController.m in Sources */,
 				26835B232491CFFD003B1BC6 /* MJRefreshAutoStateFooter.m in Sources */,
 				26835B6B249212A0003B1BC6 /* NSArray+MASAdditions.m in Sources */,
-				000AD4312DF05C3100AD8B05 /* ESPDetailViewController+UI.m in Sources */,
+				000AD4312DF05C3100AD8B05 /* ESPDeviceViewController+UI.m in Sources */,
 				2662E48B24A3079C0074383A /* BlufiScanResponse.m in Sources */,
 				26835B142491CFFD003B1BC6 /* FFDropDownMenuView.m in Sources */,
 				26835B1A2491CFFD003B1BC6 /* MJRefreshConst.m in Sources */,
@@ -903,40 +927,44 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		26835A31248FAD93003B1BC6 /* Main.storyboard */ = {
+		00E7B7892DF1246400634BED /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				26835A32248FAD93003B1BC6 /* Base */,
-				26835B382491D053003B1BC6 /* zh-Hans */,
+				00E7B7882DF1246400634BED /* en */,
 			);
-			name = Main.storyboard;
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		00E7B78B2DF1246400634BED /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00E7B78A2DF1246400634BED /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		00E7B78E2DF1246400634BED /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00E7B78D2DF1246400634BED /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		00E7B7902DF1246400634BED /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00E7B78F2DF1246400634BED /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		26835A36248FAD96003B1BC6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				26835A37248FAD96003B1BC6 /* Base */,
-				26835B392491D053003B1BC6 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		26835B3E2491D0B6003B1BC6 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				26835B3D2491D0B6003B1BC6 /* en */,
-				26835B3F2491D0BC003B1BC6 /* zh-Hans */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		26835B442491D25A003B1BC6 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				26835B432491D25A003B1BC6 /* en */,
-				26835B452491D25D003B1BC6 /* zh-Hans */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1063,7 +1091,7 @@
 				CURRENT_PROJECT_VERSION = 0.4.0;
 				DEVELOPMENT_TEAM = 84ZP6N6749;
 				ENABLE_BITCODE = NO;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/EspBlufi/ESPPch/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/EspBlufi/PrefixHeader.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/BlufiLibrary/Security/openssl/include/";
 				INFOPLIST_FILE = EspBlufi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1091,7 +1119,7 @@
 				CURRENT_PROJECT_VERSION = 0.4.0;
 				DEVELOPMENT_TEAM = 84ZP6N6749;
 				ENABLE_BITCODE = NO;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/EspBlufi/ESPPch/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/EspBlufi/PrefixHeader.pch";
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/BlufiLibrary/Security/openssl/include/";
 				INFOPLIST_FILE = EspBlufi/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

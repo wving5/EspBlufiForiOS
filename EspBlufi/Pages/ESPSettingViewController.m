@@ -55,7 +55,7 @@
     [self.filterContent addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deviceFilter)]];
     self.filterContent.userInteractionEnabled = YES;
     self.filterContent.font = [UIFont systemFontOfSize:16.0];
-    NSString *filterText = [ESPUserDefaults loadBlufiScanFilter];
+    NSString *filterText = [ESPUserDefaults getBlufiScanFilter];
     self.filterContent.text = filterText;
     [headerView addSubview:_filterContent];
 

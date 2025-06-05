@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ESPUserDefaults : NSObject
 
 + (BOOL)saveBlufiScanFilter:(NSString *)filter;
-+ (NSString *)loadBlufiScanFilter;
++ (NSString *)getBlufiScanFilter;
 
 @end
 

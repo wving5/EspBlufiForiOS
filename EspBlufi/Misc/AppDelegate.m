@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "BleDeviceListViewController.h"
 #import "ESPUserDefaults.h"
+#import "SceneDelegate.h"
 
 @interface AppDelegate ()
 
@@ -42,7 +43,7 @@
                                    options:(UISceneConnectionOptions *)options API_AVAILABLE(ios(13.0)) {
     // Called when a new scene session is being created.
     // Use this method to select a configuration to create the new scene with.
-    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
+    return [[UISceneConfiguration alloc] initWithName:nil sessionRole:connectingSceneSession.role];
 }
 
 - (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions API_AVAILABLE(ios(13.0)) {

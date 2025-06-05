@@ -1,5 +1,5 @@
 //
-//  ESPDetailViewController.h
+//  ESPDeviceViewController.h
 //  EspBlufi
 //
 //  Created by fanbaoying on 2020/6/10.
@@ -22,7 +22,7 @@ typedef enum {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ESPDetailViewController : UIViewController
+@interface ESPDeviceViewController : UIViewController
 
 - (instancetype)initWithDevice:(ESPPeripheral *)device;
 

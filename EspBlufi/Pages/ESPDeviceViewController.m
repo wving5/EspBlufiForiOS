@@ -1,18 +1,18 @@
 //
-//  ESPDetailViewController.m
+//  ESPDeviceViewController.m
 //  EspBlufi
 //
 //  Created by fanbaoying on 2020/6/10.
 //  Copyright © 2020 espressif. All rights reserved.
 //
 
-#import "ESPDetailViewController.h"
-#import "ESPDetailViewController+UI.h"
+#import "ESPDeviceViewController.h"
+#import "ESPDeviceViewController+UI.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "ESPProvisionViewController.h"
 #import "BlufiClient.h"
 
-@interface ESPDetailViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, BlufiDelegate, ESPProvisionParamsDelegate>
+@interface ESPDeviceViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, BlufiDelegate, ESPProvisionParamsDelegate>
 
 @property (strong, nonatomic) ESPPeripheral *device;
 
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation ESPDetailViewController
+@implementation ESPDeviceViewController
 
 - (instancetype)initWithDevice:(ESPPeripheral *)device
 {
