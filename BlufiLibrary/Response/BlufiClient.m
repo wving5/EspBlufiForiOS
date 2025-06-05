@@ -16,7 +16,7 @@
 #define PACKAGE_LENGTH_MIN     20
 #define PACKAGE_HEADER_LENGTH  4
 
-#define DBUG false
+#define DBUG true
 
 typedef enum {
     StateConnected = 0,
@@ -178,6 +178,7 @@ enum {
 }
 
 - (void)close {
+    BluefiLog(@"Bluefi close() ⭕️");
     _closed = YES;
     [_callbackQueue cancelAllOperations];
     [_requestQueue cancelAllOperations];
@@ -255,6 +256,9 @@ enum {
 - (void)gattWrite:(NSData *)data {
     [_writeCondition lock];
     if (![self isConnected]) {
+        if (DBUG) {
+            BluefiLog(@"Blufi GattWrite ❌ skip writing cuz NOT connected");
+        }
         [_writeCondition unlock];
         return;
     }
@@ -357,6 +361,7 @@ enum {
             return !ack || [self receiveAck:sequence];
         }
     }
+    if (DBUG) BluefiLog(@"postContainData NONE data available");
     [dataIS close];
     return YES;
 }
@@ -715,6 +720,7 @@ enum {
 - (void)onError:(NSInteger)errCode {
     id delegate = _blufiDelegate;
     BlufiClient *client = self;
+    BluefiLog(@"onError %ld", errCode);
     if (delegate && [delegate respondsToSelector:@selector(blufi:didReceiveError:)]) {
         [_callbackQueue addOperationWithBlock:^{
             [delegate blufi:client didReceiveError:errCode];
@@ -758,6 +764,8 @@ enum {
         if (!posted) {
             BluefiLog(@"Post DeiviceVersion request failed");
             [self onVersionResponse:nil status:StatusWriteFailed];
+        } else {
+            BluefiLog(@"Post DeiviceVersion request success");
         }
     }];
 }
@@ -818,6 +826,7 @@ enum {
 }
 
 - (BOOL)postStaInfo:(BlufiConfigureParams *)params {
+    BluefiLog(@"postStaInfo data_ssid");
     Byte type = [self getTypeValueWithPackageType:PackageData subType:DataSubTypeStaSsid];
     NSData *ssid = [params.staSsid dataUsingEncoding:NSUTF8StringEncoding];
     if (![self post:ssid encrypt:_encrypted checksum:_checksum requireAck:_requireAck type:type]) {
@@ -825,6 +834,7 @@ enum {
     }
     [NSThread sleepForTimeInterval:0.01];
 
+    BluefiLog(@"postStaInfo data_password");
     type = [self getTypeValueWithPackageType:PackageData subType:DataSubTypeStaPassword];
     NSData *password = [params.staPassword dataUsingEncoding:NSUTF8StringEncoding];
     if (![self post:password encrypt:_encrypted checksum:_checksum requireAck:_requireAck type:type]) {
@@ -832,6 +842,7 @@ enum {
     }
     [NSThread sleepForTimeInterval:0.01];
 
+    BluefiLog(@"postStaInfo ctrl_connectWiFi");
     type = [self getTypeValueWithPackageType:PackageCtrl subType:CtrlSubTypeConnectWiFi];
     return [self post:nil encrypt:_encrypted checksum:_checksum requireAck:_requireAck type:type];
 }
@@ -895,14 +906,19 @@ enum {
                 [self onPostConfigureParams:StatusSuccess];
                 break;
             case OpModeSta:
+                BluefiLog(@"-> postDeviceMode()");
                 if (![self postDeviceMode:opMode]) {
+                    BluefiLog(@"postDeviceMode failed");
                     [self onPostConfigureParams:StatusWriteFailed];
                     return;
                 }
+                BluefiLog(@"-> postStaInfo");
                 if (![self postStaInfo:params]) {
+                    BluefiLog(@"postStaInfo failed");
                     [self onPostConfigureParams:StatusWriteFailed];
                     return;
                 }
+                BluefiLog(@"-> onPostConfigureParams:StatusSuccess");
                 [self onPostConfigureParams:StatusSuccess];
                 break;
             case OpModeSoftAP:
@@ -1250,6 +1266,7 @@ enum {
         BluefiLog(@"didUpdateValueForCharacteristic error: %@", error);
         [self clearConnection];
     } else {
+        if (DBUG) BluefiLog(@"peripheral:didUpdateValueForCharacteristic: %@ - delegate %@", characteristic, _peripheralDelegate);
         if (!_notifyData) {
             _notifyData = [[BlufiNotifyData alloc] init];
         }
@@ -1474,6 +1491,7 @@ enum {
 }
 
 - (void)dealloc {
+    BluefiLog(@"BluefiClient dealloc");
     self.dispatchQueue = nil;
     self.queue = nil;
     self.lock = nil;

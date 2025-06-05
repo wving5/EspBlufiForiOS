@@ -109,6 +109,7 @@
 }
 
 - (void)onDisconnected {
+//    DLog(@"skip close client"); return;
     [_blufiClient close];
 }
 
