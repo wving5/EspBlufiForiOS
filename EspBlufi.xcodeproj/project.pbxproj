@@ -16,6 +16,7 @@
 		00E7B7942DF1246400634BED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00E7B78E2DF1246400634BED /* InfoPlist.strings */; };
 		00E7B7952DF1246400634BED /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00E7B78B2DF1246400634BED /* Localizable.strings */; };
 		00E7B7982DF1286800634BED /* ESPSettingViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7B7972DF1286800634BED /* ESPSettingViewController+UI.m */; };
+		00E7B79A2DF1863300634BED /* ESPDeviceActionStates.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7B7992DF1863300634BED /* ESPDeviceActionStates.m */; };
 		2662E48724A3079C0074383A /* BlufiConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E41F24A3079C0074383A /* BlufiConstants.m */; };
 		2662E48824A3079C0074383A /* BlufiClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42024A3079C0074383A /* BlufiClient.m */; };
 		2662E48924A3079C0074383A /* BlufiVersionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2662E42124A3079C0074383A /* BlufiVersionResponse.m */; };
@@ -101,6 +102,8 @@
 		00E7B78F2DF1246400634BED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		00E7B7962DF1286800634BED /* ESPSettingViewController+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ESPSettingViewController+UI.h"; sourceTree = "<group>"; };
 		00E7B7972DF1286800634BED /* ESPSettingViewController+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ESPSettingViewController+UI.m"; sourceTree = "<group>"; };
+		00E7B7992DF1863300634BED /* ESPDeviceActionStates.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESPDeviceActionStates.m; sourceTree = "<group>"; };
+		00E7B79B2DF1864200634BED /* ESPDeviceActionStates.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPDeviceActionStates.h; sourceTree = "<group>"; };
 		2662E41F24A3079C0074383A /* BlufiConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiConstants.m; sourceTree = "<group>"; };
 		2662E42024A3079C0074383A /* BlufiClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiClient.m; sourceTree = "<group>"; };
 		2662E42124A3079C0074383A /* BlufiVersionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlufiVersionResponse.m; sourceTree = "<group>"; };
@@ -574,6 +577,8 @@
 				00E7B7772DF11E4D00634BED /* UI */,
 				26835AC92491CFF8003B1BC6 /* ESPSettingViewController.h */,
 				26835AC72491CFF8003B1BC6 /* ESPSettingViewController.m */,
+				00E7B79B2DF1864200634BED /* ESPDeviceActionStates.h */,
+				00E7B7992DF1863300634BED /* ESPDeviceActionStates.m */,
 				26835AC42491CFF8003B1BC6 /* ESPDeviceViewController.h */,
 				26835AC82491CFF8003B1BC6 /* ESPDeviceViewController.m */,
 				26835B4624920311003B1BC6 /* ESPProvisionViewController.h */,
@@ -897,6 +902,7 @@
 				26835B2D2491CFFD003B1BC6 /* MJRefreshBackFooter.m in Sources */,
 				26835B6F249212A0003B1BC6 /* MASViewAttribute.m in Sources */,
 				26835ACA2491CFF8003B1BC6 /* ESPSettingViewController.m in Sources */,
+				00E7B79A2DF1863300634BED /* ESPDeviceActionStates.m in Sources */,
 				26835B1F2491CFFD003B1BC6 /* UIView+MJExtension.m in Sources */,
 				26835B1E2491CFFD003B1BC6 /* NSBundle+MJRefresh.m in Sources */,
 				26835A2D248FAD93003B1BC6 /* SceneDelegate.m in Sources */,

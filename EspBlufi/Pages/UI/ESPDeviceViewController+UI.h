@@ -8,7 +8,7 @@
 - (void)setButton:(UIButton *)button enable:(BOOL)enable;
 - (void)setButton:(UIButton *)button touchDown:(BOOL)pressed;
 
-- (void)ui_onStateChanged_isConnected:(BOOL)connected;
+- (void)ui_updateButtonStatesWithActionStates:(ESPDeviceActionStates *)states;
 
 - (void)updateMessage:(NSString *)message;
 

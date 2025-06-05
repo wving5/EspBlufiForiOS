@@ -170,17 +170,25 @@
     }
 }
 
-- (void)ui_onStateChanged_isConnected:(BOOL)connected {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self setButton:self.connectBtn enable:!connected];
-        [self setButton:self.disconnectBtn enable:connected];
-        [self setButton:self.encryptionBtn enable:connected];
-        [self setButton:self.versionBtn enable:connected];
-        [self setButton:self.configureBtn enable:connected];
-        [self setButton:self.stateBtn enable:connected];
-        [self setButton:self.scanBtn enable:connected];
-        [self setButton:self.customBtn enable:connected];
-    }];
+- (void)ui_updateButtonStatesWithActionStates:(ESPDeviceActionStates* )states {
+    // This method should be called on main queue already from notifyActionStatesChanged
+    NSAssert([NSThread isMainThread], @"ui_updateButtonStatesWithActionStates must be called on main thread");
+
+    // Connect button: enabled when not connected and not in progress
+    BOOL connectEnabled = !states.isConnected && states.connect != ESPActionState_InProgress;
+    [self setButton:self.connectBtn enable:connectEnabled];
+
+    // Disconnect button: enabled when connected
+    BOOL disconnectEnabled = states.isConnected;
+    [self setButton:self.disconnectBtn enable:disconnectEnabled];
+
+    // Other buttons: enabled when connected and not in progress for that specific action
+    [self setButton:self.encryptionBtn enable:(states.isConnected && states.security != ESPActionState_InProgress)];
+    [self setButton:self.versionBtn enable:(states.isConnected && states.version != ESPActionState_InProgress)];
+    [self setButton:self.configureBtn enable:(states.isConnected && states.configure != ESPActionState_InProgress)];
+    [self setButton:self.stateBtn enable:(states.isConnected && states.state != ESPActionState_InProgress)];
+    [self setButton:self.scanBtn enable:(states.isConnected && states.scan != ESPActionState_InProgress)];
+    [self setButton:self.customBtn enable:(states.isConnected && states.custom != ESPActionState_InProgress)];
 }
 
 - (void)showCustomDataAlertWithOKHandler:(void (^)(NSString *inputText))onOK cancelHandler:(void (^)(void))onCancel {

@@ -67,9 +67,9 @@
     [self.centralManager stopScan];
 }
 
-- (void)startScan:(bleDeviceScanCallback)device {
-    DLog(@"扫描设备");
-    _onBleScanSuccess = device;
+- (void)startScan:(bleDeviceScanCallback)callback {
+    DLog(@"BLE 扫描设备");
+    _onBleScanSuccess = callback;
     if (self.peripheralState == CBManagerStatePoweredOn) {
         [self.centralManager scanForPeripheralsWithServices:nil options:nil];
     }
@@ -99,29 +99,28 @@
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     switch (central.state) {
         case CBManagerStateUnknown: {
-            DLog(@"未知状态");
+            DLog(@"BLE 未知状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStateResetting: {
-            DLog(@"重置状态");
+            DLog(@"BLE 重置状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStateUnsupported: {
-            DLog(@"不支持的状态");
+            DLog(@"BLE 不支持的状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStateUnauthorized: {
-            DLog(@"未授权的状态");
+            DLog(@"BLE 未授权的状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStatePoweredOff: {
-            DLog(@"关闭状态");
+            DLog(@"BLE 关闭状态");
             self.peripheralState = central.state;
         } break;
         case CBManagerStatePoweredOn: {
-            DLog(@"开启状态－可用状态");
             self.peripheralState = central.state;
-            DLog(@"%ld", (long)self.peripheralState);
+            DLog(@"BLE 开启状态－可用状态 %ld", (long)self.peripheralState);
             [self.centralManager scanForPeripheralsWithServices:nil options:nil];
         } break;
         default:

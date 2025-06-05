@@ -9,6 +9,9 @@
 #ifndef ESPHeaderFiles_h
 #define ESPHeaderFiles_h
 
+#define BluefiLog(fmt, ...) NSLog((@"[Bluefi] " fmt),  ##__VA_ARGS__)
+//#define BluefiLog(fmt, ...)
+
 #import <openssl/dh.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import <openssl/rsa.h>

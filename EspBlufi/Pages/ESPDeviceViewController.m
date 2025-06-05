@@ -12,12 +12,15 @@
 #import "ESPProvisionViewController.h"
 #import "BlufiClient.h"
 
+
 @interface ESPDeviceViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, BlufiDelegate, ESPProvisionParamsDelegate>
 
 @property (strong, nonatomic) ESPPeripheral *device;
 
 @property (strong, nonatomic) BlufiClient *blufiClient;  // reset before each connect, nil protection NOT needed for objc
-@property (assign, atomic) BOOL connected;
+
+// Action states tracking
+@property (strong, nonatomic) ESPDeviceActionStates *currentActionStates;
 
 @end
 
@@ -34,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.connected = NO;
+    [self initializeActionStates];
     [self setupUIWith: self.device.name];
 }
 
@@ -43,32 +46,33 @@
 - (void)onButtonTapped:(ButtonTag)buttonTag {
     switch (buttonTag) {
         case Btn_Connect:
+            [self updateActionState:ESPActionState_InProgress forAction:Btn_Connect];
             [self connect];
             break;
         case Btn_Disconnect:
             [_blufiClient requestCloseConnection];
             break;
         case Btn_Security:
-            [self setButton:self.encryptionBtn enable:NO];
+            [self updateActionState:ESPActionState_InProgress forAction:Btn_Security];
             [_blufiClient negotiateSecurity];
             break;
         case Btn_Version:
-            [self setButton:self.versionBtn enable:NO];
+            [self updateActionState:ESPActionState_InProgress forAction:Btn_Version];
             [_blufiClient requestDeviceVersion];
             break;
         case Btn_Configure:
+            // TODO: 可能并不需要等待，先按照等待 didPost 回调处理
             [self goToProvisionVC];
             break;
         case Btn_State:
-            [self setButton:self.stateBtn enable:NO];
+            [self updateActionState:ESPActionState_InProgress forAction:Btn_State];
             [_blufiClient requestDeviceStatus];
             break;
         case Btn_Scan:
-            [self setButton:self.scanBtn enable:NO];
+            [self updateActionState:ESPActionState_InProgress forAction:Btn_Scan];
             [_blufiClient requestDeviceScan];
             break;
         case Btn_Custom:
-            [self setButton:self.customBtn enable:NO];
             [self handleCustomDataInput];
             break;
         default:
@@ -81,34 +85,34 @@
 - (void)handleCustomDataInput {
     [self
         showCustomDataAlertWithOKHandler:^(NSString *inputText) {
-        // FIXME: 根据 alert 回调来启用/禁用 btn 没啥意义 ?
-            [self setButton:self.customBtn enable:self.connected];
-
             if (inputText && inputText.length > 0 && self.blufiClient) {
+                // TODO: 可能并不需要等待，但原来的处理方式也不对
+                [self updateActionState:ESPActionState_InProgress forAction:Btn_Custom];
+
                 NSData *data = [inputText dataUsingEncoding:NSUTF8StringEncoding];
                 [self.blufiClient postCustomData:data];
+                // State will be updated in delegate callback
+            } else {
+                // No data to send, reset to idle state
+                [self updateActionState:ESPActionState_Idle forAction:Btn_Custom];
             }
         }
         cancelHandler:^{
-            [self setButton:self.customBtn enable:self.connected];
+            // User cancelled, reset to idle state
+            [self updateActionState:ESPActionState_Idle forAction:Btn_Custom];
         }];
 }
 
 - (void)connect {
-    [self setButton:_connectBtn enable:NO];
-
     [self resetBlufiClient];
     [_blufiClient connect:_device.uuid.UUIDString];
 }
 
 - (void)onDisconnected {
     [_blufiClient close];
-
-    [self ui_onStateChanged_isConnected:NO];
 }
 
 - (void)onBlufiPrepared {
-    [self ui_onStateChanged_isConnected:YES];
 }
 
 - (void)resetBlufiClient {
@@ -129,7 +133,10 @@
 }
 
 - (void)provisionDidSetParams:(BlufiConfigureParams *)params {
-    if (_blufiClient && _connected) {
+    DLog(@"设置参数 %@", params);
+    if (self.currentActionStates.isConnected) {
+        [self updateActionState:ESPActionState_InProgress forAction:Btn_Configure];
+        DLog(@"# BlufiClient.configure %@", params);
         [_blufiClient configure:params];
     }
 }
@@ -140,18 +147,18 @@
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
-    [self updateMessage:@"Connected device"];
+    [self logMessage:@"#0 BLE Connected device"];
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-    [self updateMessage:@"Connet device failed"];
-    self.connected = NO;
+    [self logMessage:@"#0 BLE Connet device failed"];
+    [self updateActionState:ESPActionState_Failed forAction:Btn_Connect];
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     [self onDisconnected];
-    [self updateMessage:@"Disconnected device"];
-    self.connected = NO;
+    [self logMessage:@"#0 BLE Disconnected device"];
+    [self updateActionState:ESPActionState_Idle forAction:Btn_Connect];
 }
 
 #pragma mark - BluFi Delegate Methods
@@ -161,92 +168,149 @@
          service:(CBService *)service
        writeChar:(CBCharacteristic *)writeChar
       notifyChar:(CBCharacteristic *)notifyChar {
-    DLog(@"Blufi gattPrepared status:%d", status);
+    DLog(@"#1 Blufi gattPrepared status:%d", status);
     if (status == StatusSuccess) {
-        self.connected = YES;
-        [self updateMessage:@"BluFi connection has prepared"];
+        [self logMessage:@"#1 BluFi connection has prepared"];
+        [self updateActionState:ESPActionState_Success forAction:Btn_Connect];
         [self onBlufiPrepared];
     } else {
+        [self logMessage:@"#1 BluFi connection failed"];
+        [self updateActionState:ESPActionState_Failed forAction:Btn_Connect];
         [self onDisconnected];
         if (!service) {
-            [self updateMessage:@"Discover service failed"];
+            [self logMessage:@"#1 Discover service failed"];
         } else if (!writeChar) {
-            [self updateMessage:@"Discover write char failed"];
+            [self logMessage:@"#1 Discover write char failed"];
         } else if (!notifyChar) {
-            [self updateMessage:@"Discover notify char failed"];
+            [self logMessage:@"#1 Discover notify char failed"];
         }
     }
 }
 
 - (void)blufi:(BlufiClient *)client didNegotiateSecurity:(BlufiStatusCode)status {
-    DLog(@"Blufi didNegotiateSecurity %d", status);
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self setButton:self.encryptionBtn enable:self.connected];
-    }];
+    DLog(@"# Blufi didNegotiateSecurity %d", status);
+
+    ESPActionState newState = (status == StatusSuccess) ? ESPActionState_Success : ESPActionState_Failed;
+    [self updateActionState:newState forAction:Btn_Security];
+
     if (status == StatusSuccess) {
-        [self updateMessage:@"Negotiate security complete"];
+        [self logMessage:@"Negotiate security complete"];
     } else {
-        [self updateMessage:[NSString stringWithFormat:@"Negotiate security failed: %d", status]];
+        [self logMessage:[NSString stringWithFormat:@"Negotiate security failed: %d", status]];
     }
 }
 
 - (void)blufi:(BlufiClient *)client didReceiveDeviceVersionResponse:(BlufiVersionResponse *)response status:(BlufiStatusCode)status {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self setButton:self.versionBtn enable:self.connected];
-    }];
+    ESPActionState newState = (status == StatusSuccess) ? ESPActionState_Success : ESPActionState_Failed;
+    [self updateActionState:newState forAction:Btn_Version];
+
     if (status == StatusSuccess) {
-        [self updateMessage:[NSString stringWithFormat:@"Receive device version: %@", response.getVersionString]];
+        [self logMessage:[NSString stringWithFormat:@"Receive device version: %@", response.getVersionString]];
     } else {
-        [self updateMessage:[NSString stringWithFormat:@"Receive device version error: %d", status]];
+        [self logMessage:[NSString stringWithFormat:@"Receive device version error: %d", status]];
     }
 }
 
 - (void)blufi:(BlufiClient *)client didPostConfigureParams:(BlufiStatusCode)status {
+    ESPActionState newState = (status == StatusSuccess) ? ESPActionState_Success : ESPActionState_Failed;
+    [self updateActionState:newState forAction:Btn_Configure];
+    
     if (status == StatusSuccess) {
-        [self updateMessage:@"Post configure params complete"];
+        [self logMessage:@"Post configure params complete"];
     } else {
-        [self updateMessage:[NSString stringWithFormat:@"Post configure params failed: %d", status]];
+        [self logMessage:[NSString stringWithFormat:@"Post configure params failed: %d", status]];
     }
 }
 
 - (void)blufi:(BlufiClient *)client didReceiveDeviceStatusResponse:(BlufiStatusResponse *)response status:(BlufiStatusCode)status {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self setButton:self.stateBtn enable:self.connected];
-    }];
+    ESPActionState newState = (status == StatusSuccess) ? ESPActionState_Success : ESPActionState_Failed;
+    [self updateActionState:newState forAction:Btn_State];
+
     if (status == StatusSuccess) {
-        [self updateMessage:[NSString stringWithFormat:@"Receive device status:\n%@", response.getStatusInfo]];
+        [self logMessage:[NSString stringWithFormat:@"Receive device status:\n%@", response.getStatusInfo]];
     } else {
-        [self updateMessage:[NSString stringWithFormat:@"Receive device status error: %d", status]];
+        [self logMessage:[NSString stringWithFormat:@"Receive device status error: %d", status]];
     }
 }
 
 - (void)blufi:(BlufiClient *)client didReceiveDeviceScanResponse:(NSArray<BlufiScanResponse *> *)scanResults status:(BlufiStatusCode)status {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [self setButton:self.scanBtn enable:self.connected];
-    }];
+    ESPActionState newState = (status == StatusSuccess) ? ESPActionState_Success : ESPActionState_Failed;
+    [self updateActionState:newState forAction:Btn_Scan];
+
     if (status == StatusSuccess) {
         NSMutableString *info = [[NSMutableString alloc] init];
         [info appendString:@"Receive device scan results:\n"];
         for (BlufiScanResponse *response in scanResults) {
             [info appendFormat:@"SSID: %@, RSSI: %d\n", response.ssid, response.rssi];
         }
-        [self updateMessage:info];
+        [self logMessage:info];
     } else {
-        [self updateMessage:[NSString stringWithFormat:@"Receive device scan results error: %d", status]];
+        [self logMessage:[NSString stringWithFormat:@"Receive device scan results error: %d", status]];
     }
 }
 
 - (void)blufi:(BlufiClient *)client didPostCustomData:(nonnull NSData *)data status:(BlufiStatusCode)status {
+    ESPActionState newState = (status == StatusSuccess) ? ESPActionState_Success : ESPActionState_Failed;
+    [self updateActionState:newState forAction:Btn_Custom];
+
     if (status == StatusSuccess) {
-        [self updateMessage:@"Post custom data complete"];
+        [self logMessage:@"Post custom data complete"];
     } else {
-        [self updateMessage:[NSString stringWithFormat:@"Post custom data failed: %d", status]];
+        [self logMessage:[NSString stringWithFormat:@"Post custom data failed: %d", status]];
     }
 }
 
 - (void)blufi:(BlufiClient *)client didReceiveCustomData:(NSData *)data status:(BlufiStatusCode)status {
     NSString *customString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [self updateMessage:[NSString stringWithFormat:@"Receive device custom data: %@", customString]];
+    [self logMessage:[NSString stringWithFormat:@"Receive device custom data: %@", customString]];
+}
+
+#pragma mark - State Management
+
+- (void)logMessage: (NSString *)msg {
+    DLog(@"%@", msg);
+    [self updateMessage:msg];
+}
+
+- (void)notifyActionStatesChanged {
+    DLog(@"### states changed: %@", self.currentActionStates.description);
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [self ui_updateButtonStatesWithActionStates:self.currentActionStates];
+    }];
+}
+
+- (void)initializeActionStates {
+    self.currentActionStates = [[ESPDeviceActionStates alloc] init];
+}
+
+- (void)updateActionState:(ESPActionState)state forAction:(ButtonTag)action {
+    DLog(@"## updateState %@ = %@", ButtonTagToString(action), ESPActionStateToString(state));
+    switch (action) {
+        case Btn_Connect:
+            self.currentActionStates.connect = state;
+            break;
+        case Btn_Security:
+            self.currentActionStates.security = state;
+            break;
+        case Btn_Version:
+            self.currentActionStates.version = state;
+            break;
+        case Btn_Configure:
+            self.currentActionStates.configure = state;
+            break;
+        case Btn_State:
+            self.currentActionStates.state = state;
+            break;
+        case Btn_Scan:
+            self.currentActionStates.scan = state;
+            break;
+        case Btn_Custom:
+            self.currentActionStates.custom = state;
+            break;
+        default:
+            break;
+    }
+    [self notifyActionStatesChanged];
 }
 
 @end

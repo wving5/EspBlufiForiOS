@@ -194,7 +194,7 @@ enum {
 }
 
 - (void)scanBLE {
-    DLog(@"Blufi Scan device: %@", _identifier);
+    BluefiLog(@"Blufi Scan device: %@", _identifier);
     [_centralManager scanForPeripheralsWithServices:nil options:nil];
 }
 
@@ -259,7 +259,7 @@ enum {
         return;
     }
     if (DBUG) {
-        DLog(@"Blufi GattWrite Length: %lu,  %@", (unsigned long)data.length, data);
+        BluefiLog(@"Blufi GattWrite Length: %lu,  %@", (unsigned long)data.length, data);
     }
     [_peripheral writeValue:data forCharacteristic:_writeChar type:CBCharacteristicWriteWithResponse];
     [_writeCondition wait];
@@ -268,14 +268,14 @@ enum {
 }
 
 - (BOOL)receiveAck:(Byte)expectAck {
-    DLog(@"receiveAck expect: %d", expectAck);
+    BluefiLog(@"receiveAck expect: %d", expectAck);
     NSNumber *number = [_deviceAck dequeue];
     if (!number) {
-        DLog(@"receiveAck nil");
+        BluefiLog(@"receiveAck nil");
         return NO;
     }
     Byte ack = number.intValue;
-    DLog(@"receiveAck: %d", ack);
+    BluefiLog(@"receiveAck: %d", ack);
     return ack == expectAck;
 }
 
@@ -322,7 +322,7 @@ enum {
             read = [dataIS read:last maxLength:available];
             if (read != available) {
                 // Impossiable come here
-                DLog(@"postContainData: read last bytes error: read=%ld, expect=%ld", (long)read, (long)available);
+                BluefiLog(@"postContainData: read last bytes error: read=%ld, expect=%ld", (long)read, (long)available);
             }
             [dataContent appendBytes:last length:available];
             available -= read;
@@ -409,15 +409,15 @@ enum {
 
 - (NotifyStatus)parseNotification:(NSData *)response notification:(BlufiNotifyData *)notification {
     if (!response) {
-        DLog(@"parseNotification nil response");
+        BluefiLog(@"parseNotification nil response");
         return NotifyNull;
     }
     if (DBUG) {
-        DLog(@"Notification: %@", response);
+        BluefiLog(@"Notification: %@", response);
     }
 
     if (response.length < 4) {
-        DLog(@"parseNotification invalid length");
+        BluefiLog(@"parseNotification invalid length");
         return NotifyInvalidLength;
     }
 
@@ -425,7 +425,7 @@ enum {
     Byte sequence = buf[2];
     Byte expectSequence = (++_readSequence) & 0xff;
     if (sequence != expectSequence) {
-        DLog(@"parseNotification invalid sequence");
+        BluefiLog(@"parseNotification invalid sequence");
         return NotifyInvalidSequence;
     }
 
@@ -444,7 +444,7 @@ enum {
     Byte dataBuf[dataLen];
     Byte dataOffset = 4;
     if (dataLen + dataOffset > response.length) {
-        DLog(@"parseNotification invalid data length");
+        BluefiLog(@"parseNotification invalid data length");
         return NotifyError;
     }
     memcpy(dataBuf, buf + dataOffset, dataLen);
@@ -467,7 +467,7 @@ enum {
         Byte calcChecksum2 = crc & 0xff;
 
         if (respChecksum1 != calcChecksum1 || respChecksum2 != calcChecksum2) {
-            DLog(@"parseNotification invalid checksum");
+            BluefiLog(@"parseNotification invalid checksum");
             return NotifyInvalidChecsum;
         }
     }
@@ -611,7 +611,7 @@ enum {
         while (dataIS.hasBytesAvailable) {
             NSInteger read = [dataIS read:temp maxLength:2];
             if (read != 2) {
-                DLog(@"parseWifiState contain invalid data1");
+                BluefiLog(@"parseWifiState contain invalid data1");
                 code = StatusInvalidData;
                 break;
             }
@@ -619,7 +619,7 @@ enum {
             Byte len = temp[1];
             read = [dataIS read:temp maxLength:len];
             if (read != len) {
-                DLog(@"parseWifiState contain invalid data2");
+                BluefiLog(@"parseWifiState contain invalid data2");
                 code = StatusInvalidData;
                 break;
             }
@@ -685,18 +685,18 @@ enum {
     while (dataIS.hasBytesAvailable) {
         NSInteger read = [dataIS read:temp maxLength:2];
         if (read != 2) {
-            DLog(@"parseWiFiScanList contain invalid data1");
+            BluefiLog(@"parseWiFiScanList contain invalid data1");
             break;
         }
         Byte length = temp[0];
         if (length < 1) {
-            DLog(@"parseWiFiScanList invalid length");
+            BluefiLog(@"parseWiFiScanList invalid length");
             break;
         }
         Byte rssi = temp[1];
         read = [dataIS read:temp maxLength:length - 1];
         if (read != length - 1) {
-            DLog(@"parseWiFiScanList invalid ssid data");
+            BluefiLog(@"parseWiFiScanList invalid ssid data");
             break;
         }
         NSString *ssid = [[NSString alloc] initWithBytes:temp length:length - 1 encoding:NSUTF8StringEncoding];
@@ -756,7 +756,7 @@ enum {
         Byte type = [self getTypeValueWithPackageType:PackageCtrl subType:CtrlSubTypeGetVersion];
         BOOL posted = [self post:nil encrypt:encrypted checksum:checksum requireAck:false type:type];
         if (!posted) {
-            DLog(@"Post DeiviceVersion request failed");
+            BluefiLog(@"Post DeiviceVersion request failed");
             [self onVersionResponse:nil status:StatusWriteFailed];
         }
     }];
@@ -769,7 +769,7 @@ enum {
         Byte type = [self getTypeValueWithPackageType:PackageCtrl subType:CtrlSubTypeGetWiFiStatus];
         BOOL posted = [self post:nil encrypt:encrypted checksum:checksum requireAck:false type:type];
         if (!posted) {
-            DLog(@"Post DeviceStatus request failed");
+            BluefiLog(@"Post DeviceStatus request failed");
             [self onDeviceStatusResponse:nil status:StatusWriteFailed];
         }
     }];
@@ -782,7 +782,7 @@ enum {
         Byte type = [self getTypeValueWithPackageType:PackageCtrl subType:CtrlSubTypeGetWiFiList];
         BOOL posted = [self post:nil encrypt:encrypted checksum:checksum requireAck:false type:type];
         if (!posted) {
-            DLog(@"Post WiFiScan request failed");
+            BluefiLog(@"Post WiFiScan request failed");
             [self onDeviceScanList:nil status:StatusWriteFailed];
         }
     }];
@@ -932,7 +932,7 @@ enum {
                 [self onPostConfigureParams:StatusSuccess];
                 break;
             default:
-                DLog(@"configure invalid OpMode: %d", opMode);
+                BluefiLog(@"configure invalid OpMode: %d", opMode);
                 [self onPostConfigureParams:StatusInvalidRequest];
                 break;
         }
@@ -949,7 +949,7 @@ enum {
     Byte bytes[] = {NegSecuritySetTotalLength, pgkLength >> 8 & 0xff, pgkLength & 0xff};
     BOOL posted = [self post:[NSData dataWithBytes:bytes length:3] encrypt:NO checksum:NO requireAck:_requireAck type:type];
     if (!posted) {
-        DLog(@"postNegotiateSecurity: Post length failed");
+        BluefiLog(@"postNegotiateSecurity: Post length failed");
         return nil;
     }
 
@@ -971,7 +971,7 @@ enum {
 
     posted = [self post:data encrypt:NO checksum:NO requireAck:_requireAck type:type];
     if (!posted) {
-        DLog(@"postNegotiateSecurity: Post data failed");
+        BluefiLog(@"postNegotiateSecurity: Post data failed");
         return nil;
     }
 
@@ -1021,11 +1021,11 @@ enum {
                 code = StatusWriteFailed;
                 return;
             }
-            DLog(@"negotiateSecurity DH posted");
+            BluefiLog(@"negotiateSecurity DH posted");
 
             NSData *deviceKey = [self.deviceKey dequeue];
             if (!deviceKey) {
-                DLog(@"negotiateSecurity Recevie nil deviceKey");
+                BluefiLog(@"negotiateSecurity Recevie nil deviceKey");
                 code = StatusFailed;
                 return;
             }
@@ -1033,17 +1033,17 @@ enum {
             NSData *secretKey = [blufiDH generateSecret:deviceKey];
             self.aesKey = [BlufiSecurity md5:secretKey];
             if (DBUG) {
-                DLog(@"DH Secret = %@", secretKey);
-                DLog(@"AES Key   = %@", self.aesKey);
+                BluefiLog(@"DH Secret = %@", secretKey);
+                BluefiLog(@"AES Key   = %@", self.aesKey);
             }
 
             setSecurity = [self postSetSecurityCtrlEncrypted:NO ctrlChecksum:NO dataEncrypted:YES dataChecksum:YES];
             if (!setSecurity) {
-                DLog(@"negotiateSecurity postSetSecurity failed");
+                BluefiLog(@"negotiateSecurity postSetSecurity failed");
                 code = StatusWriteFailed;
             }
         } @catch (NSException *exception) {
-            DLog(@"negotiateSecurity exception: %@", exception);
+            BluefiLog(@"negotiateSecurity exception: %@", exception);
             code = StatusException;
         } @finally {
             if (setSecurity) {
@@ -1062,7 +1062,7 @@ enum {
 - (void)centralManagerDidUpdateState:(nonnull CBCentralManager *)central {
     _blePowerOn = central.state == CBManagerStatePoweredOn;
     if (_blePowerOn) {
-        DLog(@"Blufi Client BLE state pwoered on");
+        BluefiLog(@"Blufi Client BLE state powered on");
         if (_bleConnectMark) {
             _bleConnectMark = NO;
             [self scanBLE];
@@ -1080,7 +1080,7 @@ enum {
     didDiscoverPeripheral:(CBPeripheral *)peripheral
         advertisementData:(NSDictionary<NSString *, id> *)advertisementData
                      RSSI:(NSNumber *)RSSI {
-    //    DLog(@"Per UUID: %@, %@", peripheral.name, peripheral.identifier.UUIDString)
+    //    BluefiLog(@"Per UUID: %@, %@", peripheral.name, peripheral.identifier.UUIDString)
     if ([peripheral.identifier isEqual:_identifier]) {
         [_centralManager stopScan];
         _peripheral = peripheral;
@@ -1157,7 +1157,7 @@ enum {
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
     // Discover services
     if (error) {
-        DLog(@"didDiscoverServices error: %@", error);
+        BluefiLog(@"didDiscoverServices error: %@", error);
         [self clearConnection];
         [self gattDiscoverCallback];
     } else {
@@ -1173,7 +1173,7 @@ enum {
             [peripheral discoverCharacteristics:nil forService:service];
             _service = service;
         } else {
-            DLog(@"didDiscoverServices failed");
+            BluefiLog(@"didDiscoverServices failed");
             [self gattDiscoverCallback];
             [self clearConnection];
         }
@@ -1189,7 +1189,7 @@ enum {
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
     // Discover Characteristics
     if (error) {
-        DLog(@"didDiscoverCharacteristicsForService error: %@", error);
+        BluefiLog(@"didDiscoverCharacteristicsForService error: %@", error);
         [self gattDiscoverCallback];
         [self clearConnection];
     } else {
@@ -1198,17 +1198,17 @@ enum {
         NSArray<CBCharacteristic *> *characteristics = [service characteristics];
         for (CBCharacteristic *c in characteristics) {
             if ([c.UUID isEqual:_writeUUID]) {
-                DLog(@"didDiscoverCharacteristicsForService get write char");
+                BluefiLog(@"didDiscoverCharacteristicsForService get write char");
                 writeChar = c;
             } else if ([c.UUID isEqual:_notifyUUID]) {
-                DLog(@"didDiscoverCharacteristicsForService get notify char");
+                BluefiLog(@"didDiscoverCharacteristicsForService get notify char");
                 notifyChar = c;
             }
         }
         _writeChar = writeChar;
         _notifyChar = notifyChar;
         if (!writeChar || !notifyChar) {
-            DLog(@"didDiscoverCharacteristicsForService failed");
+            BluefiLog(@"didDiscoverCharacteristicsForService failed");
             [self gattDiscoverCallback];
             [self clearConnection];
         } else {
@@ -1228,7 +1228,7 @@ enum {
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     // Set Notification
     if (error) {
-        DLog(@"didUpdateNotificationStateForCharacteristic error: %@", error);
+        BluefiLog(@"didUpdateNotificationStateForCharacteristic error: %@", error);
         [self gattDiscoverCallback];
         [self clearConnection];
     } else {
@@ -1247,7 +1247,7 @@ enum {
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     if (error) {
-        DLog(@"didUpdateValueForCharacteristic error: %@", error);
+        BluefiLog(@"didUpdateValueForCharacteristic error: %@", error);
         [self clearConnection];
     } else {
         if (!_notifyData) {
@@ -1261,10 +1261,10 @@ enum {
                 _notifyData = nil;
                 break;
             case NotifyHasFrag:
-                DLog(@"parseNotification wait next");
+                BluefiLog(@"parseNotification wait next");
                 break;
             default:
-                DLog(@"parseNotification failed");
+                BluefiLog(@"parseNotification failed");
                 [self onError:StatusInvalidData];
                 break;
         }
@@ -1284,7 +1284,7 @@ enum {
     [_writeCondition signal];
     [_writeCondition unlock];
     if (error) {
-        DLog(@"didWriteValueForCharacteristic error: %@", error);
+        BluefiLog(@"didWriteValueForCharacteristic error: %@", error);
         [self clearConnection];
     }
 
@@ -1465,7 +1465,7 @@ enum {
         [self.queue removeObjectAtIndex:0];
         [self.lock unlock];
     });
-    DLog(@"device details object %@", object);
+    BluefiLog(@"device details object %@", object);
     return object;
 }
 

@@ -20,7 +20,7 @@
 @property (nonatomic, assign) OpMode displaymode;
 @property (nonatomic, assign) SoftAPPasswordMode softapPasswordmode;
 
-@property (nonatomic, copy) NSMutableDictionary *pickersResultMap;
+@property (nonatomic, strong) NSMutableDictionary *pickersResultMap;
 @property (nonatomic, strong) CLLocationManager *locationManagerSystem;
 
 @end
@@ -52,7 +52,7 @@
     NSString * softApSsid = formParams[@"softApSsid"];
     NSString * softApPassword = formParams[@"softApPassword"];
     
-    DLog(@"点击事件");
+    DLog(@"提交表单: %@", formParams);
     BlufiConfigureParams *params = [[BlufiConfigureParams alloc] init];
     if (self.displaymode == OpModeNull) {
         params.opMode = OpModeNull;
@@ -61,7 +61,6 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     } else if (self.displaymode == OpModeSta) {
-        DLog(@"%@,%@", staPassword, staSsid);
         params.opMode = OpModeSta;
         params.staSsid = staSsid;
         params.staPassword = staPassword;
@@ -91,7 +90,7 @@
         } else if ([self.pickersResultMap[@(Picker_Security)] isEqualToString:@"WPA_WPA2_PSK"]) {
             params.softApSecurity = SoftAPSecurityWPAWPA2;
         } else {
-            DLog(@"异常");
+            NSAssert(false, @"unknown param");
             return;
         }
 
@@ -120,7 +119,7 @@
         } else if ([self.pickersResultMap[@(Picker_Security)] isEqualToString:@"WPA_WPA2_PSK"]) {
             params.softApSecurity = SoftAPSecurityWPAWPA2;
         } else {
-            DLog(@"异常");
+            NSAssert(false, @"unknown param");
             return;
         }
 
@@ -132,7 +131,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     } else {
-        DLog(@"异常");
+        NSAssert(false, @"unknown wifi mode");
     }
 }
 
@@ -163,7 +162,7 @@
         } else if ([str isEqualToString:@"SoftAP&STA"]) {
             self.displaymode = OpModeStaSoftAP;
         } else {
-            DLog(@"Error");
+            NSAssert(false, @"unknown device mode");
         }
     } else if (picker.type == Picker_Security) {
         if ([str isEqualToString:@"OPEN"]) {
@@ -175,7 +174,7 @@
     } else if (picker.type == Picker_Channell) {
     } else if (picker.type == Picker_Max_Connection) {
     } else {
-        DLog(@"异常");
+        NSAssert(false, @"unknown picker");
     }
 }
 

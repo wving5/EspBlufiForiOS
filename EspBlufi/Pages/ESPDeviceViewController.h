@@ -8,19 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ESPPeripheral.h"
-
-typedef enum {
-    Btn_Connect = 6000,
-    Btn_Disconnect,
-    Btn_Security,
-    Btn_Version,
-    Btn_Configure,
-    Btn_State,
-    Btn_Scan,
-    Btn_Custom,
-} ButtonTag;
+#import "ESPDeviceActionStates.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 
 @interface ESPDeviceViewController : UIViewController
 
@@ -28,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 // action from category
 - (void)onButtonTapped:(ButtonTag)buttonTag;
-
 
 // UI Properties shared with category
 // FIXME: 内部各种 callback 状态需要跟 btn 解耦，纯状态发送到分类去更新

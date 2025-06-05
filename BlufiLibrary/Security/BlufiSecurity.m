@@ -83,7 +83,7 @@ const BN_ULONG DH_G = 2;
     CCCryptorStatus status =
         CCCryptorCreateWithMode(kCCEncrypt, kCCModeCFB, kCCAlgorithmAES, ccNoPadding, iv.bytes, key.bytes, key.length, NULL, 0, 0, 0, &cryptor);
     if (status != kCCSuccess) {
-        DLog(@"BlufiSecurity aesEncrypt error: %@", @(status));
+        BluefiLog(@"BlufiSecurity aesEncrypt error: %@", @(status));
         return nil;
     }
     return [self aecCrypt:data cryptor:cryptor];
@@ -94,7 +94,7 @@ const BN_ULONG DH_G = 2;
     CCCryptorStatus status =
         CCCryptorCreateWithMode(kCCDecrypt, kCCModeCFB, kCCAlgorithmAES, ccNoPadding, iv.bytes, key.bytes, key.length, NULL, 0, 0, 0, &cryptor);
     if (status != kCCSuccess) {
-        DLog(@"BlufiSecurity aesEncrypt error: %@", @(status));
+        BluefiLog(@"BlufiSecurity aesEncrypt error: %@", @(status));
         return nil;
     }
     return [self aecCrypt:data cryptor:cryptor];
@@ -118,7 +118,7 @@ const BN_ULONG DH_G = 2;
     const BIGNUM *dh_priv_key = DH_get0_priv_key(dh);
     ret = DH_check_pub_key(dh, dh_pub_key, &i);
     if (ret != 1) {
-        DLog(@"BlufiSecurity Generate DH public key failed");
+        BluefiLog(@"BlufiSecurity Generate DH public key failed");
         return nil;
     }
 
