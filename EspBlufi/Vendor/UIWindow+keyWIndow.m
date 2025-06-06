@@ -11,7 +11,7 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 @implementation UIWindow (keyWIndow)
-+ (UIWindow *)keyWindow {
++ (UIWindow *)esp_keyWindow {
     return [UIApplication sharedApplication].keyWindow;
 }
 @end

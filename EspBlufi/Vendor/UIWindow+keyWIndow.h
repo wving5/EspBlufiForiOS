@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIWindow (keyWIndow)
-+ (UIWindow *)keyWindow;
++ (UIWindow *)esp_keyWindow;
 @end
 
 NS_ASSUME_NONNULL_END

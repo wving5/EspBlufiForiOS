@@ -128,7 +128,7 @@
     picker.arrayType = DeviceMode;
     picker.type = Picker_DeviceMode;
 
-    UIWindow *currentWindow = [UIWindow keyWindow];
+    UIWindow *currentWindow = [UIWindow esp_keyWindow];
     [currentWindow addSubview:picker];
 }
 
@@ -140,7 +140,7 @@
     picker.arrayType = max_connection;
     picker.type = Picker_Max_Connection;
 
-    UIWindow *currentWindow = [UIWindow keyWindow];
+    UIWindow *currentWindow = [UIWindow esp_keyWindow];
     [currentWindow addSubview:picker];
 }
 
@@ -152,7 +152,7 @@
     picker.arrayType = channel;
     picker.type = Picker_Channell;
     
-    UIWindow *currentWindow = [UIWindow keyWindow];
+    UIWindow *currentWindow = [UIWindow esp_keyWindow];
     [currentWindow addSubview:picker];
 }
 
@@ -164,7 +164,7 @@
     picker.arrayType = Security;
     picker.type = Picker_Security;
 
-    UIWindow *currentWindow = [UIWindow keyWindow];
+    UIWindow *currentWindow = [UIWindow esp_keyWindow];
     [currentWindow addSubview:picker];
 }
 
