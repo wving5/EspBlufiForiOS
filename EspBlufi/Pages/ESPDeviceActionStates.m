@@ -1,23 +1,23 @@
 #import "ESPDeviceActionStates.h"
 
-NSString *ButtonTagToString(ButtonTag tag) {
+NSString *ESPActionTypeToString(ESPActionType tag) {
     switch (tag) {
-        case Btn_Connect:
-            return @"Btn_Connect";
-        case Btn_Disconnect:
-            return @"Btn_Disconnect";
-        case Btn_Security:
-            return @"Btn_Security";
-        case Btn_Version:
-            return @"Btn_Version";
-        case Btn_Configure:
-            return @"Btn_Configure";
-        case Btn_State:
-            return @"Btn_State";
-        case Btn_Scan:
-            return @"Btn_Scan";
-        case Btn_Custom:
-            return @"Btn_Custom";
+        case ESPAction_Connect:
+            return @"ESPAction_Connect";
+        case ESPAction_Disconnect:
+            return @"ESPAction_Disconnect";
+        case ESPAction_Security:
+            return @"ESPAction_Security";
+        case ESPAction_Version:
+            return @"ESPAction_Version";
+        case ESPAction_Configure:
+            return @"ESPAction_Configure";
+        case ESPAction_Status:
+            return @"ESPAction_State";
+        case ESPAction_Scan:
+            return @"ESPAction_Scan";
+        case ESPAction_Custom:
+            return @"ESPAction_Custom";
         default:
             return @"Unknown";
     }

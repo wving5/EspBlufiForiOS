@@ -2,17 +2,17 @@
 
 
 typedef enum {
-    Btn_Connect = 6000,
-    Btn_Disconnect,
-    Btn_Security,
-    Btn_Version,
-    Btn_Configure,
-    Btn_State,
-    Btn_Scan,
-    Btn_Custom,
-} ButtonTag;
+    ESPAction_Connect = 6000,
+    ESPAction_Disconnect,
+    ESPAction_Security,
+    ESPAction_Version,
+    ESPAction_Configure,
+    ESPAction_Status,
+    ESPAction_Scan,
+    ESPAction_Custom,
+} ESPActionType;
 
-NSString *ButtonTagToString(ButtonTag tag);
+NSString *ESPActionTypeToString(ESPActionType tag);
 
 typedef enum {
     ESPActionState_Idle = 0,

@@ -44,14 +44,14 @@
 
 - (NSArray *)createButtonConfigurations {
     return @[
-        @{@"title" : INTER_STR(@"EspBlufi-operation-connect"), @"tag" : @(Btn_Connect)},
-        @{@"title" : INTER_STR(@"EspBlufi-operation-disConnect"), @"tag" : @(Btn_Disconnect)},
-        @{@"title" : INTER_STR(@"EspBlufi-operation-encryption"), @"tag" : @(Btn_Security)},
-        @{@"title" : INTER_STR(@"EspBlufi-operation-version"), @"tag" : @(Btn_Version)},
-        @{@"title" : INTER_STR(@"EspBlufi-operation-provision"), @"tag" : @(Btn_Configure)},
-        @{@"title" : INTER_STR(@"EspBlufi-operation-state"), @"tag" : @(Btn_State)},
-        @{@"title" : INTER_STR(@"EspBlufi-operation-scan"), @"tag" : @(Btn_Scan)},
-        @{@"title" : INTER_STR(@"EspBlufi-operation-custom"), @"tag" : @(Btn_Custom)}
+        @{@"title" : INTER_STR(@"EspBlufi-operation-connect"), @"tag" : @(ESPAction_Connect)},
+        @{@"title" : INTER_STR(@"EspBlufi-operation-disConnect"), @"tag" : @(ESPAction_Disconnect)},
+        @{@"title" : INTER_STR(@"EspBlufi-operation-encryption"), @"tag" : @(ESPAction_Security)},
+        @{@"title" : INTER_STR(@"EspBlufi-operation-version"), @"tag" : @(ESPAction_Version)},
+        @{@"title" : INTER_STR(@"EspBlufi-operation-provision"), @"tag" : @(ESPAction_Configure)},
+        @{@"title" : INTER_STR(@"EspBlufi-operation-state"), @"tag" : @(ESPAction_Status)},
+        @{@"title" : INTER_STR(@"EspBlufi-operation-scan"), @"tag" : @(ESPAction_Scan)},
+        @{@"title" : INTER_STR(@"EspBlufi-operation-custom"), @"tag" : @(ESPAction_Custom)}
     ];
 }
 
@@ -93,7 +93,7 @@
     [self addButtonTargets:button];
 
     // Only connect button is enabled initially
-    BOOL shouldEnable = (button.tag == Btn_Connect);
+    BOOL shouldEnable = (button.tag == ESPAction_Connect);
     [self setButton:button enable:shouldEnable];
 
     return button;
@@ -112,28 +112,28 @@
 
 - (void)assignButtonToProperty:(UIButton *)button withTag:(NSInteger)tag {
     switch (tag) {
-        case Btn_Connect:
+        case ESPAction_Connect:
             self.connectBtn = button;
             break;
-        case Btn_Disconnect:
+        case ESPAction_Disconnect:
             self.disconnectBtn = button;
             break;
-        case Btn_Security:
+        case ESPAction_Security:
             self.encryptionBtn = button;
             break;
-        case Btn_Version:
+        case ESPAction_Version:
             self.versionBtn = button;
             break;
-        case Btn_Configure:
+        case ESPAction_Configure:
             self.configureBtn = button;
             break;
-        case Btn_State:
+        case ESPAction_Status:
             self.stateBtn = button;
             break;
-        case Btn_Scan:
+        case ESPAction_Scan:
             self.scanBtn = button;
             break;
-        case Btn_Custom:
+        case ESPAction_Custom:
             self.customBtn = button;
             break;
         default:
@@ -236,7 +236,7 @@
     [self setButton:sender touchDown:NO];
 
     // Callback to main view controller with the button tag
-    [self onButtonTapped:(ButtonTag)sender.tag];
+    [self onButtonTapped:(ESPActionType)sender.tag];
 }
 
 #pragma mark - UITableView DataSource & Delegate

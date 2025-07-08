@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDevice:(ESPPeripheral *)device;
 
 // action from category
-- (void)onButtonTapped:(ButtonTag)buttonTag;
+- (void)onButtonTapped:(ESPActionType)buttonTag;
 
 // UI Properties shared with category
 // FIXME: 内部各种 callback 状态需要跟 btn 解耦，纯状态发送到分类去更新
