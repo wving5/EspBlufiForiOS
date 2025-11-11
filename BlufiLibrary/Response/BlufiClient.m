@@ -303,8 +303,8 @@ enum {
 
 - (BOOL)postContainData:(NSData *)data encrypt:(BOOL)encrypt checksum:(BOOL)checksum requireAck:(BOOL)ack type:(Byte)type {
     NSInputStream *dataIS = [NSInputStream inputStreamWithData:data];
-    NSInteger dataLengthLimit = _postPackageLengthLimit - PACKAGE_HEADER_LENGTH;
-    dataLengthLimit -= 2;  // If frag, two bytes total length in data
+    NSInteger dataLengthLimit = _postPackageLengthLimit - PACKAGE_HEADER_LENGTH; // Header: 类型，帧控制，序列号，数据长度(不包含校验部分)各占 1 字节
+    dataLengthLimit -= 2;  // If frag, two bytes `total length` in data
     if (checksum) {
         dataLengthLimit -= 2;
     }
@@ -321,7 +321,7 @@ enum {
         NSMutableData *dataContent = [[NSMutableData alloc] init];
         available -= read;
         [dataContent appendBytes:dataBuf length:read];
-        if (available > 0 && available <= 2) {
+        if (available > 0 && available <= 2) { // send data as no frag
             Byte last[available];
             read = [dataIS read:last maxLength:available];
             if (read != available) {
@@ -332,8 +332,8 @@ enum {
             available -= read;
         }
         BOOL frag = dataIS.hasBytesAvailable;
-        if (frag) {
-            NSInteger totalLen = dataContent.length + available;
+        if (frag) {  // send data as frag
+            NSInteger totalLen = dataContent.length + available; // 对于分片帧，在数据字段的前两个字节中，会给定当前内容部分和随后内容部分的总长度（即最大支持 64 K 的数据内容）。
             NSMutableData *newDataContent = [[NSMutableData alloc] init];
             Byte totalLenBytes[] = {totalLen & 0xff, totalLen >> 8 & 0xff};
             [newDataContent appendBytes:totalLenBytes length:2];
@@ -355,7 +355,7 @@ enum {
                 [dataIS close];
                 return NO;
             }
-            [NSThread sleepForTimeInterval:0.01];
+            [NSThread sleepForTimeInterval:0.01]; // ???: manual frag(s) write interval
         } else {
             [dataIS close];
             return !ack || [self receiveAck:sequence];

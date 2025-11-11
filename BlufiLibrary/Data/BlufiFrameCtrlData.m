@@ -16,12 +16,15 @@
 
 @implementation BlufiFrameCtrlData
 
+/// Frame Control
+/// 帧控制字段，占 1 字节，每个位表示不同含义
+/// 这里 0 表示最低字节位
 enum {
-    PositionEncrypted = 0,
-    PositionChecksum,
-    PositionDataDirection,
-    PositionRequireAck,
-    PositionFrag,
+    PositionEncrypted = 0, // 帧是否加密
+    PositionChecksum, // 帧尾是否包含校验位
+    PositionDataDirection, // 数据方向。0 表示传输方向是从手机到 ESP 设备。1 表示传输方向是从 ESP 设备到手机。
+    PositionRequireAck, // 是否要求对方回复 ACK。
+    PositionFrag, // 是否有后续的数据分片。
 };
 
 - (instancetype)initWithValue:(Byte)value {
